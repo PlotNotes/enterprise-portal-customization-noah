@@ -31,6 +31,15 @@ navigation:
       - title: Post-Installation
         page: pages/installation/post-installation.md
 
+  - title: Cloud Providers
+    icon: cloud
+    items:
+      - title: AWS
+        page: pages/cloud-providers/aws.md
+        visible_when:
+          entitlements:
+            - isAWSEnabled
+
   - title: Infrastructure
     icon: cloud
     items:
@@ -56,18 +65,15 @@ navigation:
     icon: settings
     items:
       - title: Configuration Guide
-        page: pages/configuration/guide.md
-      - title: Environment Variables
-        page: pages/configuration/environment.md
-      - title: Database
-        page: pages/configuration/database.md
-      - title: TLS Certificates
-        page: pages/configuration/tls.md
-      - title: High Availability
-        page: pages/configuration/high-availability.md
-        visible_when:
-          entitlements:
-            - isHAEnabled
+        page: pages/configuration/configuration.md
+      - title: Private Registry
+        page: pages/configuration/private-registry.md
+
+  - title: Operators
+    icon: wrench
+    items:
+      - title: Troubleshooting
+        page: pages/operators/troubleshooting.md
 
   - title: Operations
     icon: wrench
@@ -78,8 +84,6 @@ navigation:
         page: pages/operations/backup.md
       - title: Upgrading
         page: pages/operations/upgrading.md
-      - title: Troubleshooting
-        page: pages/operations/troubleshooting.md
 
   - title: Reference
     icon: file-text
