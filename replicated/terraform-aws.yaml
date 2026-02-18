@@ -1,0 +1,14 @@
+apiVersion: replicated.com/v1beta1
+kind: Terraform
+metadata:
+  name: aws-infrastructure
+spec:
+  sourceRepository: "https://github.com/replicatedhq/chartsmith-enterprise-portal"
+  sourcePath: "terraform/aws"
+  sourceRef: "v1.0.0"
+  provider: aws
+  minTerraformVersion: "1.5.0"
+  docs:
+    description: "AWS infrastructure including EKS, RDS PostgreSQL, and VPC for ChartSmith"
+    requirements: "AWS credentials with permissions to create VPC, EKS, RDS, and IAM resources"
+    outputs: "EKS cluster endpoint, RDS connection string, VPC ID, kubeconfig command"

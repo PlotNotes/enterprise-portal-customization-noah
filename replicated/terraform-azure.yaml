@@ -1,0 +1,14 @@
+apiVersion: replicated.com/v1beta1
+kind: Terraform
+metadata:
+  name: azure-infrastructure
+spec:
+  sourceRepository: "https://github.com/replicatedhq/chartsmith-enterprise-portal"
+  sourcePath: "terraform/azure"
+  sourceRef: "v1.0.0"
+  provider: azurerm
+  minTerraformVersion: "1.5.0"
+  docs:
+    description: "Azure infrastructure including AKS, PostgreSQL Flexible Server, and VNet for ChartSmith"
+    requirements: "Azure subscription with permissions to create AKS, PostgreSQL, and VNet resources"
+    outputs: "AKS cluster name, PostgreSQL connection string, kubeconfig command"

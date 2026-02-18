@@ -1,0 +1,107 @@
+# ChartSmith Enterprise Portal - Table of Contents
+#
+# This file defines the navigation structure, page ordering, and visibility
+# rules for the ChartSmith Enterprise Portal documentation.
+
+navigation:
+  - title: Getting Started
+    icon: rocket
+    page: pages/getting-started.md
+
+  - title: Installation
+    icon: download
+    items:
+      - title: Requirements
+        page: pages/installation/requirements.md
+      - title: Linux Installation
+        page: pages/installation/linux.md
+        visible_when:
+          entitlements:
+            - isEmbeddedClusterDownloadEnabled
+      - title: Helm Installation
+        page: pages/installation/helm.md
+        visible_when:
+          entitlements:
+            - isHelmInstallEnabled
+      - title: Air Gap Installation
+        page: pages/installation/airgap.md
+        visible_when:
+          entitlements:
+            - isAirgapSupported
+      - title: Post-Installation
+        page: pages/installation/post-installation.md
+
+  - title: Infrastructure
+    icon: cloud
+    items:
+      - title: Overview
+        page: pages/infrastructure/overview.md
+      - title: AWS
+        terraform_module: aws-infrastructure
+        visible_when:
+          entitlements:
+            - isAWSEnabled
+      - title: Google Cloud
+        terraform_module: gcp-infrastructure
+        visible_when:
+          entitlements:
+            - isGCPEnabled
+      - title: Azure
+        terraform_module: azure-infrastructure
+        visible_when:
+          entitlements:
+            - isAzureEnabled
+
+  - title: Configuration
+    icon: settings
+    items:
+      - title: Configuration Guide
+        page: pages/configuration/guide.md
+      - title: Environment Variables
+        page: pages/configuration/environment.md
+      - title: Database
+        page: pages/configuration/database.md
+      - title: TLS Certificates
+        page: pages/configuration/tls.md
+      - title: High Availability
+        page: pages/configuration/high-availability.md
+        visible_when:
+          entitlements:
+            - isHAEnabled
+
+  - title: Operations
+    icon: wrench
+    items:
+      - title: Monitoring & Metrics
+        page: pages/operations/monitoring.md
+      - title: Backup & Restore
+        page: pages/operations/backup.md
+      - title: Upgrading
+        page: pages/operations/upgrading.md
+      - title: Troubleshooting
+        page: pages/operations/troubleshooting.md
+
+  - title: Reference
+    icon: file-text
+    items:
+      - title: Helm Values
+        generated: helm-values
+      - title: CLI Reference
+        page: pages/reference/cli.md
+      - title: API Reference
+        page: pages/reference/api.md
+
+  - title: Support
+    icon: life-buoy
+    items:
+      - title: FAQ
+        page: pages/support/faq.md
+      - title: Contact Support
+        page: pages/support/contact.md
+
+overrides:
+  home: pages/getting-started.md
+
+hide_defaults:
+  - features/branding
+  - features/webhooks

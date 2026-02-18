@@ -1,0 +1,41 @@
+output "cluster_endpoint" {
+  description = "EKS cluster endpoint"
+  value       = module.eks.cluster_endpoint
+}
+
+output "cluster_name" {
+  description = "EKS cluster name"
+  value       = module.eks.cluster_name
+}
+
+output "cluster_certificate_authority" {
+  description = "EKS cluster CA certificate (base64 encoded)"
+  value       = module.eks.cluster_certificate_authority
+  sensitive   = true
+}
+
+output "database_endpoint" {
+  description = "RDS PostgreSQL endpoint"
+  value       = module.rds.endpoint
+}
+
+output "database_name" {
+  description = "Database name"
+  value       = module.rds.database_name
+}
+
+output "database_connection_string" {
+  description = "Full PostgreSQL connection string for ChartSmith Helm values"
+  value       = module.rds.connection_string
+  sensitive   = true
+}
+
+output "vpc_id" {
+  description = "VPC ID"
+  value       = module.vpc.vpc_id
+}
+
+output "kubeconfig_command" {
+  description = "Command to configure kubectl"
+  value       = "aws eks update-kubeconfig --region ${var.region} --name ${module.eks.cluster_name}"
+}

@@ -1,0 +1,14 @@
+apiVersion: replicated.com/v1beta1
+kind: Terraform
+metadata:
+  name: gcp-infrastructure
+spec:
+  sourceRepository: "https://github.com/replicatedhq/chartsmith-enterprise-portal"
+  sourcePath: "terraform/gcp"
+  sourceRef: "v1.0.0"
+  provider: google
+  minTerraformVersion: "1.5.0"
+  docs:
+    description: "GCP infrastructure including GKE, Cloud SQL PostgreSQL, and VPC for ChartSmith"
+    requirements: "GCP project with Kubernetes Engine, Cloud SQL, and Compute APIs enabled"
+    outputs: "GKE cluster endpoint, Cloud SQL connection string, kubeconfig command"
