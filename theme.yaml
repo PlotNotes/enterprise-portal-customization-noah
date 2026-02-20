@@ -15,8 +15,8 @@ branding:
   supportPortalLink: https://support.plotnotes.io
 
   # Core colors — warm coral accent
-  primaryColor: "#5900ff"
-  secondaryColor: "#d400ff"
+  primaryColor: "#D4583B"
+  secondaryColor: "#E8654A"
 
   # Link colors
   linkColor: "#D4583B"
