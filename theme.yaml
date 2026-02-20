@@ -8,7 +8,6 @@
 #
 # This example demonstrates a dark, warm-toned theme inspired by modern dev portals.
 
-
 branding:
   title: "Plotnotes"
   overview: "Welcome to the Plotnotes Enterprise Portal."
@@ -101,10 +100,7 @@ customCSS: |
     z-index: 1;
   }
 
-  /* Grid overlay on content area, offset past sidebar */
-  .docs-content-wrapper {
-    overflow: visible;
-  }
+  /* Grid overlay on content area — sits above content with pointer-events: none */
   .docs-content-wrapper::after {
     content: '';
     position: absolute;
@@ -113,13 +109,13 @@ customCSS: |
     right: 0;
     bottom: 0;
     background-image:
-      linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+      linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
     background-size: 48px 48px;
     mask-image: linear-gradient(to bottom, white 0%, transparent 60%);
     -webkit-mask-image: linear-gradient(to bottom, white 0%, transparent 60%);
     pointer-events: none;
-    z-index: 0;
+    z-index: 10;
   }
 
 # ─────────────────────────────────────────────────────────────────────────────
