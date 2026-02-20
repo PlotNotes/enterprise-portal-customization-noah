@@ -80,7 +80,7 @@ customCSS: |
     background-color: #0f0f0f !important;
   }
 
-  /* Warm gradient at top of content area (orange → transparent) */
+  /* Warm gradient at top of content area (orange → transparent), offset past sidebar */
   .docs-content-wrapper {
     position: relative;
   }
@@ -88,7 +88,7 @@ customCSS: |
     content: '';
     position: absolute;
     top: 0;
-    left: 0;
+    left: 18rem;
     right: 0;
     height: 300px;
     background: linear-gradient(to bottom, rgba(212, 88, 59, 0.15), transparent);
@@ -100,11 +100,14 @@ customCSS: |
     z-index: 1;
   }
 
-  /* Subtle grid overlay that fades out */
+  /* Subtle grid overlay that fades out, offset past sidebar */
   .docs-content-wrapper::after {
     content: '';
     position: absolute;
-    inset: 0;
+    top: 0;
+    left: 18rem;
+    right: 0;
+    bottom: 0;
     background-image:
       linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
       linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
