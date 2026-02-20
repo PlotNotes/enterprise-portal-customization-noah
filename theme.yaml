@@ -1,0 +1,260 @@
+# theme.yaml — Enterprise Portal v2 Branding & Appearance
+# ======================================================
+#
+# Place this file at the root of your content repo (or at path_prefix + theme.yaml),
+# alongside toc.yaml. Fields present here override the corresponding UI-configured
+# values in the Vendor Portal. Fields you omit fall through to your UI settings or defaults.
+#
+# Precedence: theme.yaml > UI-configured value > default
+#
+# This example uses a fictional "ChartSmith" brand to demonstrate every available option.
+
+# ─────────────────────────────────────────────────────────────────────────────
+# BRANDING — Core identity and color settings
+# ─────────────────────────────────────────────────────────────────────────────
+branding:
+
+  # ── Portal Identity ──────────────────────────────────────────────────────
+
+  # Portal title shown in the browser tab and header area
+  # Max 255 characters
+  title: "ChartSmith Portal"
+
+  # Overview text displayed on the portal landing page
+  # Max 2000 characters — supports plain text only
+  overview: "Welcome to the ChartSmith Enterprise Portal. Access your releases, documentation, and support resources."
+
+  # Contact email shown to end users for support inquiries
+  # Max 255 characters
+  contact: support@chartsmith.io
+
+  # Link to your external support portal — must be a valid https:// URL
+  # Max 2048 characters
+  supportPortalLink: https://support.chartsmith.io
+
+  # ── Visual Identity ──────────────────────────────────────────────────────
+  # Asset paths are relative to the repo root (or path_prefix if configured).
+  # During sync, these files are uploaded to storage and served via CDN.
+
+  # Portal logo — PNG format
+  logo: assets/logo.png
+
+  # Browser favicon — PNG or ICO format
+  favicon: assets/favicon.ico
+
+  # ── Core Colors ──────────────────────────────────────────────────────────
+  # All colors use hex format: #RRGGBB
+
+  # Primary brand color — used for buttons, focus rings, active states,
+  # radio/checkbox accents, and as the base for the "minimalist" background
+  primaryColor: "#2563eb"
+
+  # Secondary brand color — used for gradient endpoints and accent areas
+  secondaryColor: "#1e40af"
+
+  # ── Link & Accent Colors ─────────────────────────────────────────────────
+
+  # Color for hyperlinks in content areas
+  # Defaults to primaryColor if omitted
+  linkColor: "#3b82f6"
+
+  # Hover state for hyperlinks
+  # Defaults to a lightened version of linkColor if omitted
+  linkHoverColor: "#60a5fa"
+
+  # ── Header Background ───────────────────────────────────────────────────
+  # Controls the large header/hero area background style.
+  # Options: "minimalist" | "custom" | "image"
+
+  # "minimalist" — solid fill using primaryColor
+  # "custom"     — vertical gradient using customColor1 (top) → customColor2 (bottom)
+  # "image"      — background image with gradient overlay
+  background: custom
+
+  # Required when background: custom
+  customColor1: "#1e3a5f"    # Gradient top
+  customColor2: "#0a1628"    # Gradient bottom
+
+  # Required when background: image — path to an image file in your repo
+  # backgroundImage: assets/hero.jpg
+
+  # ── Docs Template Area Colors ────────────────────────────────────────────
+  # Fine-grained control over the three main areas of the docs template layout.
+  # Each area supports a start → end gradient. Omit to use template defaults.
+
+  # Header bar (horizontal gradient, left → right)
+  headerColor: "#1a1a2e"
+  headerGradientEnd: "#16213e"
+
+  # Sidebar navigation (vertical gradient, top → bottom)
+  sidebarColor: "#0f1923"
+  sidebarGradientEnd: "#162033"
+
+  # Main content area (vertical gradient, top → bottom)
+  contentBackgroundColor: "#ffffff"
+  contentBackgroundGradientEnd: "#f8fafc"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# CUSTOM CSS — Advanced style overrides
+# ─────────────────────────────────────────────────────────────────────────────
+# Injected as a <style> block after the default styles, so your rules take
+# precedence. Max 50KB. Use this to fine-tune spacing, colors, borders,
+# or any visual detail not covered by the branding fields above.
+#
+# Choose ONE of: inline customCSS or customCSSFile (file reference wins if both set).
+
+# Option A: Inline CSS
+customCSS: |
+  /* Announcement banner styling */
+  .announcement-banner {
+    background: linear-gradient(90deg, #2563eb, #7c3aed);
+    color: white;
+    text-align: center;
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+  }
+
+  /* Custom footer styling */
+  .custom-footer {
+    background: #0f172a;
+    color: #94a3b8;
+    text-align: center;
+    padding: 2rem 1rem;
+    font-size: 0.75rem;
+    border-top: 1px solid #1e293b;
+  }
+  .custom-footer a {
+    color: #3b82f6;
+    text-decoration: none;
+  }
+  .custom-footer a:hover {
+    text-decoration: underline;
+  }
+
+  /* Subtle grid pattern with gradient fade — creates a faint grid overlay
+     that fades out partway down the page, similar to modern dev tool sites */
+  .docs-content-area {
+    position: relative;
+  }
+  .docs-content-area::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: linear-gradient(to bottom, white 0%, transparent 60%);
+    -webkit-mask-image: linear-gradient(to bottom, white 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  /* Override sidebar link hover color */
+  .docs-sidebar a:hover {
+    color: #60a5fa;
+  }
+
+  /* Subtle card shadow for content cards */
+  .portal-surface {
+    box-shadow: 0 4px 24px rgba(37, 99, 235, 0.08);
+  }
+
+# Option B: Reference a CSS file from your repo
+# customCSSFile: assets/custom.css
+
+# ─────────────────────────────────────────────────────────────────────────────
+# CUSTOM HTML — Inject content at specific locations in the portal
+# ─────────────────────────────────────────────────────────────────────────────
+# Each slot supports inline HTML or a file reference (file wins if both set).
+# Max 10KB per slot. HTML is sanitized server-side — allowed tags include:
+#   div, p, span, a, img, ul, ol, li, h1-h6, strong, em, br, hr,
+#   section, nav, footer, header
+# Disallowed: script, iframe, object, embed, on* attributes, javascript: URLs
+
+customHTML:
+
+  # ── Header / Announcement Banner ──────────────────────────────────────
+  # Injected above the main navigation bar — ideal for announcements,
+  # maintenance notices, or promotional banners.
+  header: |
+    <div class="announcement-banner">
+      <strong>v4.2 is now available!</strong> Check the
+      <a href="/releases" style="color: white; text-decoration: underline;">releases page</a>
+      for details.
+    </div>
+
+  # Or reference an HTML file:
+  # headerFile: assets/banner.html
+
+  # ── Footer ────────────────────────────────────────────────────────────
+  # Injected below the main page content — ideal for legal text,
+  # company info, or additional navigation links.
+  footer: |
+    <footer class="custom-footer">
+      <p>&copy; 2026 ChartSmith, Inc. All rights reserved.</p>
+      <p>
+        <a href="https://chartsmith.io/terms">Terms of Service</a> &middot;
+        <a href="https://chartsmith.io/privacy">Privacy Policy</a> &middot;
+        <a href="https://status.chartsmith.io">System Status</a>
+      </p>
+    </footer>
+
+  # Or reference an HTML file:
+  # footerFile: assets/footer.html
+
+  # ── Login Page ────────────────────────────────────────────────────────
+  # Injected on the authentication page — useful for access instructions,
+  # SSO guidance, or compliance notices.
+  login: |
+    <div style="text-align: center; margin-top: 1rem; color: #64748b; font-size: 0.875rem;">
+      <p>Need access? Contact your IT administrator or
+        <a href="mailto:support@chartsmith.io" style="color: #3b82f6;">reach out to support</a>.
+      </p>
+      <p style="margin-top: 0.5rem; font-size: 0.75rem;">
+        By signing in, you agree to our
+        <a href="https://chartsmith.io/terms" style="color: #3b82f6;">Terms of Service</a>.
+      </p>
+    </div>
+
+  # Or reference an HTML file:
+  # loginFile: assets/login-notice.html
+
+  # ── Sidebar ───────────────────────────────────────────────────────────
+  # Injected in the docs sidebar area — useful for quick links,
+  # version selectors, or contextual widgets.
+  sidebar: |
+    <div style="padding: 0.75rem; margin-top: 1rem; border-top: 1px solid #e2e8f0;">
+      <p style="font-size: 0.75rem; font-weight: 600; color: #64748b; text-transform: uppercase; margin-bottom: 0.5rem;">
+        Resources
+      </p>
+      <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.875rem;">
+        <li style="margin-bottom: 0.25rem;">
+          <a href="https://chartsmith.io/docs" style="color: #3b82f6;">Public Docs</a>
+        </li>
+        <li style="margin-bottom: 0.25rem;">
+          <a href="https://community.chartsmith.io" style="color: #3b82f6;">Community Forum</a>
+        </li>
+        <li>
+          <a href="https://status.chartsmith.io" style="color: #3b82f6;">System Status</a>
+        </li>
+      </ul>
+    </div>
+
+  # Or reference an HTML file:
+  # sidebarFile: assets/sidebar-widget.html
+
+# ─────────────────────────────────────────────────────────────────────────────
+# FONTS (stretch goal — not yet supported)
+# ─────────────────────────────────────────────────────────────────────────────
+# Uncomment when font customization is available.
+#
+# fonts:
+#   # CSS font-family for body text
+#   sans: "'IBM Plex Sans', system-ui, sans-serif"
+#
+#   # CSS font-family for code blocks and monospace content
+#   mono: "'IBM Plex Mono', 'SFMono-Regular', Consolas, monospace"
+#
+#   # Google Fonts URL to load the font families above
+#   googleFontsURL: "https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap"
