@@ -100,7 +100,10 @@ customCSS: |
     z-index: 1;
   }
 
-  /* Subtle grid overlay that fades out, offset past sidebar */
+  /* Grid overlay on content area, offset past sidebar */
+  .docs-content-wrapper {
+    overflow: visible;
+  }
   .docs-content-wrapper::after {
     content: '';
     position: absolute;
@@ -109,11 +112,11 @@ customCSS: |
     right: 0;
     bottom: 0;
     background-image:
-      linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+      linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
     background-size: 48px 48px;
-    mask-image: linear-gradient(to bottom, white 0%, transparent 50%);
-    -webkit-mask-image: linear-gradient(to bottom, white 0%, transparent 50%);
+    mask-image: linear-gradient(to bottom, white 0%, transparent 60%);
+    -webkit-mask-image: linear-gradient(to bottom, white 0%, transparent 60%);
     pointer-events: none;
     z-index: 0;
   }
