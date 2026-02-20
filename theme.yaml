@@ -39,63 +39,69 @@ branding:
 
 customCSS: |
   /* Dark content area with light text */
-  .docs-content-area,
-  .docs-content,
   main {
     background-color: #1a1a1a !important;
     color: #d4d4d4 !important;
   }
 
   /* White headings */
-  .docs-content h1,
-  .docs-content h2,
-  .docs-content h3,
-  .docs-content h4 {
+  main h1, main h2, main h3, main h4 {
     color: #ffffff !important;
   }
 
   /* Muted body text */
-  .docs-content p,
-  .docs-content li {
+  main p, main li {
     color: #a3a3a3 !important;
   }
 
   /* Coral links */
-  .docs-content a {
+  main a {
     color: #D4583B !important;
   }
-  .docs-content a:hover {
+  main a:hover {
     color: #E8856A !important;
   }
 
   /* Muted sidebar links with coral active/hover */
-  .docs-sidebar a {
+  nav.w-72 a {
     color: #8a8a8a !important;
   }
-  .docs-sidebar a:hover,
-  .docs-sidebar a.active {
+  nav.w-72 a:hover,
+  nav.w-72 a[data-active="true"] {
     color: #D4583B !important;
   }
 
-  /* Sidebar section headers */
-  .docs-sidebar .section-title {
-    color: #a3a3a3 !important;
-  }
-
   /* Dark code blocks */
-  .docs-content code {
+  main code {
     background-color: #2a2a2a !important;
     color: #d4d4d4 !important;
   }
-  .docs-content pre {
+  main pre {
     background-color: #0f0f0f !important;
   }
 
-  /* Subtle grid overlay that fades out */
-  .docs-content-area {
+  /* Warm gradient at top of content area (orange → transparent) */
+  main {
     position: relative;
   }
-  .docs-content-area::before {
+  main::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 300px;
+    background: linear-gradient(to bottom, rgba(212, 88, 59, 0.15), transparent);
+    pointer-events: none;
+    z-index: 0;
+  }
+  main > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Subtle grid overlay that fades out */
+  main::after {
     content: '';
     position: absolute;
     inset: 0;
@@ -103,9 +109,10 @@ customCSS: |
       linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
       linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
     background-size: 48px 48px;
-    mask-image: linear-gradient(to bottom, white 0%, transparent 60%);
-    -webkit-mask-image: linear-gradient(to bottom, white 0%, transparent 60%);
+    mask-image: linear-gradient(to bottom, white 0%, transparent 50%);
+    -webkit-mask-image: linear-gradient(to bottom, white 0%, transparent 50%);
     pointer-events: none;
+    z-index: 0;
   }
 
 # ─────────────────────────────────────────────────────────────────────────────
