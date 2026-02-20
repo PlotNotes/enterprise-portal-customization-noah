@@ -71,20 +71,17 @@ customCSS: |
     color: #D4583B !important;
   }
 
-  /* Override prose-slate colors for dark theme */
-  .prose-inherit-colors,
-  .prose-inherit-colors td,
-  .prose-inherit-colors th,
-  .prose-inherit-colors tr,
-  .prose-inherit-colors thead,
-  .prose-inherit-colors tbody {
+  /* Override all text colors in content for dark theme */
+  article td, article th,
+  .markdown-content td, .markdown-content th,
+  main article, main .markdown-content {
     color: #d4d4d4 !important;
   }
-  .prose-inherit-colors thead th {
+  article thead th, .markdown-content thead th {
     background-color: #2a2a2a !important;
     color: #ffffff !important;
   }
-  .prose-inherit-colors strong {
+  article strong, .markdown-content strong {
     color: #ffffff !important;
   }
 
