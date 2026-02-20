@@ -71,6 +71,15 @@ customCSS: |
     color: #D4583B !important;
   }
 
+  /* Table text visibility on dark background */
+  main td, main th {
+    color: #d4d4d4 !important;
+  }
+  main thead th {
+    background-color: #2a2a2a !important;
+    color: #ffffff !important;
+  }
+
   /* Dark code blocks */
   main code {
     background-color: #2a2a2a !important;
