@@ -39,7 +39,7 @@ branding:
 
 customCSS: |
   /* Dark content area with light text */
-  main {
+  main, main article, main .markdown-content {
     background-color: #1a1a1a !important;
     color: #d4d4d4 !important;
   }
