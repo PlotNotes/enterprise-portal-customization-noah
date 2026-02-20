@@ -115,26 +115,6 @@ customCSS: |
   }
 
 # ─────────────────────────────────────────────────────────────────────────────
-# CUSTOM HTML — Inject content at specific locations in the portal
-# ─────────────────────────────────────────────────────────────────────────────
-# Each slot supports inline HTML or a file reference (file wins if both set).
-# Max 10KB per slot. Sanitized server-side.
-#
-# customHTML:
-#   header: |
-#     <div>Announcement banner here</div>
-#   # headerFile: assets/banner.html
-#   footer: |
-#     <footer>Footer content here</footer>
-#   # footerFile: assets/footer.html
-#   login: |
-#     <p>Login page notice here</p>
-#   # loginFile: assets/login.html
-#   sidebar: |
-#     <div>Sidebar widget here</div>
-#   # sidebarFile: assets/sidebar.html
-
-# ─────────────────────────────────────────────────────────────────────────────
 # FONTS (stretch goal — not yet supported)
 # ─────────────────────────────────────────────────────────────────────────────
 # fonts:
