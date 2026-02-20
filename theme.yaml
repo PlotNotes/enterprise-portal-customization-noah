@@ -1,4 +1,4 @@
-# theme.yaml — Enterprise Portal v2 Branding & Appearance 
+# theme.yaml — Enterprise Portal v2 Branding & Appearance
 # ======================================================
 #
 # Place this file at the root of your content repo (or at path_prefix + theme.yaml),
@@ -50,8 +50,19 @@ customCSS: |
   }
 
   /* Muted body text */
-  main p, main li {
+  main p, main li, main td, main th {
     color: #a3a3a3 !important;
+  }
+
+  /* Table header */
+  main thead th {
+    background-color: #2a2a2a !important;
+    color: #ffffff !important;
+  }
+
+  /* Bold text */
+  main strong {
+    color: #ffffff !important;
   }
 
   /* Coral links */
@@ -71,20 +82,6 @@ customCSS: |
     color: #D4583B !important;
   }
 
-  /* Override all text colors in content for dark theme */
-  article td, article th,
-  .markdown-content td, .markdown-content th,
-  main article, main .markdown-content {
-    color: #d4d4d4 !important;
-  }
-  article thead th, .markdown-content thead th {
-    background-color: #2a2a2a !important;
-    color: #ffffff !important;
-  }
-  article strong, .markdown-content strong {
-    color: #ffffff !important;
-  }
-
   /* Dark code blocks */
   main code {
     background-color: #2a2a2a !important;
@@ -94,7 +91,7 @@ customCSS: |
     background-color: #0f0f0f !important;
   }
 
-  /* Warm gradient at top of content area (orange → transparent), offset past sidebar */
+  /* Warm gradient at top of content area */
   .docs-content-wrapper {
     position: relative;
   }
@@ -110,7 +107,7 @@ customCSS: |
     z-index: 10;
   }
 
-  /* Grid overlay on content area — sits above content with pointer-events: none */
+  /* Grid overlay on content area */
   .docs-content-wrapper::after {
     content: '';
     position: absolute;
