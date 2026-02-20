@@ -71,12 +71,20 @@ customCSS: |
     color: #D4583B !important;
   }
 
-  /* Table text visibility on dark background */
-  main td, main th {
+  /* Override prose-slate colors for dark theme */
+  .prose-inherit-colors,
+  .prose-inherit-colors td,
+  .prose-inherit-colors th,
+  .prose-inherit-colors tr,
+  .prose-inherit-colors thead,
+  .prose-inherit-colors tbody {
     color: #d4d4d4 !important;
   }
-  main thead th {
+  .prose-inherit-colors thead th {
     background-color: #2a2a2a !important;
+    color: #ffffff !important;
+  }
+  .prose-inherit-colors strong {
     color: #ffffff !important;
   }
 
