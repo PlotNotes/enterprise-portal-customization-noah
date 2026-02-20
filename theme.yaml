@@ -23,7 +23,7 @@ branding:
   linkHoverColor: "#E8856A"
 
   # Header background
-  background: minimalist
+  background: minimal
 
   # Dark header
   headerColor: "#141414"
