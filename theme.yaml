@@ -8,6 +8,7 @@
 #
 # This example demonstrates a dark, warm-toned theme inspired by modern dev portals.
 
+
 branding:
   title: "Plotnotes"
   overview: "Welcome to the Plotnotes Enterprise Portal."
