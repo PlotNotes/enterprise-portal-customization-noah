@@ -81,10 +81,10 @@ customCSS: |
   }
 
   /* Warm gradient at top of content area (orange → transparent) */
-  main {
+  .docs-content-wrapper {
     position: relative;
   }
-  main::before {
+  .docs-content-wrapper::before {
     content: '';
     position: absolute;
     top: 0;
@@ -95,13 +95,13 @@ customCSS: |
     pointer-events: none;
     z-index: 0;
   }
-  main > * {
+  .docs-content-wrapper > * {
     position: relative;
     z-index: 1;
   }
 
   /* Subtle grid overlay that fades out */
-  main::after {
+  .docs-content-wrapper::after {
     content: '';
     position: absolute;
     inset: 0;
