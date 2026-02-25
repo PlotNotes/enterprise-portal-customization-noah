@@ -5,59 +5,67 @@ visible_when:
   entitlements:
     - isEmbeddedClusterDownloadEnabled
 weight: 150
+install_type: linux
 ---
 
 # Linux Installation
 
 Install {{ app.name }} on a Linux server. This method provisions an embedded Kubernetes cluster with everything pre-configured.
 
-## Prerequisites
+<LinuxRequirements />
 
-- [System requirements](/installation/requirements) met
-- Linux server with root access
-- Internet access (or see [Air Gap Installation](/installation/airgap))
+---
 
-## Step 1: Download the Installer
+## Before You Begin
 
-```bash
-curl -fSsL https://{{ app.slug }}.replicated.com/embedded/{{ channel.slug }}/install.sh | sudo bash
-```
-
-## Step 2: Configure
-
-The installer will prompt you for:
-
-- **Admin console password**: Used to access the admin UI
-- **Domain name**: The hostname where {{ app.name }} will be accessible
+- Ensure your server meets the [system requirements](/content/installation/requirements)
+- Have root or sudo access ready
+- For air gap environments, see [Air Gap Installation](/content/installation/airgap)
 
 {{#if entitlements.isHAEnabled}}
-### Multi-Node Setup
+> **High Availability:** This application supports multi-node deployments. After completing the single-node installation below, you can add worker nodes for redundancy.
+{{/if}}
 
-To add worker nodes for high availability:
+---
+
+<LinuxConfiguration />
+
+---
+
+<LinuxInstallation />
+
+<SupportLink />
+
+---
+
+<LinuxVerification />
+
+---
+
+{{#if entitlements.isHAEnabled}}
+## Adding Worker Nodes
+
+To add additional nodes for high availability:
 
 ```bash
-# On the first node, after installation:
+# On the first node, generate a join token:
 chartsmith join-token
 
-# On additional nodes:
+# On each additional node:
 curl -fSsL https://{{ app.slug }}.replicated.com/embedded/{{ channel.slug }}/join.sh | \
   sudo bash -s -- --token <JOIN_TOKEN>
 ```
 {{/if}}
 
-## Step 3: Verify
+---
 
-```bash
-chartsmith status
-```
+<InstanceName />
 
-All components should show `Ready`.
+---
 
-## Step 4: Access
-
-Open `https://<your-domain>` in your browser.
+<PostInstall />
 
 ## Next Steps
 
-- [Post-Installation steps](/installation/post-installation)
-- [Configuration Guide](/configuration/guide)
+- [Post-Installation steps](/content/installation/post-installation)
+- [Configuration Guide](/content/configuration/configuration)
