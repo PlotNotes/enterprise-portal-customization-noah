@@ -4,7 +4,9 @@ description: Get started with {{ app.name }} — your enterprise chart managemen
 layout: doc
 ---
 
-# Welcome to {{ app.name }}
+# Welcome to {{ app.name }} — v3.0.0
+
+> **You are viewing the v3.0.0 documentation.** This is the latest release with cutting-edge features.
 
 Hello, **{{ customer.name }}**! This portal contains everything you need to install, configure, and operate {{ app.name }} in your environment.
 
