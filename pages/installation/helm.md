@@ -8,11 +8,16 @@ weight: 200
 install_type: helm
 ---
 
-# Helm Installation
+# Helm Installation (v1.0.0)
 
-{{ app.name }} deploys as a Helm chart via OCI registry through Replicated. This guide covers the installation procedure, preflight validation, and post-installation configuration.
+{{ app.name }} v1.0.0 deploys as a Helm chart via OCI registry through Replicated.
 
-<HelmRequirements />
+## Requirements
+
+- Kubernetes cluster v1.26 or later
+- Helm 3.x installed on your workstation
+- kubectl configured with cluster access
+- StorageClass available for persistent volumes
 
 ---
 
@@ -26,62 +31,29 @@ install_type: helm
 > **Using Azure?** Provision your infrastructure first with our [Azure Terraform module](/content/infrastructure/azure-infrastructure).
 {{/if}}
 
-## Install Required Plugins
-
-Two `kubectl` plugins are required: **preflight** (for cluster validation) and **support-bundle** (for diagnostics).
-
-Install the Krew plugin manager:
+## Authenticate with the Registry
 
 ```bash
-curl -fsSL https://krew.sh | bash
-```
-
-Install the plugins:
-
-```bash
-kubectl krew install preflight
-kubectl krew install support-bundle
-```
-
-Verify the installations:
-
-```bash
-kubectl preflight version
-kubectl support-bundle version
+helm registry login registry.replicated.com \
+  --username {{ customer.email }} \
+  --password {{ license.id }}
 ```
 
 ---
 
-<HelmConfiguration />
-
----
-
-## Preflight Validation
-
-Before installing, validate that your cluster meets the requirements:
+## Install
 
 ```bash
-helm template {{ app.slug }} \
+helm install {{ app.slug }} \
   oci://registry.replicated.com/{{ app.slug }}/{{ channel.slug }}/{{ app.slug }} \
-  --values my-values.yaml | kubectl preflight -
+  --namespace {{ app.slug }} \
+  --create-namespace \
+  --values my-values.yaml
 ```
 
-Preflight checks verify:
-
-- Cluster resource availability
-- Storage class configuration
-- RBAC permissions
-- Overall system requirements
-
 ---
 
-<HelmInstallation />
-
-<SupportLink />
-
----
-
-### Verify the Installation
+## Verify
 
 ```bash
 kubectl -n {{ app.slug }} get pods
@@ -93,25 +65,11 @@ Wait for all pods to reach `Running` state.
 
 ---
 
-<InstanceName />
-
----
-
-<PostInstall />
-
 ## Troubleshooting
-
-### Pod Startup Issues
 
 ```bash
 kubectl -n {{ app.slug }} describe pod <pod-name>
 kubectl -n {{ app.slug }} logs <pod-name>
-kubectl -n {{ app.slug }} get events --sort-by='.lastTimestamp'
-```
-
-### Generate a Support Bundle
-
-```bash
 kubectl support-bundle --load-cluster-specs
 ```
 
