@@ -44,8 +44,10 @@ Always review the release notes for breaking changes and back up your database b
 
 Use the admin console to check for and apply updates, or use the CLI:
 
-<CommandBlock command="chartsmith update check
-chartsmith update apply" />
+<CommandBlock>
+chartsmith update check
+chartsmith update apply
+</CommandBlock>
 
 </InstallStep>
 

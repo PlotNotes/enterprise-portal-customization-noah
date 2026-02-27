@@ -12,44 +12,46 @@ weight: 100
 
 A production deployment requires at minimum:
 
-<CommandBlock label="yaml" command="image:
-  tag: &quot;your-version-tag&quot;
+<CommandBlock label="yaml">
+image:
+  tag: "your-version-tag"
 
 # External database (recommended)
 postgresql:
   enabled: false
 
 env:
-  DB_HOST: &quot;your-db-host&quot;
-  DB_PORT: &quot;5432&quot;
-  DB_USER: &quot;{{ app.slug }}&quot;
-  DB_NAME: &quot;{{ app.slug }}_production&quot;
-  DB_NAME_CABLE: &quot;{{ app.slug }}_cable_production&quot;
-  STORAGE_SERVICE: &quot;amazon&quot;
-  AWS_REGION: &quot;us-west-2&quot;
-  AWS_BUCKET: &quot;your-bucket-name&quot;
-  APP_HOST: &quot;{{ app.slug }}.company.com&quot;
-  AUTH_PROVIDER: &quot;entra_id&quot;
+  DB_HOST: "your-db-host"
+  DB_PORT: "5432"
+  DB_USER: "{{ app.slug }}"
+  DB_NAME: "{{ app.slug }}_production"
+  DB_NAME_CABLE: "{{ app.slug }}_cable_production"
+  STORAGE_SERVICE: "amazon"
+  AWS_REGION: "us-west-2"
+  AWS_BUCKET: "your-bucket-name"
+  APP_HOST: "{{ app.slug }}.company.com"
+  AUTH_PROVIDER: "entra_id"
 
 secrets:
-  DB_PASSWORD: &quot;&quot;
-  AWS_ACCESS_KEY_ID: &quot;&quot;
-  AWS_SECRET_ACCESS_KEY: &quot;&quot;
-  ENTRA_ID_CLIENT_ID: &quot;&quot;
-  ENTRA_ID_CLIENT_SECRET: &quot;&quot;
-  ENTRA_ID_TENANT_ID: &quot;&quot;
+  DB_PASSWORD: ""
+  AWS_ACCESS_KEY_ID: ""
+  AWS_SECRET_ACCESS_KEY: ""
+  ENTRA_ID_CLIENT_ID: ""
+  ENTRA_ID_CLIENT_SECRET: ""
+  ENTRA_ID_TENANT_ID: ""
 
 ingress:
   enabled: true
   hosts:
-    - host: &quot;{{ app.slug }}.company.com&quot;
+    - host: "{{ app.slug }}.company.com"
       paths:
         - path: /
           pathType: Prefix
   tls:
     - secretName: {{ app.slug }}-tls
       hosts:
-        - &quot;{{ app.slug }}.company.com&quot;" />
+        - "{{ app.slug }}.company.com"
+</CommandBlock>
 
 > **Warning:** Never commit secrets to version control. Use CI/CD secret management or external secret stores for production environments.
 
@@ -61,18 +63,20 @@ ingress:
 
 Disable the internal database and configure your external connection:
 
-<CommandBlock label="yaml" command="postgresql:
+<CommandBlock label="yaml">
+postgresql:
   enabled: false
 
 env:
-  DB_HOST: &quot;your-db-host&quot;
-  DB_PORT: &quot;5432&quot;
-  DB_USER: &quot;{{ app.slug }}&quot;
-  DB_NAME: &quot;{{ app.slug }}_production&quot;
-  DB_NAME_CABLE: &quot;{{ app.slug }}_cable_production&quot;
+  DB_HOST: "your-db-host"
+  DB_PORT: "5432"
+  DB_USER: "{{ app.slug }}"
+  DB_NAME: "{{ app.slug }}_production"
+  DB_NAME_CABLE: "{{ app.slug }}_cable_production"
 
 secrets:
-  DB_PASSWORD: &quot;your-secure-password&quot;" />
+  DB_PASSWORD: "your-secure-password"
+</CommandBlock>
 
 Supported version: **PostgreSQL 16.8+**
 
@@ -100,18 +104,20 @@ If you used our [Azure Terraform module](/infrastructure/azure-infrastructure), 
 
 > **Warning:** Internal PostgreSQL is not intended for production use. It lacks high-availability features, automated backups, and enterprise-grade reliability. Always use an external managed PostgreSQL service for production deployments.
 
-<CommandBlock label="yaml" command="postgresql:
+<CommandBlock label="yaml">
+postgresql:
   enabled: true
   persistence:
     size: 20Gi
-    storageClass: &quot;your-storage-class&quot;
+    storageClass: "your-storage-class"
   resources:
     limits:
       cpu: 2
       memory: 4Gi
     requests:
       cpu: 500m
-      memory: 1Gi" />
+      memory: 1Gi
+</CommandBlock>
 
 ---
 
@@ -119,37 +125,45 @@ If you used our [Azure Terraform module](/infrastructure/azure-infrastructure), 
 
 ### External S3 (Recommended)
 
-<CommandBlock label="yaml" command="env:
-  STORAGE_SERVICE: &quot;amazon&quot;
-  AWS_REGION: &quot;us-west-2&quot;
-  AWS_BUCKET: &quot;your-bucket-name&quot;
+<CommandBlock label="yaml">
+env:
+  STORAGE_SERVICE: "amazon"
+  AWS_REGION: "us-west-2"
+  AWS_BUCKET: "your-bucket-name"
 
 secrets:
-  AWS_ACCESS_KEY_ID: &quot;&quot;
-  AWS_SECRET_ACCESS_KEY: &quot;&quot;" />
+  AWS_ACCESS_KEY_ID: ""
+  AWS_SECRET_ACCESS_KEY: ""
+</CommandBlock>
 
 For S3-compatible services, add the endpoint:
 
-<CommandBlock label="yaml" command="env:
-  AWS_ENDPOINT: &quot;https://your-s3-compatible-endpoint&quot;" />
+<CommandBlock label="yaml">
+env:
+  AWS_ENDPOINT: "https://your-s3-compatible-endpoint"
+</CommandBlock>
 
 {{#if entitlements.isAzureEnabled}}
 ### Azure Blob Storage
 
-<CommandBlock label="yaml" command="env:
-  STORAGE_SERVICE: &quot;microsoft&quot;
+<CommandBlock label="yaml">
+env:
+  STORAGE_SERVICE: "microsoft"
 
 secrets:
-  AZURE_STORAGE_ACCOUNT_NAME: &quot;&quot;
-  AZURE_STORAGE_ACCESS_KEY: &quot;&quot;" />
+  AZURE_STORAGE_ACCOUNT_NAME: ""
+  AZURE_STORAGE_ACCESS_KEY: ""
+</CommandBlock>
 {{/if}}
 
 ### Internal MinIO (Development Only)
 
 > **Note:** Internal MinIO is not intended for production use. Use an external S3-compatible storage service for production deployments.
 
-<CommandBlock label="yaml" command="minio:
-  enabled: true" />
+<CommandBlock label="yaml">
+minio:
+  enabled: true
+</CommandBlock>
 
 ---
 
@@ -163,34 +177,40 @@ Secrets provided directly in your values file are base64-encoded automatically. 
 
 For enterprise deployments, integrate with an external secret store:
 
-<CommandBlock label="yaml" command="externalSecret:
+<CommandBlock label="yaml">
+externalSecret:
   enabled: true
   secretStore:
     name: your-secret-store
-    kind: SecretStore" />
+    kind: SecretStore
+</CommandBlock>
 
 {{#if entitlements.isAWSEnabled}}
 #### AWS Secrets Manager
 
-<CommandBlock label="yaml" command="externalSecret:
+<CommandBlock label="yaml">
+externalSecret:
   enabled: true
   secretStore:
     name: aws-secrets-manager
     kind: SecretStore
   aws:
-    region: &quot;us-west-2&quot;
-    role: &quot;arn:aws:iam::123456789012:role/{{ app.slug }}-secrets&quot;
-    serviceAccount: &quot;{{ app.slug }}-sa&quot;" />
+    region: "us-west-2"
+    role: "arn:aws:iam::123456789012:role/{{ app.slug }}-secrets"
+    serviceAccount: "{{ app.slug }}-sa"
+</CommandBlock>
 {{/if}}
 
 {{#if entitlements.isAzureEnabled}}
 #### Azure Key Vault
 
-<CommandBlock label="yaml" command="externalSecret:
+<CommandBlock label="yaml">
+externalSecret:
   enabled: true
   secretStore:
     name: azure-key-vault
-    kind: SecretStore" />
+    kind: SecretStore
+</CommandBlock>
 {{/if}}
 
 ---
@@ -200,62 +220,72 @@ For enterprise deployments, integrate with an external secret store:
 {{#if entitlements.isAWSEnabled}}
 ### AWS Application Load Balancer
 
-<CommandBlock label="yaml" command="ingress:
+<CommandBlock label="yaml">
+ingress:
   enabled: true
   annotations:
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/target-type: ip
-    alb.ingress.kubernetes.io/certificate-arn: &quot;arn:aws:acm:REGION:ACCOUNT:certificate/CERT_ID&quot;
-    alb.ingress.kubernetes.io/ssl-policy: &quot;ELBSecurityPolicy-TLS-1-2-2017-01&quot;" />
+    alb.ingress.kubernetes.io/certificate-arn: "arn:aws:acm:REGION:ACCOUNT:certificate/CERT_ID"
+    alb.ingress.kubernetes.io/ssl-policy: "ELBSecurityPolicy-TLS-1-2-2017-01"
+</CommandBlock>
 {{/if}}
 
 ### NGINX Ingress Controller
 
-<CommandBlock label="yaml" command="ingress:
+<CommandBlock label="yaml">
+ingress:
   enabled: true
   annotations:
-    nginx.ingress.kubernetes.io/ssl-redirect: &quot;true&quot;
-    nginx.ingress.kubernetes.io/enable-cors: &quot;true&quot;
-    nginx.ingress.kubernetes.io/affinity: &quot;cookie&quot;
-    nginx.ingress.kubernetes.io/whitelist-source-range: &quot;10.0.0.0/8&quot;
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/enable-cors: "true"
+    nginx.ingress.kubernetes.io/affinity: "cookie"
+    nginx.ingress.kubernetes.io/whitelist-source-range: "10.0.0.0/8"
   tls:
     - secretName: {{ app.slug }}-tls
       hosts:
-        - &quot;{{ app.slug }}.company.com&quot;" />
+        - "{{ app.slug }}.company.com"
+</CommandBlock>
 
 ### Application-Level TLS
 
 For environments without ingress TLS termination, enable auto-generated self-signed certificates:
 
-<CommandBlock label="yaml" command="env:
-  USE_HTTPS: &quot;true&quot;
+<CommandBlock label="yaml">
+env:
+  USE_HTTPS: "true"
 
 tls:
   autoGenerate: true
   validityDays: 365
   hosts:
-    - &quot;{{ app.slug }}.company.com&quot;" />
+    - "{{ app.slug }}.company.com"
+</CommandBlock>
 
 ### Manual Certificate Upload
 
 Upload your PEM-encoded certificate as a Kubernetes secret:
 
-<CommandBlock command="kubectl create secret tls {{ app.slug }}-tls \
+<CommandBlock>
+kubectl create secret tls {{ app.slug }}-tls \
   --cert=path/to/tls.crt \
   --key=path/to/tls.key \
-  -n {{ app.slug }}" />
+  -n {{ app.slug }}
+</CommandBlock>
 
 ### cert-manager
 
 If you have cert-manager installed in your cluster:
 
-<CommandBlock label="yaml" command="ingress:
+<CommandBlock label="yaml">
+ingress:
   annotations:
-    cert-manager.io/cluster-issuer: &quot;your-cluster-issuer&quot;
+    cert-manager.io/cluster-issuer: "your-cluster-issuer"
   tls:
     - secretName: {{ app.slug }}-tls
       hosts:
-        - &quot;{{ app.slug }}.company.com&quot;" />
+        - "{{ app.slug }}.company.com"
+</CommandBlock>
 
 ---
 
@@ -263,58 +293,68 @@ If you have cert-manager installed in your cluster:
 
 ### Local Authentication
 
-<CommandBlock label="yaml" command="env:
-  AUTH_PROVIDER: &quot;local&quot;" />
+<CommandBlock label="yaml">
+env:
+  AUTH_PROVIDER: "local"
+</CommandBlock>
 
 ### Microsoft Entra ID
 
 Register an application in Azure AD with the redirect URI: `https://your-domain/auth/entra_id/callback`
 
-<CommandBlock label="yaml" command="env:
-  AUTH_PROVIDER: &quot;entra_id&quot;
+<CommandBlock label="yaml">
+env:
+  AUTH_PROVIDER: "entra_id"
 
 secrets:
-  ENTRA_ID_CLIENT_ID: &quot;&quot;
-  ENTRA_ID_TENANT_ID: &quot;&quot;
-  ENTRA_ID_CLIENT_SECRET: &quot;&quot;" />
+  ENTRA_ID_CLIENT_ID: ""
+  ENTRA_ID_TENANT_ID: ""
+  ENTRA_ID_CLIENT_SECRET: ""
+</CommandBlock>
 
 ### Okta
 
 Create an OIDC web application in Okta with the redirect URI: `https://your-domain/auth/okta/callback`
 
-<CommandBlock label="yaml" command="env:
-  AUTH_PROVIDER: &quot;okta&quot;
+<CommandBlock label="yaml">
+env:
+  AUTH_PROVIDER: "okta"
 
 secrets:
-  OKTA_SITE: &quot;&quot;
-  OKTA_CLIENT_ID: &quot;&quot;
-  OKTA_AUTHORIZATION_SERVER: &quot;&quot;
-  OKTA_AUDIENCE: &quot;&quot;" />
+  OKTA_SITE: ""
+  OKTA_CLIENT_ID: ""
+  OKTA_AUTHORIZATION_SERVER: ""
+  OKTA_AUDIENCE: ""
+</CommandBlock>
 
 ### WorkOS
 
 Create an application in the WorkOS Dashboard with the redirect URI configured for your domain.
 
-<CommandBlock label="yaml" command="env:
-  AUTH_PROVIDER: &quot;workos&quot;
+<CommandBlock label="yaml">
+env:
+  AUTH_PROVIDER: "workos"
 
 secrets:
-  WORKOS_CLIENT_ID: &quot;&quot;
-  WORKOS_AUTHKIT_DOMAIN: &quot;&quot;" />
+  WORKOS_CLIENT_ID: ""
+  WORKOS_AUTHKIT_DOMAIN: ""
+</CommandBlock>
 
 ### Keycloak
 
 Create an OpenID Connect client in the Keycloak Admin Console with client authentication enabled, standard flow enabled, and the redirect URI: `https://your-domain/auth/keycloak/callback`
 
-<CommandBlock label="yaml" command="env:
-  AUTH_PROVIDER: &quot;keycloak&quot;
-  KEYCLOAK_CLIENT_ID: &quot;&quot;
-  KEYCLOAK_SITE: &quot;&quot;
-  KEYCLOAK_REALM: &quot;&quot;
-  KEYCLOAK_AUDIENCE: &quot;account&quot;
+<CommandBlock label="yaml">
+env:
+  AUTH_PROVIDER: "keycloak"
+  KEYCLOAK_CLIENT_ID: ""
+  KEYCLOAK_SITE: ""
+  KEYCLOAK_REALM: ""
+  KEYCLOAK_AUDIENCE: "account"
 
 secrets:
-  KEYCLOAK_CLIENT_SECRET: &quot;&quot;" />
+  KEYCLOAK_CLIENT_SECRET: ""
+</CommandBlock>
 
 Optional: For CLI authentication, create a separate public client with Device Authorization Grant flow and set `KEYCLOAK_DEVICE_AUTHORIZATION_CLIENT_ID`.
 
@@ -322,7 +362,8 @@ Optional: For CLI authentication, create a separate public client with Device Au
 
 ## Resource Sizing
 
-<CommandBlock label="yaml" command="web:
+<CommandBlock label="yaml">
+web:
   replicas: 2
   resources:
     limits:
@@ -350,7 +391,8 @@ buildkit:
       memory: 8Gi
     requests:
       cpu: 500m
-      memory: 2Gi" />
+      memory: 2Gi
+</CommandBlock>
 
 > **Note:** Default resource requests are conservative. Increase them for production workloads.
 
@@ -361,23 +403,27 @@ buildkit:
 
 Production HA deployments should use:
 
-<CommandBlock label="yaml" command="web:
+<CommandBlock label="yaml">
+web:
   replicas: 3
 
 worker:
   replicas: 3
 
-terminationGracePeriodSeconds: 60" />
+terminationGracePeriodSeconds: 60
+</CommandBlock>
 
 Use external HA-enabled services (e.g., AWS RDS Multi-AZ) and node selectors to distribute pods across availability zones:
 
-<CommandBlock label="yaml" command="web:
+<CommandBlock label="yaml">
+web:
   nodeSelector:
-    topology.kubernetes.io/zone: &quot;&quot;
+    topology.kubernetes.io/zone: ""
   topologySpreadConstraints:
     - maxSkew: 1
       topologyKey: topology.kubernetes.io/zone
-      whenUnsatisfiable: DoNotSchedule" />
+      whenUnsatisfiable: DoNotSchedule
+</CommandBlock>
 {{/if}}
 
 ---
@@ -392,8 +438,10 @@ Images are pulled from the Replicated proxy registry by default with automatic p
 
 Use `global.imageNamePrefixOverride` to redirect image pulls to your private registry:
 
-<CommandBlock label="yaml" command="global:
-  imageNamePrefixOverride: &quot;123456789012.dkr.ecr.us-west-2.amazonaws.com/{{ app.slug }}&quot;" />
+<CommandBlock label="yaml">
+global:
+  imageNamePrefixOverride: "123456789012.dkr.ecr.us-west-2.amazonaws.com/{{ app.slug }}"
+</CommandBlock>
 
 This completely replaces the image path structure. For example:
 - **Default:** `images.crewai.com/proxy/crewai/dockerhub/library/postgres:16`
@@ -405,9 +453,11 @@ This completely replaces the image path structure. For example:
 
 Enable rootless mode for improved security:
 
-<CommandBlock label="yaml" command="buildkit:
+<CommandBlock label="yaml">
+buildkit:
   rootless:
-    enabled: true" />
+    enabled: true
+</CommandBlock>
 
 Rootless mode runs as non-root (UID/GID 1000) with user namespace remapping and reduced attack surface. Requires Kubernetes nodes that allow `seccompProfile: Unconfined` and `appArmorProfile: Unconfined`.
 
@@ -425,14 +475,16 @@ Migrations run automatically during installation and upgrades.
 
 ### Troubleshooting Migrations
 
-<CommandBlock command="# View migration logs (upgrades)
+<CommandBlock>
+# View migration logs (upgrades)
 kubectl logs -l app.kubernetes.io/component=migration --tail=100
 
 # View setup logs (initial install)
 kubectl logs -l app.kubernetes.io/component=setup --tail=100
 
 # Check job status
-kubectl get jobs -l app.kubernetes.io/component=migration" />
+kubectl get jobs -l app.kubernetes.io/component=migration
+</CommandBlock>
 
 ---
 
@@ -451,57 +503,63 @@ kubectl get jobs -l app.kubernetes.io/component=migration" />
 {{#if entitlements.isAWSEnabled}}
 ### AWS Production
 
-<CommandBlock label="yaml" command="postgresql:
+<CommandBlock label="yaml">
+postgresql:
   enabled: false
 env:
-  DB_HOST: &quot;your-rds-endpoint&quot;
-  STORAGE_SERVICE: &quot;amazon&quot;
-  AUTH_PROVIDER: &quot;entra_id&quot;
+  DB_HOST: "your-rds-endpoint"
+  STORAGE_SERVICE: "amazon"
+  AUTH_PROVIDER: "entra_id"
 web:
   replicas: 3
 ingress:
   enabled: true
   annotations:
-    alb.ingress.kubernetes.io/certificate-arn: &quot;your-cert-arn&quot;
+    alb.ingress.kubernetes.io/certificate-arn: "your-cert-arn"
 buildkit:
   enabled: true
 externalSecret:
-  enabled: true" />
+  enabled: true
+</CommandBlock>
 {{/if}}
 
 {{#if entitlements.isAzureEnabled}}
 ### Azure Production
 
-<CommandBlock label="yaml" command="postgresql:
+<CommandBlock label="yaml">
+postgresql:
   enabled: false
 env:
-  DB_HOST: &quot;your-azure-db-endpoint&quot;
-  STORAGE_SERVICE: &quot;microsoft&quot;
-  AUTH_PROVIDER: &quot;entra_id&quot;
+  DB_HOST: "your-azure-db-endpoint"
+  STORAGE_SERVICE: "microsoft"
+  AUTH_PROVIDER: "entra_id"
 web:
   replicas: 3
 ingress:
   enabled: true
   annotations:
-    nginx.ingress.kubernetes.io/ssl-redirect: &quot;true&quot;
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
 externalSecret:
-  enabled: true" />
+  enabled: true
+</CommandBlock>
 {{/if}}
 
 ### Development / Testing
 
-<CommandBlock label="yaml" command="postgresql:
+<CommandBlock label="yaml">
+postgresql:
   enabled: true
 minio:
   enabled: true
 env:
-  AUTH_PROVIDER: &quot;local&quot;
-  LOG_LEVEL: &quot;debug&quot;
-  STORAGE_SERVICE: &quot;amazon&quot;
-  AWS_ENDPOINT: &quot;http://{{ app.slug }}-minio:9000&quot;
+  AUTH_PROVIDER: "local"
+  LOG_LEVEL: "debug"
+  STORAGE_SERVICE: "amazon"
+  AWS_ENDPOINT: "http://{{ app.slug }}-minio:9000"
 web:
   replicas: 1
 worker:
   replicas: 1
 tls:
-  autoGenerate: true" />
+  autoGenerate: true
+</CommandBlock>

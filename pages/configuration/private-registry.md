@@ -19,9 +19,11 @@ Configure {{ app.name }} to pull images from your private Docker registry for ai
 
 Use the credentials from your customer portal. These are the same tokens used for Helm registry authentication.
 
-<CommandBlock command="docker login images.crewai.com \
+<CommandBlock>
+docker login images.crewai.com \
   --username {{ customer.email }} \
-  --password {{ license.id }}" />
+  --password {{ license.id }}
+</CommandBlock>
 
 ## Step 2: Pull Required Images
 
@@ -53,10 +55,12 @@ The following images are required for {{ app.name }}:
 
 Tag each image for your private registry:
 
-<CommandBlock command="export YOUR_PRIVATE_REGISTRY=&quot;your-registry.example.com&quot;
+<CommandBlock>
+export YOUR_PRIVATE_REGISTRY="your-registry.example.com"
 
 docker tag images.crewai.com/library/replicated-sdk-image:1.12.1 \
-  $YOUR_PRIVATE_REGISTRY/crewai/replicated-sdk-image:1.12.1" />
+  $YOUR_PRIVATE_REGISTRY/crewai/replicated-sdk-image:1.12.1
+</CommandBlock>
 
 Repeat for all required images.
 
@@ -72,93 +76,105 @@ Repeat for all images.
 
 ### Generic Private Registry
 
-<CommandBlock label="yaml" command="global:
-  imageRegistry: &quot;your-registry.example.com&quot;
-  imageNamePrefixOverride: &quot;crewai/&quot;
+<CommandBlock label="yaml">
+global:
+  imageRegistry: "your-registry.example.com"
+  imageNamePrefixOverride: "crewai/"
 
 image:
   registries:
-    - host: &quot;your-registry.example.com&quot;
-      username: &quot;your-username&quot;
-      password: &quot;your-password&quot;
+    - host: "your-registry.example.com"
+      username: "your-username"
+      password: "your-password"
 
 envVars:
-  CONTAINER_REGISTRY_HOSTNAME: &quot;your-registry.example.com&quot;" />
+  CONTAINER_REGISTRY_HOSTNAME: "your-registry.example.com"
+</CommandBlock>
 
 {{#if entitlements.isAWSEnabled}}
 ### AWS ECR
 
-<CommandBlock label="yaml" command="global:
-  imageRegistry: &quot;123456789012.dkr.ecr.us-west-2.amazonaws.com&quot;
-  imageNamePrefixOverride: &quot;crewai/&quot;
+<CommandBlock label="yaml">
+global:
+  imageRegistry: "123456789012.dkr.ecr.us-west-2.amazonaws.com"
+  imageNamePrefixOverride: "crewai/"
 
 image:
   registries:
-    - host: &quot;123456789012.dkr.ecr.us-west-2.amazonaws.com&quot;
-      credHelper: &quot;ecr-login&quot;
+    - host: "123456789012.dkr.ecr.us-west-2.amazonaws.com"
+      credHelper: "ecr-login"
 
 envVars:
-  CONTAINER_REGISTRY_HOSTNAME: &quot;123456789012.dkr.ecr.us-west-2.amazonaws.com&quot;" />
+  CONTAINER_REGISTRY_HOSTNAME: "123456789012.dkr.ecr.us-west-2.amazonaws.com"
+</CommandBlock>
 {{/if}}
 
 {{#if entitlements.isAzureEnabled}}
 ### Azure Container Registry
 
-<CommandBlock label="yaml" command="global:
-  imageRegistry: &quot;myregistry.azurecr.io&quot;
-  imageNamePrefixOverride: &quot;crewai/&quot;
+<CommandBlock label="yaml">
+global:
+  imageRegistry: "myregistry.azurecr.io"
+  imageNamePrefixOverride: "crewai/"
 
 image:
   registries:
-    - host: &quot;myregistry.azurecr.io&quot;
-      username: &quot;myregistry&quot;
-      password: &quot;<access-token>&quot;
+    - host: "myregistry.azurecr.io"
+      username: "myregistry"
+      password: "<access-token>"
 
 envVars:
-  CONTAINER_REGISTRY_HOSTNAME: &quot;myregistry.azurecr.io&quot;" />
+  CONTAINER_REGISTRY_HOSTNAME: "myregistry.azurecr.io"
+</CommandBlock>
 {{/if}}
 
 ## Automation Script
 
 Save the following as `mirror-images.sh` to automate the pull/tag/push workflow:
 
-<CommandBlock command="#!/bin/bash
+<CommandBlock>
+#!/bin/bash
 set -euo pipefail
 
-SOURCE_REGISTRY=&quot;images.crewai.com&quot;
-TARGET_REGISTRY=&quot;${YOUR_PRIVATE_REGISTRY}&quot;
-TARGET_PREFIX=&quot;crewai&quot;
+SOURCE_REGISTRY="images.crewai.com"
+TARGET_REGISTRY="${YOUR_PRIVATE_REGISTRY}"
+TARGET_PREFIX="crewai"
 
 declare -A IMAGES=(
-  [&quot;library/replicated-sdk-image:1.12.1&quot;]=&quot;replicated-sdk-image:1.12.1&quot;
-  [&quot;library/crewai-enterprise-platform:0.15.6&quot;]=&quot;crewai-enterprise-platform:0.15.6&quot;
-  [&quot;library/buildkit:v2026.0130.11&quot;]=&quot;buildkit:v2026.0130.11&quot;
-  [&quot;library/buildkit-rootless:v2026.0130.11&quot;]=&quot;buildkit-rootless:v2026.0130.11&quot;
-  [&quot;library/crewai-enterprise-preinstalled-v2:latest&quot;]=&quot;crewai-enterprise-preinstalled-v2:latest&quot;
-  [&quot;library/python-base:latest&quot;]=&quot;python-base:latest&quot;
-  [&quot;library/busybox:latest&quot;]=&quot;busybox:latest&quot;
-  [&quot;library/redis:latest&quot;]=&quot;redis:latest&quot;
+  ["library/replicated-sdk-image:1.12.1"]="replicated-sdk-image:1.12.1"
+  ["library/crewai-enterprise-platform:0.15.6"]="crewai-enterprise-platform:0.15.6"
+  ["library/buildkit:v2026.0130.11"]="buildkit:v2026.0130.11"
+  ["library/buildkit-rootless:v2026.0130.11"]="buildkit-rootless:v2026.0130.11"
+  ["library/crewai-enterprise-preinstalled-v2:latest"]="crewai-enterprise-preinstalled-v2:latest"
+  ["library/python-base:latest"]="python-base:latest"
+  ["library/busybox:latest"]="busybox:latest"
+  ["library/redis:latest"]="redis:latest"
 )
 
-for SOURCE_IMAGE in &quot;${!IMAGES[@]}&quot;; do
-  TARGET_IMAGE=&quot;${IMAGES[$SOURCE_IMAGE]}&quot;
-  echo &quot;Mirroring ${SOURCE_IMAGE} -> ${TARGET_PREFIX}/${TARGET_IMAGE}&quot;
-  docker pull &quot;${SOURCE_REGISTRY}/${SOURCE_IMAGE}&quot;
-  docker tag &quot;${SOURCE_REGISTRY}/${SOURCE_IMAGE}&quot; &quot;${TARGET_REGISTRY}/${TARGET_PREFIX}/${TARGET_IMAGE}&quot;
-  docker push &quot;${TARGET_REGISTRY}/${TARGET_PREFIX}/${TARGET_IMAGE}&quot;
+for SOURCE_IMAGE in "${!IMAGES[@]}"; do
+  TARGET_IMAGE="${IMAGES[$SOURCE_IMAGE]}"
+  echo "Mirroring ${SOURCE_IMAGE} -> ${TARGET_PREFIX}/${TARGET_IMAGE}"
+  docker pull "${SOURCE_REGISTRY}/${SOURCE_IMAGE}"
+  docker tag "${SOURCE_REGISTRY}/${SOURCE_IMAGE}" "${TARGET_REGISTRY}/${TARGET_PREFIX}/${TARGET_IMAGE}"
+  docker push "${TARGET_REGISTRY}/${TARGET_PREFIX}/${TARGET_IMAGE}"
 done
 
-echo &quot;All images mirrored successfully.&quot;" />
+echo "All images mirrored successfully."
+</CommandBlock>
 
-<CommandBlock command="chmod +x mirror-images.sh
-./mirror-images.sh" />
+<CommandBlock>
+chmod +x mirror-images.sh
+./mirror-images.sh
+</CommandBlock>
 
 ## Verification
 
 After deploying, verify all pods are pulling from your private registry:
 
-<CommandBlock command="kubectl get pods -l app.kubernetes.io/name={{ app.slug }} \
-  -o jsonpath='{range .items[*]}{.spec.containers[*].image}{&quot;\n&quot;}{end}'" />
+<CommandBlock>
+kubectl get pods -l app.kubernetes.io/name={{ app.slug }} \
+  -o jsonpath='{range .items[*]}{.spec.containers[*].image}{"\n"}{end}'
+</CommandBlock>
 
 ## Troubleshooting
 

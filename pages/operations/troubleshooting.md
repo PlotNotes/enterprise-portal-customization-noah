@@ -10,9 +10,11 @@ weight: 400
 
 <Accordion title="Pods not starting">
 
-<CommandBlock command="kubectl -n chartsmith get pods
+<CommandBlock>
+kubectl -n chartsmith get pods
 kubectl -n chartsmith describe pod <POD_NAME>
-kubectl -n chartsmith logs <POD_NAME>" />
+kubectl -n chartsmith logs <POD_NAME>
+</CommandBlock>
 
 </Accordion>
 

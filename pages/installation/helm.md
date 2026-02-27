@@ -34,9 +34,11 @@ install_type: helm
 
 Two `kubectl` plugins are required: **preflight** (for cluster validation) and **support-bundle** (for diagnostics).
 
-<CommandBlock command="curl -fsSL https://krew.sh | bash
+<CommandBlock>
+curl -fsSL https://krew.sh | bash
 kubectl krew install preflight
-kubectl krew install support-bundle" />
+kubectl krew install support-bundle
+</CommandBlock>
 
 </InstallStep>
 
@@ -56,9 +58,11 @@ kubectl krew install support-bundle" />
 
 Check that all pods are running and services are available:
 
-<CommandBlock command="kubectl -n {{ app.slug }} get pods
+<CommandBlock>
+kubectl -n {{ app.slug }} get pods
 kubectl -n {{ app.slug }} get svc
-helm list -n {{ app.slug }}" />
+helm list -n {{ app.slug }}
+</CommandBlock>
 
 Wait for all pods to reach `Running` state.
 
@@ -83,9 +87,11 @@ After your v3.0.0 Helm deployment is running:
 
 <Accordion title="Pod Startup Issues">
 
-<CommandBlock command="kubectl -n {{ app.slug }} describe pod <pod-name>
+<CommandBlock>
+kubectl -n {{ app.slug }} describe pod <pod-name>
 kubectl -n {{ app.slug }} logs <pod-name>
-kubectl -n {{ app.slug }} get events --sort-by='.lastTimestamp'" />
+kubectl -n {{ app.slug }} get events --sort-by='.lastTimestamp'
+</CommandBlock>
 
 </Accordion>
 

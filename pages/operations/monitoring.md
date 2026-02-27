@@ -14,7 +14,8 @@ weight: 100
 
 Add the following scrape config to your Prometheus configuration:
 
-<CommandBlock label="yaml" command="- job_name: chartsmith
+<CommandBlock label="yaml">
+- job_name: chartsmith
   kubernetes_sd_configs:
     - role: pod
       namespaces:
@@ -22,7 +23,8 @@ Add the following scrape config to your Prometheus configuration:
   relabel_configs:
     - source_labels: [__meta_kubernetes_pod_label_app]
       regex: chartsmith
-      action: keep" />
+      action: keep
+</CommandBlock>
 
 ## Key Metrics
 
