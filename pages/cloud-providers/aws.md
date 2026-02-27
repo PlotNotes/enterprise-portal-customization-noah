@@ -55,18 +55,16 @@ Memory-optimized instances (R6g family) are recommended. Production workloads ne
 
 ### Helm Configuration
 
-```yaml
-postgres:
+<CommandBlock label="yaml" command="postgres:
   enabled: false
 
 envVars:
-  DB_HOST: "{{ app.slug }}-prod.cluster-abc123.us-east-1.rds.amazonaws.com"
-  DB_PORT: "5432"
-  DB_USER: "{{ app.slug }}"
+  DB_HOST: &quot;{{ app.slug }}-prod.cluster-abc123.us-east-1.rds.amazonaws.com&quot;
+  DB_PORT: &quot;5432&quot;
+  DB_USER: &quot;{{ app.slug }}&quot;
 
 secrets:
-  DB_PASSWORD: "your-secure-password"
-```
+  DB_PASSWORD: &quot;your-secure-password&quot;" />
 
 ---
 
@@ -130,16 +128,14 @@ aws iam attach-role-policy \
 
 **Static Access Keys (Development Only):**
 
-```yaml
-envVars:
-  STORAGE_SERVICE: "amazon"
-  AWS_REGION: "us-east-1"
-  AWS_BUCKET: "{{ app.slug }}-prod-storage"
+<CommandBlock label="yaml" command="envVars:
+  STORAGE_SERVICE: &quot;amazon&quot;
+  AWS_REGION: &quot;us-east-1&quot;
+  AWS_BUCKET: &quot;{{ app.slug }}-prod-storage&quot;
 
 secrets:
-  AWS_ACCESS_KEY_ID: "AKIAIOSFODNN7EXAMPLE"
-  AWS_SECRET_ACCESS_KEY: "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"
-```
+  AWS_ACCESS_KEY_ID: &quot;AKIAIOSFODNN7EXAMPLE&quot;
+  AWS_SECRET_ACCESS_KEY: &quot;wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY&quot;" />
 
 **IAM Roles for Service Accounts (IRSA):** Also supported as an alternative. See the AWS IRSA documentation for details.
 
@@ -220,46 +216,42 @@ aws ecr put-lifecycle-policy \
 
 ### ECR IAM Policy
 
-```json
-{
-  "Version": "2012-10-17",
-  "Statement": [
+<CommandBlock label="json" command="{
+  &quot;Version&quot;: &quot;2012-10-17&quot;,
+  &quot;Statement&quot;: [
     {
-      "Effect": "Allow",
-      "Action": ["ecr:GetAuthorizationToken"],
-      "Resource": "*"
+      &quot;Effect&quot;: &quot;Allow&quot;,
+      &quot;Action&quot;: [&quot;ecr:GetAuthorizationToken&quot;],
+      &quot;Resource&quot;: &quot;*&quot;
     },
     {
-      "Effect": "Allow",
-      "Action": [
-        "ecr:BatchCheckLayerAvailability",
-        "ecr:GetDownloadUrlForLayer",
-        "ecr:BatchGetImage",
-        "ecr:PutImage",
-        "ecr:InitiateLayerUpload",
-        "ecr:UploadLayerPart",
-        "ecr:CompleteLayerUpload"
+      &quot;Effect&quot;: &quot;Allow&quot;,
+      &quot;Action&quot;: [
+        &quot;ecr:BatchCheckLayerAvailability&quot;,
+        &quot;ecr:GetDownloadUrlForLayer&quot;,
+        &quot;ecr:BatchGetImage&quot;,
+        &quot;ecr:PutImage&quot;,
+        &quot;ecr:InitiateLayerUpload&quot;,
+        &quot;ecr:UploadLayerPart&quot;,
+        &quot;ecr:CompleteLayerUpload&quot;
       ],
-      "Resource": "arn:aws:ecr:us-east-1:ACCOUNT:repository/*/crewai-enterprise"
+      &quot;Resource&quot;: &quot;arn:aws:ecr:us-east-1:ACCOUNT:repository/*/crewai-enterprise&quot;
     }
   ]
-}
-```
+}" />
 
 ### Helm Configuration for ECR
 
-```yaml
-envVars:
-  CREW_IMAGE_REGISTRY_OVERRIDE: "123456789012.dkr.ecr.us-east-1.amazonaws.com/my-org"
-  STORAGE_SERVICE: "amazon"
-  AWS_REGION: "us-east-1"
-  AWS_BUCKET: "{{ app.slug }}-prod-storage"
+<CommandBlock label="yaml" command="envVars:
+  CREW_IMAGE_REGISTRY_OVERRIDE: &quot;123456789012.dkr.ecr.us-east-1.amazonaws.com/my-org&quot;
+  STORAGE_SERVICE: &quot;amazon&quot;
+  AWS_REGION: &quot;us-east-1&quot;
+  AWS_BUCKET: &quot;{{ app.slug }}-prod-storage&quot;
 
-serviceAccount: "{{ app.slug }}-sa"
+serviceAccount: &quot;{{ app.slug }}-sa&quot;
 
 rbac:
-  create: true
-```
+  create: true" />
 
 ---
 
@@ -295,42 +287,38 @@ helm install external-secrets \
 
 IAM policy for the operator:
 
-```json
-{
-  "Version": "2012-10-17",
-  "Statement": [
+<CommandBlock label="json" command="{
+  &quot;Version&quot;: &quot;2012-10-17&quot;,
+  &quot;Statement&quot;: [
     {
-      "Effect": "Allow",
-      "Action": [
-        "secretsmanager:GetSecretValue",
-        "secretsmanager:DescribeSecret"
+      &quot;Effect&quot;: &quot;Allow&quot;,
+      &quot;Action&quot;: [
+        &quot;secretsmanager:GetSecretValue&quot;,
+        &quot;secretsmanager:DescribeSecret&quot;
       ],
-      "Resource": "arn:aws:secretsmanager:us-east-1:ACCOUNT:secret:{{ app.slug }}/*"
+      &quot;Resource&quot;: &quot;arn:aws:secretsmanager:us-east-1:ACCOUNT:secret:{{ app.slug }}/*&quot;
     }
   ]
-}
-```
+}" />
 
 ### Helm Configuration
 
-```yaml
-externalSecret:
+<CommandBlock label="yaml" command="externalSecret:
   enabled: true
-  secretStore: "{{ app.slug }}-secret-store"
-  secretPath: "{{ app.slug }}/platform"
+  secretStore: &quot;{{ app.slug }}-secret-store&quot;
+  secretPath: &quot;{{ app.slug }}/platform&quot;
   includes_aws_credentials: false
   includes_azure_credentials: false
 
 secretStore:
   enabled: true
-  provider: "aws"
+  provider: &quot;aws&quot;
   aws:
-    region: "us-east-1"
+    region: &quot;us-east-1&quot;
     auth:
       serviceAccount:
         enabled: true
-        name: "{{ app.slug }}-secrets-reader"
-```
+        name: &quot;{{ app.slug }}-secrets-reader&quot;" />
 
 ---
 
@@ -338,145 +326,141 @@ secretStore:
 
 A single policy granting S3 and ECR access:
 
-```json
-{
-  "Version": "2012-10-17",
-  "Statement": [
+<CommandBlock label="json" command="{
+  &quot;Version&quot;: &quot;2012-10-17&quot;,
+  &quot;Statement&quot;: [
     {
-      "Sid": "S3Access",
-      "Effect": "Allow",
-      "Action": [
-        "s3:GetObject",
-        "s3:PutObject",
-        "s3:DeleteObject",
-        "s3:ListBucket"
+      &quot;Sid&quot;: &quot;S3Access&quot;,
+      &quot;Effect&quot;: &quot;Allow&quot;,
+      &quot;Action&quot;: [
+        &quot;s3:GetObject&quot;,
+        &quot;s3:PutObject&quot;,
+        &quot;s3:DeleteObject&quot;,
+        &quot;s3:ListBucket&quot;
       ],
-      "Resource": [
-        "arn:aws:s3:::{{ app.slug }}-prod-storage",
-        "arn:aws:s3:::{{ app.slug }}-prod-storage/*"
+      &quot;Resource&quot;: [
+        &quot;arn:aws:s3:::{{ app.slug }}-prod-storage&quot;,
+        &quot;arn:aws:s3:::{{ app.slug }}-prod-storage/*&quot;
       ]
     },
     {
-      "Sid": "ECRAuthToken",
-      "Effect": "Allow",
-      "Action": ["ecr:GetAuthorizationToken"],
-      "Resource": "*"
+      &quot;Sid&quot;: &quot;ECRAuthToken&quot;,
+      &quot;Effect&quot;: &quot;Allow&quot;,
+      &quot;Action&quot;: [&quot;ecr:GetAuthorizationToken&quot;],
+      &quot;Resource&quot;: &quot;*&quot;
     },
     {
-      "Sid": "ECRPushPull",
-      "Effect": "Allow",
-      "Action": [
-        "ecr:BatchCheckLayerAvailability",
-        "ecr:GetDownloadUrlForLayer",
-        "ecr:BatchGetImage",
-        "ecr:PutImage",
-        "ecr:InitiateLayerUpload",
-        "ecr:UploadLayerPart",
-        "ecr:CompleteLayerUpload"
+      &quot;Sid&quot;: &quot;ECRPushPull&quot;,
+      &quot;Effect&quot;: &quot;Allow&quot;,
+      &quot;Action&quot;: [
+        &quot;ecr:BatchCheckLayerAvailability&quot;,
+        &quot;ecr:GetDownloadUrlForLayer&quot;,
+        &quot;ecr:BatchGetImage&quot;,
+        &quot;ecr:PutImage&quot;,
+        &quot;ecr:InitiateLayerUpload&quot;,
+        &quot;ecr:UploadLayerPart&quot;,
+        &quot;ecr:CompleteLayerUpload&quot;
       ],
-      "Resource": "arn:aws:ecr:us-east-1:ACCOUNT:repository/*/crewai-enterprise"
+      &quot;Resource&quot;: &quot;arn:aws:ecr:us-east-1:ACCOUNT:repository/*/crewai-enterprise&quot;
     }
   ]
-}
-```
+}" />
 
 ---
 
 ## Complete Production Configuration
 
-```yaml
-postgres:
+<CommandBlock label="yaml" command="postgres:
   enabled: false
 
 minio:
   enabled: false
 
 envVars:
-  DB_HOST: "{{ app.slug }}-prod.cluster-abc123.us-east-1.rds.amazonaws.com"
-  DB_PORT: "5432"
-  DB_USER: "{{ app.slug }}"
-  POSTGRES_DB: "{{ app.slug }}_plus_production"
-  POSTGRES_CABLE_DB: "{{ app.slug }}_plus_cable_production"
-  RAILS_MAX_THREADS: "5"
-  DB_POOL: "5"
-  STORAGE_SERVICE: "amazon"
-  AWS_REGION: "us-east-1"
-  AWS_BUCKET: "{{ app.slug }}-prod-storage"
-  CREW_IMAGE_REGISTRY_OVERRIDE: "123456789012.dkr.ecr.us-east-1.amazonaws.com/production"
-  APPLICATION_HOST: "{{ app.slug }}.company.com"
-  AUTH_PROVIDER: "entra_id"
-  RAILS_ENV: "production"
-  RAILS_LOG_LEVEL: "info"
+  DB_HOST: &quot;{{ app.slug }}-prod.cluster-abc123.us-east-1.rds.amazonaws.com&quot;
+  DB_PORT: &quot;5432&quot;
+  DB_USER: &quot;{{ app.slug }}&quot;
+  POSTGRES_DB: &quot;{{ app.slug }}_plus_production&quot;
+  POSTGRES_CABLE_DB: &quot;{{ app.slug }}_plus_cable_production&quot;
+  RAILS_MAX_THREADS: &quot;5&quot;
+  DB_POOL: &quot;5&quot;
+  STORAGE_SERVICE: &quot;amazon&quot;
+  AWS_REGION: &quot;us-east-1&quot;
+  AWS_BUCKET: &quot;{{ app.slug }}-prod-storage&quot;
+  CREW_IMAGE_REGISTRY_OVERRIDE: &quot;123456789012.dkr.ecr.us-east-1.amazonaws.com/production&quot;
+  APPLICATION_HOST: &quot;{{ app.slug }}.company.com&quot;
+  AUTH_PROVIDER: &quot;entra_id&quot;
+  RAILS_ENV: &quot;production&quot;
+  RAILS_LOG_LEVEL: &quot;info&quot;
 
 externalSecret:
   enabled: true
-  secretStore: "{{ app.slug }}-secret-store"
-  secretPath: "{{ app.slug }}/platform"
+  secretStore: &quot;{{ app.slug }}-secret-store&quot;
+  secretPath: &quot;{{ app.slug }}/platform&quot;
   includes_aws_credentials: false
 
 secretStore:
   enabled: true
-  provider: "aws"
+  provider: &quot;aws&quot;
   aws:
-    region: "us-east-1"
+    region: &quot;us-east-1&quot;
     auth:
       serviceAccount:
         enabled: true
-        name: "{{ app.slug }}-secrets-reader"
+        name: &quot;{{ app.slug }}-secrets-reader&quot;
 
 web:
   replicaCount: 3
   resources:
     requests:
-      cpu: "1000m"
-      memory: "6Gi"
+      cpu: &quot;1000m&quot;
+      memory: &quot;6Gi&quot;
     limits:
-      cpu: "6"
-      memory: "12Gi"
+      cpu: &quot;6&quot;
+      memory: &quot;12Gi&quot;
   ingress:
     enabled: true
-    className: "alb"
-    host: "{{ app.slug }}.company.com"
+    className: &quot;alb&quot;
+    host: &quot;{{ app.slug }}.company.com&quot;
     annotations:
       alb.ingress.kubernetes.io/scheme: internet-facing
       alb.ingress.kubernetes.io/target-type: ip
-      alb.ingress.kubernetes.io/certificate-arn: "arn:aws:acm:us-east-1:123456789012:certificate/abc-123"
+      alb.ingress.kubernetes.io/certificate-arn: &quot;arn:aws:acm:us-east-1:123456789012:certificate/abc-123&quot;
       alb.ingress.kubernetes.io/ssl-policy: ELBSecurityPolicy-TLS13-1-2-2021-06
-      alb.ingress.kubernetes.io/ssl-redirect: "443"
+      alb.ingress.kubernetes.io/ssl-redirect: &quot;443&quot;
       alb.ingress.kubernetes.io/target-group-attributes: idle_timeout.timeout_seconds=300
       alb.ingress.kubernetes.io/healthcheck-path: /up
       alb.ingress.kubernetes.io/tags: Environment=production,Application={{ app.slug }}
     alb:
-      scheme: "internet-facing"
-      targetType: "ip"
-      certificateArn: "arn:aws:acm:us-east-1:123456789012:certificate/abc-123"
+      scheme: &quot;internet-facing&quot;
+      targetType: &quot;ip&quot;
+      certificateArn: &quot;arn:aws:acm:us-east-1:123456789012:certificate/abc-123&quot;
 
 worker:
   replicaCount: 3
   resources:
     requests:
-      cpu: "1000m"
-      memory: "6Gi"
+      cpu: &quot;1000m&quot;
+      memory: &quot;6Gi&quot;
     limits:
-      cpu: "6"
-      memory: "12Gi"
+      cpu: &quot;6&quot;
+      memory: &quot;12Gi&quot;
 
 buildkit:
   enabled: true
   replicaCount: 1
   resources:
     requests:
-      cpu: "500m"
-      memory: "2Gi"
+      cpu: &quot;500m&quot;
+      memory: &quot;2Gi&quot;
     limits:
-      cpu: "4"
-      memory: "8Gi"
+      cpu: &quot;4&quot;
+      memory: &quot;8Gi&quot;
 
 rbac:
   create: true
 
-serviceAccount: "{{ app.slug }}-sa"
-```
+serviceAccount: &quot;{{ app.slug }}-sa&quot;" />
 
 Deploy with:
 

@@ -23,16 +23,14 @@ Regular backups are critical for disaster recovery. Configure automated backups 
 
 Enable automated database backups by adding this to your values file:
 
-```yaml
-backup:
+<CommandBlock label="yaml" command="backup:
   enabled: true
-  schedule: "0 2 * * *"  # Daily at 2 AM
+  schedule: &quot;0 2 * * *&quot;  # Daily at 2 AM
   retention: 30           # Keep 30 days
   destination:
     type: s3
     bucket: chartsmith-backups
-    region: us-west-2
-```
+    region: us-west-2" />
 
 ## Manual Backup
 

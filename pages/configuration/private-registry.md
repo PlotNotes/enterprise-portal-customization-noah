@@ -72,56 +72,50 @@ Repeat for all images.
 
 ### Generic Private Registry
 
-```yaml
-global:
-  imageRegistry: "your-registry.example.com"
-  imageNamePrefixOverride: "crewai/"
+<CommandBlock label="yaml" command="global:
+  imageRegistry: &quot;your-registry.example.com&quot;
+  imageNamePrefixOverride: &quot;crewai/&quot;
 
 image:
   registries:
-    - host: "your-registry.example.com"
-      username: "your-username"
-      password: "your-password"
+    - host: &quot;your-registry.example.com&quot;
+      username: &quot;your-username&quot;
+      password: &quot;your-password&quot;
 
 envVars:
-  CONTAINER_REGISTRY_HOSTNAME: "your-registry.example.com"
-```
+  CONTAINER_REGISTRY_HOSTNAME: &quot;your-registry.example.com&quot;" />
 
 {{#if entitlements.isAWSEnabled}}
 ### AWS ECR
 
-```yaml
-global:
-  imageRegistry: "123456789012.dkr.ecr.us-west-2.amazonaws.com"
-  imageNamePrefixOverride: "crewai/"
+<CommandBlock label="yaml" command="global:
+  imageRegistry: &quot;123456789012.dkr.ecr.us-west-2.amazonaws.com&quot;
+  imageNamePrefixOverride: &quot;crewai/&quot;
 
 image:
   registries:
-    - host: "123456789012.dkr.ecr.us-west-2.amazonaws.com"
-      credHelper: "ecr-login"
+    - host: &quot;123456789012.dkr.ecr.us-west-2.amazonaws.com&quot;
+      credHelper: &quot;ecr-login&quot;
 
 envVars:
-  CONTAINER_REGISTRY_HOSTNAME: "123456789012.dkr.ecr.us-west-2.amazonaws.com"
-```
+  CONTAINER_REGISTRY_HOSTNAME: &quot;123456789012.dkr.ecr.us-west-2.amazonaws.com&quot;" />
 {{/if}}
 
 {{#if entitlements.isAzureEnabled}}
 ### Azure Container Registry
 
-```yaml
-global:
-  imageRegistry: "myregistry.azurecr.io"
-  imageNamePrefixOverride: "crewai/"
+<CommandBlock label="yaml" command="global:
+  imageRegistry: &quot;myregistry.azurecr.io&quot;
+  imageNamePrefixOverride: &quot;crewai/&quot;
 
 image:
   registries:
-    - host: "myregistry.azurecr.io"
-      username: "myregistry"
-      password: "<access-token>"
+    - host: &quot;myregistry.azurecr.io&quot;
+      username: &quot;myregistry&quot;
+      password: &quot;<access-token>&quot;
 
 envVars:
-  CONTAINER_REGISTRY_HOSTNAME: "myregistry.azurecr.io"
-```
+  CONTAINER_REGISTRY_HOSTNAME: &quot;myregistry.azurecr.io&quot;" />
 {{/if}}
 
 ## Automation Script
