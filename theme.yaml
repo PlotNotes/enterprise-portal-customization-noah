@@ -50,7 +50,7 @@ customCSS: |
   }
 
   /* Muted body text */
-  main p, main li, main td, main th {
+  main p, main li, main td, main th, main label, main legend, main span, main fieldset {
     color: #a3a3a3 !important;
   }
 
@@ -80,6 +80,16 @@ customCSS: |
   nav.w-72 a:hover,
   nav.w-72 a[data-active="true"] {
     color: #D4583B !important;
+  }
+
+  /* Dark form elements */
+  main select, main input[type="text"], main .portal-input, main .portal-select {
+    background-color: #2a2a2a !important;
+    color: #d4d4d4 !important;
+    border-color: #404040 !important;
+  }
+  main input[type="radio"] {
+    accent-color: #D4583B;
   }
 
   /* Dark code blocks */
