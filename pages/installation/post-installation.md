@@ -20,7 +20,7 @@ After installing {{ app.name }}, complete the following configuration steps befo
 
 Replace `admin@company.com` with your administrator's email address:
 
-<CommandBlock command={`kubectl exec -it deploy/{{ app.slug }}-web -- rake factory:setup_permissions_defaults 'factory:add_owner[2,admin@company.com]'`} />
+<CommandBlock command="kubectl exec -it deploy/{{ app.slug }}-web -- rake factory:setup_permissions_defaults 'factory:add_owner[2,admin@company.com]'" />
 
 </InstallStep>
 
@@ -34,11 +34,11 @@ To enable Studio V2 features, ensure the following prerequisites are met:
 
 Then run the following commands:
 
-<CodeBlock language="bash">
-{`kubectl exec -it deploy/{{ app.slug }}-web -- rake studio:agent:install
+```bash
+kubectl exec -it deploy/{{ app.slug }}-web -- rake studio:agent:install
 kubectl exec -it deploy/{{ app.slug }}-web -- rake studio:tools:sync_crewai_tools
-kubectl exec -it deploy/{{ app.slug }}-web -- rake studio:runner:install`}
-</CodeBlock>
+kubectl exec -it deploy/{{ app.slug }}-web -- rake studio:runner:install
+```
 
 </Accordion>
 

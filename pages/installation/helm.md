@@ -34,11 +34,11 @@ install_type: helm
 
 Two `kubectl` plugins are required: **preflight** (for cluster validation) and **support-bundle** (for diagnostics).
 
-<CodeBlock language="bash">
-{`curl -fsSL https://krew.sh | bash
+```bash
+curl -fsSL https://krew.sh | bash
 kubectl krew install preflight
-kubectl krew install support-bundle`}
-</CodeBlock>
+kubectl krew install support-bundle
+```
 
 </InstallStep>
 
@@ -50,7 +50,7 @@ kubectl krew install support-bundle`}
 **New in v3.0.0:** Preflight checks now run automatically during `helm install`. You can still run them manually:
 </Note>
 
-<CommandBlock command={`helm template {{ app.slug }} oci://registry.replicated.com/{{ app.slug }}/{{ channel.slug }}/{{ app.slug }} --values my-values.yaml | kubectl preflight -`} />
+<CommandBlock command="helm template {{ app.slug }} oci://registry.replicated.com/{{ app.slug }}/{{ channel.slug }}/{{ app.slug }} --values my-values.yaml | kubectl preflight -" />
 
 </InstallStep>
 
@@ -58,11 +58,11 @@ kubectl krew install support-bundle`}
 
 Check that all pods are running and services are available:
 
-<CodeBlock language="bash">
-{`kubectl -n {{ app.slug }} get pods
+```bash
+kubectl -n {{ app.slug }} get pods
 kubectl -n {{ app.slug }} get svc
-helm list -n {{ app.slug }}`}
-</CodeBlock>
+helm list -n {{ app.slug }}
+```
 
 Wait for all pods to reach `Running` state.
 
@@ -87,11 +87,11 @@ After your v3.0.0 Helm deployment is running:
 
 <Accordion title="Pod Startup Issues">
 
-<CodeBlock language="bash">
-{`kubectl -n {{ app.slug }} describe pod <pod-name>
+```bash
+kubectl -n {{ app.slug }} describe pod <pod-name>
 kubectl -n {{ app.slug }} logs <pod-name>
-kubectl -n {{ app.slug }} get events --sort-by='.lastTimestamp'`}
-</CodeBlock>
+kubectl -n {{ app.slug }} get events --sort-by='.lastTimestamp'
+```
 
 </Accordion>
 

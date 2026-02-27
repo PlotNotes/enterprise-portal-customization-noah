@@ -34,11 +34,11 @@ Copy the bundle to your air gap server using your organization's approved transf
 
 <InstallStep stepNumber={3} title="Extract and Install">
 
-<CodeBlock language="bash">
-{`tar xzf {{ app.slug }}-{{ release.version }}.airgap.tar.gz
+```bash
+tar xzf {{ app.slug }}-{{ release.version }}.airgap.tar.gz
 cd {{ app.slug }}-{{ release.version }}
-sudo ./install.sh --airgap`}
-</CodeBlock>
+sudo ./install.sh --airgap
+```
 
 </InstallStep>
 

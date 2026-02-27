@@ -30,7 +30,7 @@ Always review the release notes for breaking changes and back up your database b
 
 <InstallStep stepNumber={1} title="Upgrade via Helm">
 
-<CommandBlock command={`helm upgrade {{ app.slug }} oci://registry.replicated.com/{{ app.slug }}/{{ channel.slug }}/{{ app.slug }} --version <NEW_VERSION> --namespace chartsmith --reuse-values`} />
+<CommandBlock command="helm upgrade {{ app.slug }} oci://registry.replicated.com/{{ app.slug }}/{{ channel.slug }}/{{ app.slug }} --version NEW_VERSION --namespace chartsmith --reuse-values" />
 
 </InstallStep>
 
@@ -44,10 +44,10 @@ Always review the release notes for breaking changes and back up your database b
 
 Use the admin console to check for and apply updates, or use the CLI:
 
-<CodeBlock language="bash">
-{`chartsmith update check
-chartsmith update apply`}
-</CodeBlock>
+```bash
+chartsmith update check
+chartsmith update apply
+```
 
 </InstallStep>
 

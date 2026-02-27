@@ -23,28 +23,28 @@ Regular backups are critical for disaster recovery. Configure automated backups 
 
 Enable automated database backups by adding this to your values file:
 
-<CodeBlock language="yaml" title="backup configuration">
-{`backup:
+```yaml
+backup:
   enabled: true
   schedule: "0 2 * * *"  # Daily at 2 AM
   retention: 30           # Keep 30 days
   destination:
     type: s3
     bucket: chartsmith-backups
-    region: us-west-2`}
-</CodeBlock>
+    region: us-west-2
+```
 
 ## Manual Backup
 
 <Tabs>
 <Tab title="Internal PostgreSQL">
 
-<CommandBlock command={`kubectl exec -n chartsmith deploy/chartsmith-postgresql -- pg_dump -U chartsmith -Fc > chartsmith-$(date +%Y%m%d).dump`} />
+<CommandBlock command="kubectl exec -n chartsmith deploy/chartsmith-postgresql -- pg_dump -U chartsmith -Fc > chartsmith-backup.dump" />
 
 </Tab>
 <Tab title="External Database">
 
-<CommandBlock command={`pg_dump -h HOST -U chartsmith -Fc > chartsmith-$(date +%Y%m%d).dump`} />
+<CommandBlock command="pg_dump -h HOST -U chartsmith -Fc > chartsmith-backup.dump" />
 
 </Tab>
 </Tabs>
@@ -63,7 +63,7 @@ Restoring a backup will **overwrite** all current data. Make sure you have a rec
 
 <InstallStep stepNumber={2} title="Restore the Database">
 
-<CommandBlock command="pg_restore -h HOST -U chartsmith -d chartsmith chartsmith-20250209.dump" />
+<CommandBlock command="pg_restore -h HOST -U chartsmith -d chartsmith chartsmith-backup.dump" />
 
 </InstallStep>
 
