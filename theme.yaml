@@ -93,12 +93,15 @@ customCSS: |
   }
 
   /* Dark code blocks */
-  main code {
+  main code:not(pre code) {
     background-color: #2a2a2a !important;
     color: #d4d4d4 !important;
   }
   main pre {
     background-color: #0f0f0f !important;
+  }
+  main pre code {
+    background-color: transparent !important;
   }
 
   /* Warm gradient at top of content area */
