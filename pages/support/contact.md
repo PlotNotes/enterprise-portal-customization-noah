@@ -14,20 +14,22 @@ weight: 200
 
 ## Before Contacting Support
 
-Please have the following ready:
+<Note>
+Please have the following information ready when contacting support:
+</Note>
 
 1. Your {{ app.name }} version: `{{ release.version }}`
-2. Your license ID: `{{ license.id }}`
+2. Your customer name: **<ValueDisplay path="customer.name" fallback="(check your license)" />**
 3. Installation method (Helm or Linux)
-4. A [support bundle](/operations/troubleshooting) if applicable
+4. A support bundle (see below)
 
-## Support Bundle
+## Upload a Support Bundle
 
-Generate and upload a support bundle for faster resolution:
+Generate a support bundle for faster resolution:
 
-```bash
-kubectl support-bundle --namespace chartsmith
-```
+<CommandBlock command="kubectl support-bundle --namespace chartsmith" />
+
+<SupportBundleUpload />
 
 ## SLA
 
@@ -35,4 +37,6 @@ kubectl support-bundle --namespace chartsmith
 |---------|--------------|
 | {{ channel.name }} | Based on your support agreement |
 
-Contact your account manager for SLA details.
+<Tip>
+Contact your account manager for SLA details and to discuss priority support options.
+</Tip>

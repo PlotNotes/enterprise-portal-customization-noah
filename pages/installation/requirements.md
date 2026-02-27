@@ -10,12 +10,9 @@ Before installing {{ app.name }}, ensure your environment meets the following re
 
 ## Kubernetes Infrastructure
 
-{{ app.name }} requires **Kubernetes 1.32.0 or later** with the following API groups enabled:
-
-- `apps/v1`
-- `v1`
-- `batch/v1`
-- `networking.k8s.io/v1`
+<Note>
+{{ app.name }} requires **Kubernetes 1.32.0 or later** with the `apps/v1`, `v1`, `batch/v1`, and `networking.k8s.io/v1` API groups enabled.
+</Note>
 
 ### Cluster Resources
 
@@ -25,8 +22,9 @@ Before installing {{ app.name }}, ensure your environment meets the following re
 | CPU | 4 cores | 8 cores |
 | Ephemeral Storage | 10 Gi | 20 Gi |
 
-{{#if entitlements.isHAEnabled}}
-### High Availability Requirements
+<ConditionalRender when="entitlements.isHAEnabled">
+
+<Accordion title="High Availability Requirements" defaultOpen={false}>
 
 Production deployments should use 3 or more nodes. Multiply the per-node requirements by your node count.
 
@@ -35,17 +33,16 @@ Production deployments should use 3 or more nodes. Multiply the per-node require
 | Memory | 8 Gi | 24 Gi |
 | CPU | 4 cores | 12 cores |
 | Ephemeral Storage | 10 Gi | 30 Gi |
-{{/if}}
+
+</Accordion>
+
+</ConditionalRender>
 
 ## Data Storage
 
 ### PostgreSQL Database
 
-A **PostgreSQL 16.8+** database is required with the following privileges:
-
-- `CREATE`
-- `DROP`
-- `ALTER`
+A **PostgreSQL 16.8+** database is required with `CREATE`, `DROP`, and `ALTER` privileges.
 
 Compatible providers include:
 
@@ -66,19 +63,6 @@ The database must be network-accessible from cluster pods. SSL/TLS connections a
 
 Full S3 API compatibility is required. You must pre-create your storage buckets and provide read/write access credentials.
 
-Supported providers include:
-
-{{#if entitlements.isAWSEnabled}}
-- AWS S3
-{{/if}}
-{{#if entitlements.isAzureEnabled}}
-- Azure Blob Storage (with S3 compatibility)
-{{/if}}
-{{#if entitlements.isGCPEnabled}}
-- Google Cloud Storage (with S3 compatibility)
-{{/if}}
-- Other S3-compatible storage services (e.g., MinIO)
-
 ## Network Requirements
 
 Functional cluster DNS (CoreDNS or kube-dns) is required for pod service discovery.
@@ -89,48 +73,20 @@ Functional cluster DNS (CoreDNS or kube-dns) is required for pod service discove
 | 443 | TCP | Inbound | Ingress traffic (HTTPS) |
 | 80 | TCP | Inbound | Ingress traffic (HTTP) |
 | 5432 | TCP | Internal | PostgreSQL database connectivity |
-| - | - | Internal | Pod-to-pod communication |
 
-Optional **NetworkPolicy** support (via Calico, Cilium, or similar) is recommended for enhanced security.
+<ConditionalRender when="entitlements.isHAEnabled">
 
-{{#if entitlements.isHAEnabled}}
-### HA Network Requirements
+<Accordion title="HA Network Requirements">
 
 | Port | Protocol | Direction | Purpose |
 |------|----------|-----------|---------|
 | 2379-2380 | TCP | Internal | etcd peer communication |
 | 9443 | TCP | Internal | Join server |
 | 10250 | TCP | Internal | Kubelet API |
-{{/if}}
 
-## Security & RBAC
+</Accordion>
 
-Kubernetes RBAC must be configured to grant service accounts permissions for managing:
-
-- Pods
-- Services
-- Secrets
-- Storage
-
-Kubernetes Secrets are used by default. External secret providers are also supported:
-
-{{#if entitlements.isAWSEnabled}}
-- AWS Secrets Manager
-{{/if}}
-{{#if entitlements.isAzureEnabled}}
-- Azure Key Vault
-{{/if}}
-- HashiCorp Vault
-
-## Authentication
-
-{{ app.name }} supports the following enterprise authentication providers:
-
-- Microsoft Entra ID (Azure AD)
-- Okta
-- WorkOS
-
-Each provider requires its own client credentials and configuration. See [Configuration Guide](/configuration/guide) for setup details.
+</ConditionalRender>
 
 ## Required Tools
 
@@ -143,18 +99,13 @@ Each provider requires its own client credentials and configuration. See [Config
 
 {{ app.name }} images are distributed through the Replicated registry. Authenticate with your service account token:
 
-```bash
-helm registry login registry.replicated.com \
-  --username {{ customer.email }} \
-  --password {{ license.id }}
-```
+<CommandBlock command="helm registry login registry.replicated.com --username {{ customer.email }} --password {{ license.id }}" />
 
 ## TLS Certificates
 
-Production deployments require valid TLS certificates:
-
-- PEM-encoded format
-- From a trusted or internal certificate authority
+<Warning>
+Production deployments **require** valid TLS certificates in PEM-encoded format from a trusted or internal certificate authority.
+</Warning>
 
 Supported provisioning methods include:
 

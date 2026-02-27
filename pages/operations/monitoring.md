@@ -6,14 +6,16 @@ weight: 100
 
 # Monitoring & Metrics
 
-{{ app.name }} exposes Prometheus metrics on port 9090 by default.
+<Note>
+<ValueDisplay path="app.name" fallback="The application" /> exposes Prometheus metrics on port **9090** by default.
+</Note>
 
 ## Prometheus
 
-Scrape config:
+Add the following scrape config to your Prometheus configuration:
 
-```yaml
-- job_name: chartsmith
+<CodeBlock language="yaml" title="prometheus scrape config">
+{`- job_name: chartsmith
   kubernetes_sd_configs:
     - role: pod
       namespaces:
@@ -21,8 +23,8 @@ Scrape config:
   relabel_configs:
     - source_labels: [__meta_kubernetes_pod_label_app]
       regex: chartsmith
-      action: keep
-```
+      action: keep`}
+</CodeBlock>
 
 ## Key Metrics
 
@@ -35,8 +37,14 @@ Scrape config:
 
 ## Alerting
 
-Recommended alerts:
+<Warning>
+Set up alerts for these critical conditions to avoid downtime.
+</Warning>
+
+<Accordion title="Recommended Alert Rules">
 
 - `chartsmith_api_request_duration_seconds > 5` — API latency high
 - `up{job="chartsmith"} == 0` — Instance down
 - `chartsmith_storage_bytes > 0.9 * limit` — Storage near capacity
+
+</Accordion>

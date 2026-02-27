@@ -12,71 +12,67 @@ install_type: helm
 
 {{ app.name }} v3.0.0 deploys as a Helm chart via OCI registry. This latest version includes automatic preflight checks and simplified values configuration.
 
-<HelmRequirements />
+<Prerequisites title="Before You Begin">
+
+- Kubernetes 1.32+ cluster with kubectl access
+- Helm 3.10+ installed
+- Review the [System Requirements](/installation/requirements)
+
+</Prerequisites>
+
+{{#if terraform_modules.aws-infrastructure}}
+
+<Tip>
+**Using AWS?** Provision your infrastructure first with our [AWS Terraform module](/content/infrastructure/aws-infrastructure).
+</Tip>
+
+{{/if}}
 
 ---
 
-{{#if terraform_modules.aws-infrastructure}}
-> **Using AWS?** Provision your infrastructure first with our [AWS Terraform module](/content/infrastructure/aws-infrastructure).
-{{/if}}
-{{#if terraform_modules.gcp-infrastructure}}
-> **Using GCP?** Provision your infrastructure first with our [GCP Terraform module](/content/infrastructure/gcp-infrastructure).
-{{/if}}
-{{#if terraform_modules.azure-infrastructure}}
-> **Using Azure?** Provision your infrastructure first with our [Azure Terraform module](/content/infrastructure/azure-infrastructure).
-{{/if}}
-
-## Install Required Plugins
+<InstallStep stepNumber={1} title="Install Required Plugins">
 
 Two `kubectl` plugins are required: **preflight** (for cluster validation) and **support-bundle** (for diagnostics).
 
-```bash
-curl -fsSL https://krew.sh | bash
+<CodeBlock language="bash">
+{`curl -fsSL https://krew.sh | bash
 kubectl krew install preflight
-kubectl krew install support-bundle
-```
+kubectl krew install support-bundle`}
+</CodeBlock>
 
----
+</InstallStep>
 
-<HelmConfiguration />
+<HelmInstallAssets stepNumber={2} />
 
----
+<InstallStep stepNumber={3} title="Run Preflight Checks">
 
-## Preflight Validation
+<Note>
+**New in v3.0.0:** Preflight checks now run automatically during `helm install`. You can still run them manually:
+</Note>
 
-> **New in v3.0.0:** Preflight checks now run automatically during `helm install`. You can still run them manually:
+<CommandBlock command={`helm template {{ app.slug }} oci://registry.replicated.com/{{ app.slug }}/{{ channel.slug }}/{{ app.slug }} --values my-values.yaml | kubectl preflight -`} />
 
-```bash
-helm template {{ app.slug }} \
-  oci://registry.replicated.com/{{ app.slug }}/{{ channel.slug }}/{{ app.slug }} \
-  --values my-values.yaml | kubectl preflight -
-```
+</InstallStep>
 
----
+<InstallStep stepNumber={4} title="Verify the Installation">
 
-<HelmInstallation />
+Check that all pods are running and services are available:
 
-<SupportLink />
-
----
-
-### Verify the Installation
-
-```bash
-kubectl -n {{ app.slug }} get pods
+<CodeBlock language="bash">
+{`kubectl -n {{ app.slug }} get pods
 kubectl -n {{ app.slug }} get svc
-helm list -n {{ app.slug }}
-```
+helm list -n {{ app.slug }}`}
+</CodeBlock>
 
 Wait for all pods to reach `Running` state.
 
----
-
-<InstanceName />
+</InstallStep>
 
 ---
 
-<PostInstall>
+## Post-Installation Configuration
+
+<Accordion title="Recommended Next Steps" defaultOpen={true}>
 
 After your v3.0.0 Helm deployment is running:
 
@@ -85,23 +81,27 @@ After your v3.0.0 Helm deployment is running:
 3. **Set Up Monitoring** — v3.0.0 exposes Prometheus metrics automatically
 4. **Configure Backups** — Use Velero or your preferred backup tool for PV snapshots
 
-</PostInstall>
+</Accordion>
 
 ## Troubleshooting
 
-### Pod Startup Issues
+<Accordion title="Pod Startup Issues">
 
-```bash
-kubectl -n {{ app.slug }} describe pod <pod-name>
+<CodeBlock language="bash">
+{`kubectl -n {{ app.slug }} describe pod <pod-name>
 kubectl -n {{ app.slug }} logs <pod-name>
-kubectl -n {{ app.slug }} get events --sort-by='.lastTimestamp'
-```
+kubectl -n {{ app.slug }} get events --sort-by='.lastTimestamp'`}
+</CodeBlock>
 
-### Generate a Support Bundle
+</Accordion>
 
-```bash
-kubectl support-bundle --load-cluster-specs
-```
+<Accordion title="Generate a Support Bundle">
+
+<CommandBlock command="kubectl support-bundle --load-cluster-specs" />
+
+Upload the bundle on the [Contact Support](/support/contact) page.
+
+</Accordion>
 
 ## Next Steps
 

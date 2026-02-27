@@ -10,22 +10,21 @@ After installing {{ app.name }}, complete the following configuration steps befo
 
 ## Initial Setup
 
-### Initialize Internal Organization
+<InstallStep stepNumber={1} title="Initialize Internal Organization">
 
-```bash
-kubectl exec -it deploy/{{ app.slug }}-web -- rake studio:install_internal_organization
-```
+<CommandBlock command="kubectl exec -it deploy/{{ app.slug }}-web -- rake studio:install_internal_organization" />
 
-### Set Up Default Permissions
+</InstallStep>
+
+<InstallStep stepNumber={2} title="Set Up Default Permissions">
 
 Replace `admin@company.com` with your administrator's email address:
 
-```bash
-kubectl exec -it deploy/{{ app.slug }}-web -- rake factory:setup_permissions_defaults \
-  'factory:add_owner[2,admin@company.com]'
-```
+<CommandBlock command={`kubectl exec -it deploy/{{ app.slug }}-web -- rake factory:setup_permissions_defaults 'factory:add_owner[2,admin@company.com]'`} />
 
-## Studio V2 Features (Optional)
+</InstallStep>
+
+<Accordion title="Studio V2 Features (Optional)">
 
 To enable Studio V2 features, ensure the following prerequisites are met:
 
@@ -35,39 +34,43 @@ To enable Studio V2 features, ensure the following prerequisites are met:
 
 Then run the following commands:
 
-```bash
-kubectl exec -it deploy/{{ app.slug }}-web -- rake studio:agent:install
+<CodeBlock language="bash">
+{`kubectl exec -it deploy/{{ app.slug }}-web -- rake studio:agent:install
 kubectl exec -it deploy/{{ app.slug }}-web -- rake studio:tools:sync_crewai_tools
-kubectl exec -it deploy/{{ app.slug }}-web -- rake studio:runner:install
-```
+kubectl exec -it deploy/{{ app.slug }}-web -- rake studio:runner:install`}
+</CodeBlock>
+
+</Accordion>
 
 ## Accessing the Application
 
-### Port Forwarding
+<Tabs>
+<Tab title="Port Forwarding">
 
 For quick access or testing:
 
-```bash
-kubectl port-forward svc/{{ app.slug }}-web 2603:80
-```
+<CommandBlock command="kubectl port-forward svc/{{ app.slug }}-web 2603:80" />
 
 Then open [http://localhost:2603](http://localhost:2603) in your browser.
 
-### Ingress
+</Tab>
+<Tab title="Ingress">
 
 If you configured ingress during installation, access {{ app.name }} at your configured hostname (e.g., `https://{{ app.slug }}.company.com`).
 
-### LoadBalancer
+</Tab>
+<Tab title="LoadBalancer">
 
 If using a LoadBalancer service, retrieve the external IP:
 
-```bash
-kubectl get svc {{ app.slug }}-web
-```
+<CommandBlock command="kubectl get svc {{ app.slug }}-web" />
+
+</Tab>
+</Tabs>
 
 ## Verification
 
-Confirm the installation is working correctly:
+<InstallStep stepNumber={3} title="Verify Everything is Working">
 
 1. **Web UI access** — Open the application URL and confirm the login page loads
 2. **Authentication** — Log in with your configured authentication provider
@@ -75,14 +78,12 @@ Confirm the installation is working correctly:
 4. **Basic functionality** — Create a test crew or project to confirm operations are working
 5. **Background workers** — Check that background workers are running:
 
-```bash
-kubectl logs deploy/{{ app.slug }}-worker --tail=50
-```
+<CommandBlock command="kubectl logs deploy/{{ app.slug }}-worker --tail=50" />
+
+</InstallStep>
 
 ## Next Steps
 
 - [Configuration Guide](/configuration/guide) for production tuning
-- [TLS Certificates](/configuration/tls) for securing your deployment
-- [Database Configuration](/configuration/database) for external PostgreSQL setup
 - [Monitoring & Metrics](/operations/monitoring) for observability
 - [Backup & Restore](/operations/backup) for disaster recovery

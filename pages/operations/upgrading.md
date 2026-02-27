@@ -6,51 +6,67 @@ weight: 300
 
 # Upgrading {{ app.name }}
 
-## Check Available Versions
+## Available Versions
 
-Visit the [Release History](/installation/release-history) page to see available versions for your channel.
+<ReleaseHistory limit={5} />
 
 ## Before Upgrading
 
-1. Review the release notes for breaking changes
-2. [Back up your database](/operations/backup)
-3. Test the upgrade in a non-production environment if possible
+<Warning>
+Always review the release notes for breaking changes and back up your database before upgrading. Test in a non-production environment when possible.
+</Warning>
 
-{{#if entitlements.isHelmInstallEnabled}}
+<Prerequisites title="Upgrade Checklist">
+
+- Review the release notes for breaking changes
+- [Back up your database](/operations/backup)
+- Test the upgrade in a non-production environment if possible
+
+</Prerequisites>
+
+<ConditionalRender when="entitlements.isHelmInstallEnabled">
+
 ## Helm Upgrade
 
-```bash
-helm upgrade {{ app.slug }} \
-  oci://registry.replicated.com/{{ app.slug }}/{{ channel.slug }}/{{ app.slug }} \
-  --version <NEW_VERSION> \
-  --namespace chartsmith \
-  --reuse-values
-```
-{{/if}}
+<InstallStep stepNumber={1} title="Upgrade via Helm">
 
-{{#if entitlements.isEmbeddedClusterDownloadEnabled}}
+<CommandBlock command={`helm upgrade {{ app.slug }} oci://registry.replicated.com/{{ app.slug }}/{{ channel.slug }}/{{ app.slug }} --version <NEW_VERSION> --namespace chartsmith --reuse-values`} />
+
+</InstallStep>
+
+</ConditionalRender>
+
+<ConditionalRender when="entitlements.isEmbeddedClusterDownloadEnabled">
+
 ## Linux Upgrade
 
-Use the admin console to check for and apply updates, or:
+<InstallStep stepNumber={1} title="Upgrade via CLI">
 
-```bash
-chartsmith update check
-chartsmith update apply
-```
-{{/if}}
+Use the admin console to check for and apply updates, or use the CLI:
+
+<CodeBlock language="bash">
+{`chartsmith update check
+chartsmith update apply`}
+</CodeBlock>
+
+</InstallStep>
+
+</ConditionalRender>
 
 ## Rollback
 
-If something goes wrong:
+<Warning>
+Only roll back if the upgrade caused issues. Rollbacks may not reverse database migrations.
+</Warning>
 
-{{#if entitlements.isHelmInstallEnabled}}
-```bash
-helm rollback {{ app.slug }} --namespace chartsmith
-```
-{{/if}}
+<ConditionalRender when="entitlements.isHelmInstallEnabled">
 
-{{#if entitlements.isEmbeddedClusterDownloadEnabled}}
-```bash
-chartsmith update rollback
-```
-{{/if}}
+<CommandBlock command="helm rollback {{ app.slug }} --namespace chartsmith" />
+
+</ConditionalRender>
+
+<ConditionalRender when="entitlements.isEmbeddedClusterDownloadEnabled">
+
+<CommandBlock command="chartsmith update rollback" />
+
+</ConditionalRender>

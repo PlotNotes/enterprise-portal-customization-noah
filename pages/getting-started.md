@@ -6,63 +6,77 @@ layout: doc
 
 # Welcome to {{ app.name }} — v3.0.0
 
-> **You are viewing the v3.0.0 documentation.** This is the latest release with cutting-edge features.
+<Note title="Latest Release">
+You are viewing the **v3.0.0** documentation. This is the latest release with cutting-edge features.
+</Note>
 
-Hello, **{{ customer.name }}**! This portal contains everything you need to install, configure, and operate {{ app.name }} in your environment.
+Hello, **{{ customer.name }}**! This portal contains everything you need to install, configure, and operate <ValueDisplay path="app.name" fallback="your application" /> in your environment.
 
 You're on the **{{ channel.name }}** channel, running version **{{ release.version }}**.
 
 ## Quick Start
 
-{{#if entitlements.isEmbeddedClusterDownloadEnabled}}
+<ConditionalRender when="entitlements.isEmbeddedClusterDownloadEnabled">
+
 ### Linux (Recommended)
-If you don't have access to a K8s cluster.... our Linux installer provisions a complete Kubernetes cluster with {{ app.name }} pre-configured.
 
-→ [Linux Installation Guide](/installation/linux)
-{{/if}}
+If you don't have access to a K8s cluster, our Linux installer provisions a complete Kubernetes cluster with {{ app.name }} pre-configured.
 
-{{#if entitlements.isHelmInstallEnabled}}
+<LinuxInstallAssets stepNumber={1} />
+
+</ConditionalRender>
+
+<ConditionalRender when="entitlements.isHelmInstallEnabled">
+
 ### Helm
+
 Deploy to your existing Kubernetes cluster using Helm.
 
-→ [Helm Installation Guide](/installation/helm)
-{{/if}}
+<HelmInstallAssets stepNumber={1} />
+
+</ConditionalRender>
 
 ## Before You Begin
 
-1. Review the [Requirements](/installation/requirements) for your deployment method
-{{#if terraform_modules.aws-infrastructure}}
-2. Provision your cloud infrastructure using our [Terraform modules](/infrastructure/overview)
-{{/if}}
-3. Follow the installation guide for your chosen method
-4. Complete [Post-Installation](/installation/post-installation) steps
+<Prerequisites title="Checklist">
+
+- Review the [Requirements](/installation/requirements) for your deployment method
+- Provision your cloud infrastructure if applicable
+- Follow the installation guide for your chosen method
+- Complete [Post-Installation](/installation/post-installation) steps
+
+</Prerequisites>
 
 ## What's Included
 
 Your {{ channel.name }} license includes:
 
-{{#if entitlements.isHelmInstallEnabled}}
-- ✅ Helm-based installation
-{{/if}}
-{{#if entitlements.isEmbeddedClusterDownloadEnabled}}
-- ✅ Linux embedded cluster installation
-{{/if}}
-{{#if entitlements.isAirgapSupported}}
-- ✅ Air gap deployment support
-{{/if}}
-{{#if entitlements.isHAEnabled}}
-- ✅ High availability configuration
-{{/if}}
-{{#if entitlements.isAWSEnabled}}
-- ✅ AWS Terraform modules
-{{/if}}
-{{#if entitlements.isGCPEnabled}}
-- ✅ GCP Terraform modules
-{{/if}}
-{{#if entitlements.isAzureEnabled}}
-- ✅ Azure Terraform modules
-{{/if}}
+<ConditionalRender when="entitlements.isHelmInstallEnabled">
+
+- Helm-based installation
+
+</ConditionalRender>
+
+<ConditionalRender when="entitlements.isEmbeddedClusterDownloadEnabled">
+
+- Linux embedded cluster installation
+
+</ConditionalRender>
+
+<ConditionalRender when="entitlements.isAirgapSupported">
+
+- Air gap deployment support
+
+</ConditionalRender>
+
+<ConditionalRender when="entitlements.isHAEnabled">
+
+- High availability configuration
+
+</ConditionalRender>
 
 ## Need Help?
 
-Check our [Troubleshooting Guide](/operations/troubleshooting) or [Contact Support](/support/contact).
+<Tip>
+Check our [Troubleshooting Guide](/operations/troubleshooting) for common issues, or head to [Contact Support](/support/contact) to upload a support bundle and reach our team.
+</Tip>

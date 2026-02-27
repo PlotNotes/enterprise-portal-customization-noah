@@ -8,48 +8,54 @@ weight: 400
 
 ## Common Issues
 
-### Pods not starting
+<Accordion title="Pods not starting">
 
-```bash
-kubectl -n chartsmith get pods
+<CodeBlock language="bash">
+{`kubectl -n chartsmith get pods
 kubectl -n chartsmith describe pod <POD_NAME>
-kubectl -n chartsmith logs <POD_NAME>
-```
+kubectl -n chartsmith logs <POD_NAME>`}
+</CodeBlock>
 
-### Database connection failed
+</Accordion>
+
+<Accordion title="Database connection failed">
 
 1. Verify the connection string is correct
 2. Check network connectivity to the database host
 3. Verify the database user has appropriate permissions
 
-### Registry authentication failed
+<Tip>
+Test connectivity directly from a pod:
+</Tip>
+
+<CommandBlock command="kubectl -n chartsmith exec -it deploy/chartsmith-web -- pg_isready -h $DB_HOST" />
+
+</Accordion>
+
+<Accordion title="Registry authentication failed">
 
 Re-authenticate with the registry:
 
-```bash
-helm registry login registry.replicated.com \
-  --username {{ customer.email }} \
-  --password {{ license.id }}
-```
+<CommandBlock command="helm registry login registry.replicated.com --username {{ customer.email }} --password {{ license.id }}" />
 
-### License expired
+</Accordion>
+
+<Accordion title="License expired">
 
 Your license expires on {{ license.expiresAt }}. Contact your account manager or [support](/support/contact) to renew.
+
+</Accordion>
 
 ## Support Bundles
 
 Generate a support bundle for our team:
 
-```bash
-kubectl support-bundle --namespace chartsmith
-```
+<CommandBlock command="kubectl support-bundle --namespace chartsmith" />
 
-Upload the bundle on the [Contact Support](/support/contact) page.
+<SupportBundleUpload />
 
 ## Preflight Checks
 
 Run preflight checks to validate your environment:
 
-```bash
-kubectl preflight --namespace chartsmith
-```
+<CommandBlock command="kubectl preflight --namespace chartsmith" />

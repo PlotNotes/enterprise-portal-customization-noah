@@ -8,39 +8,62 @@ weight: 100
 
 ## General
 
-### What Kubernetes versions are supported?
+<Accordion title="What Kubernetes versions are supported?">
 
 {{ app.name }} supports Kubernetes 1.27 and later.
 
-### Can I run {{ app.name }} on-premises?
+</Accordion>
+
+<Accordion title="Can I run on-premises?">
 
 Yes. {{ app.name }} is designed for on-premises, air-gapped, and cloud deployments.
 
-### How do I check my license?
+</Accordion>
+
+<Accordion title="How do I check my license?">
 
 Visit the [License](/license) page in this portal to view your license details, entitlements, and expiration date.
 
+</Accordion>
+
 ## Installation
 
-### Which installation method should I use?
+<Accordion title="Which installation method should I use?">
 
-{{#if entitlements.isEmbeddedClusterDownloadEnabled}}
+<ConditionalRender when="entitlements.isEmbeddedClusterDownloadEnabled">
+
 - **Linux**: Best for single-server deployments or when you don't have an existing Kubernetes cluster.
-{{/if}}
-{{#if entitlements.isHelmInstallEnabled}}
-- **Helm**: Best when you have an existing Kubernetes cluster and want full control.
-{{/if}}
 
-### Can I migrate between installation methods?
+</ConditionalRender>
+
+<ConditionalRender when="entitlements.isHelmInstallEnabled">
+
+- **Helm**: Best when you have an existing Kubernetes cluster and want full control.
+
+</ConditionalRender>
+
+</Accordion>
+
+<Accordion title="Can I migrate between installation methods?">
 
 Not directly. We recommend a fresh install with data migration via database backup/restore.
 
+<Warning>
+Make sure to back up your database before attempting any migration. See [Backup & Restore](/operations/backup).
+</Warning>
+
+</Accordion>
+
 ## Licensing
 
-### What happens when my license expires?
+<Accordion title="What happens when my license expires?">
 
 {{ app.name }} continues to run but you won't be able to pull updates or access new releases.
 
-### How do I renew my license?
+</Accordion>
+
+<Accordion title="How do I renew my license?">
 
 Contact your account manager or reach out via [Contact Support](/support/contact).
+
+</Accordion>

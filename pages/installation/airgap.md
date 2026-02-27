@@ -11,7 +11,11 @@ weight: 300
 
 Install {{ app.name }} in environments without direct internet access.
 
-## Step 1: Download the Air Gap Bundle
+<Warning>
+Air gap installations require pre-downloading all bundles from a machine with internet access. Plan your transfer method before beginning.
+</Warning>
+
+<InstallStep stepNumber={1} title="Download the Air Gap Bundle">
 
 From a machine with internet access, download the air gap bundle from this portal's [Release History](/installation/release-history) page.
 
@@ -20,29 +24,37 @@ The bundle includes:
 - Kubernetes manifests
 - Embedded cluster binaries (if using Linux install)
 
-## Step 2: Transfer to Air Gap Environment
+</InstallStep>
+
+<InstallStep stepNumber={2} title="Transfer to Air Gap Environment">
 
 Copy the bundle to your air gap server using your organization's approved transfer method (USB drive, bastion host, etc.).
 
-## Step 3: Install
+</InstallStep>
 
-```bash
-tar xzf {{ app.slug }}-{{ release.version }}.airgap.tar.gz
+<InstallStep stepNumber={3} title="Extract and Install">
+
+<CodeBlock language="bash">
+{`tar xzf {{ app.slug }}-{{ release.version }}.airgap.tar.gz
 cd {{ app.slug }}-{{ release.version }}
-sudo ./install.sh --airgap
-```
+sudo ./install.sh --airgap`}
+</CodeBlock>
 
-## Step 4: Load Images
+</InstallStep>
 
-The installer automatically loads container images into the embedded registry. This may take 10-15 minutes depending on hardware.
+<InstallStep stepNumber={4} title="Wait for Image Loading">
+
+<Note>
+The installer automatically loads container images into the embedded registry. This may take **10-15 minutes** depending on hardware.
+</Note>
+
+</InstallStep>
 
 ## Updating in Air Gap
 
 Download the new version's air gap bundle and run:
 
-```bash
-sudo ./install.sh --airgap --upgrade
-```
+<CommandBlock command="sudo ./install.sh --airgap --upgrade" />
 
 ## Next Steps
 
