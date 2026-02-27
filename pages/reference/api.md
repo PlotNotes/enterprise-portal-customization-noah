@@ -12,10 +12,8 @@ weight: 300
 
 All API requests require a Bearer token:
 
-```bash
-curl -H "Authorization: Bearer <API_TOKEN>" \
-  https://chartsmith.yourdomain.com/api/v1/charts
-```
+<CommandBlock command="curl -H &quot;Authorization: Bearer <API_TOKEN>&quot; \
+  https://chartsmith.yourdomain.com/api/v1/charts" />
 
 Generate an API token from the {{ app.name }} UI under **Settings → API Tokens**.
 

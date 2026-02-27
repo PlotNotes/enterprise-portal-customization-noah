@@ -56,11 +56,9 @@ kubectl krew install support-bundle" />
 
 Check that all pods are running and services are available:
 
-```bash
-kubectl -n {{ app.slug }} get pods
+<CommandBlock command="kubectl -n {{ app.slug }} get pods
 kubectl -n {{ app.slug }} get svc
-helm list -n {{ app.slug }}
-```
+helm list -n {{ app.slug }}" />
 
 Wait for all pods to reach `Running` state.
 
@@ -85,11 +83,9 @@ After your v3.0.0 Helm deployment is running:
 
 <Accordion title="Pod Startup Issues">
 
-```bash
-kubectl -n {{ app.slug }} describe pod <pod-name>
+<CommandBlock command="kubectl -n {{ app.slug }} describe pod <pod-name>
 kubectl -n {{ app.slug }} logs <pod-name>
-kubectl -n {{ app.slug }} get events --sort-by='.lastTimestamp'
-```
+kubectl -n {{ app.slug }} get events --sort-by='.lastTimestamp'" />
 
 </Accordion>
 

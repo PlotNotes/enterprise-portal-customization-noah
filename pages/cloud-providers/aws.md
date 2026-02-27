@@ -76,8 +76,7 @@ secrets:
 
 ### Bucket Setup
 
-```bash
-aws s3api create-bucket \
+<CommandBlock command="aws s3api create-bucket \
   --bucket {{ app.slug }}-prod-storage \
   --region us-east-1
 
@@ -88,13 +87,12 @@ aws s3api put-bucket-versioning \
 aws s3api put-bucket-encryption \
   --bucket {{ app.slug }}-prod-storage \
   --server-side-encryption-configuration '{
-    "Rules": [{
-      "ApplyServerSideEncryptionByDefault": {
-        "SSEAlgorithm": "AES256"
+    &quot;Rules&quot;: [{
+      &quot;ApplyServerSideEncryptionByDefault&quot;: {
+        &quot;SSEAlgorithm&quot;: &quot;AES256&quot;
       }
     }]
-  }'
-```
+  }'" />
 
 ### Authentication Methods
 
@@ -105,34 +103,30 @@ No static keys required. Credentials are provided automatically with rotation.
 1. Create an IAM policy for S3 access (`GetObject`, `PutObject`, `DeleteObject`, `ListBucket`)
 2. Create an IAM role with Pod Identity trust:
 
-```bash
-aws iam create-role \
+<CommandBlock command="aws iam create-role \
   --role-name CrewAIPodIdentityRole \
   --assume-role-policy-document '{
-    "Version": "2012-10-17",
-    "Statement": [{
-      "Effect": "Allow",
-      "Principal": {
-        "Service": "pods.eks.amazonaws.com"
+    &quot;Version&quot;: &quot;2012-10-17&quot;,
+    &quot;Statement&quot;: [{
+      &quot;Effect&quot;: &quot;Allow&quot;,
+      &quot;Principal&quot;: {
+        &quot;Service&quot;: &quot;pods.eks.amazonaws.com&quot;
       },
-      "Action": ["sts:AssumeRole", "sts:TagSession"]
+      &quot;Action&quot;: [&quot;sts:AssumeRole&quot;, &quot;sts:TagSession&quot;]
     }]
   }'
 
 aws iam attach-role-policy \
   --role-name CrewAIPodIdentityRole \
-  --policy-arn arn:aws:iam::ACCOUNT:policy/CrewAIS3Access
-```
+  --policy-arn arn:aws:iam::ACCOUNT:policy/CrewAIS3Access" />
 
 3. Create the Pod Identity Association:
 
-```bash
-aws eks create-pod-identity-association \
+<CommandBlock command="aws eks create-pod-identity-association \
   --cluster-name your-cluster \
   --namespace {{ app.slug }} \
   --service-account default \
-  --role-arn arn:aws:iam::ACCOUNT:role/CrewAIPodIdentityRole
-```
+  --role-arn arn:aws:iam::ACCOUNT:role/CrewAIPodIdentityRole" />
 
 **Static Access Keys (Development Only):**
 
@@ -169,12 +163,10 @@ secrets:
 
 ### ACM Certificate
 
-```bash
-aws acm request-certificate \
+<CommandBlock command="aws acm request-certificate \
   --domain-name {{ app.slug }}.your-company.com \
   --validation-method DNS \
-  --region us-east-1
-```
+  --region us-east-1" />
 
 ---
 
@@ -190,8 +182,7 @@ aws acm request-certificate \
 
 ### Repository Setup
 
-```bash
-aws ecr create-repository \
+<CommandBlock command="aws ecr create-repository \
   --repository-name your-org/crewai-enterprise \
   --region us-east-1 \
   --image-scanning-configuration scanOnPush=true
@@ -204,19 +195,18 @@ aws ecr put-image-tag-mutability \
 aws ecr put-lifecycle-policy \
   --repository-name your-org/crewai-enterprise \
   --lifecycle-policy-text '{
-    "rules": [{
-      "rulePriority": 1,
-      "description": "Remove untagged images after 7 days",
-      "selection": {
-        "tagStatus": "untagged",
-        "countType": "sinceImagePushed",
-        "countUnit": "days",
-        "countNumber": 7
+    &quot;rules&quot;: [{
+      &quot;rulePriority&quot;: 1,
+      &quot;description&quot;: &quot;Remove untagged images after 7 days&quot;,
+      &quot;selection&quot;: {
+        &quot;tagStatus&quot;: &quot;untagged&quot;,
+        &quot;countType&quot;: &quot;sinceImagePushed&quot;,
+        &quot;countUnit&quot;: &quot;days&quot;,
+        &quot;countNumber&quot;: 7
       },
-      "action": {"type": "expire"}
+      &quot;action&quot;: {&quot;type&quot;: &quot;expire&quot;}
     }]
-  }'
-```
+  }'" />
 
 ### Valid Repository URIs
 
@@ -297,13 +287,11 @@ Create individual secrets for each value (e.g., `{{ app.slug }}/db-password`, `{
 
 Install the External Secrets Operator:
 
-```bash
-helm repo add external-secrets https://charts.external-secrets.io
+<CommandBlock command="helm repo add external-secrets https://charts.external-secrets.io
 helm install external-secrets \
   external-secrets/external-secrets \
   --namespace external-secrets-operator \
-  --create-namespace
-```
+  --create-namespace" />
 
 IAM policy for the operator:
 
@@ -492,13 +480,11 @@ serviceAccount: "{{ app.slug }}-sa"
 
 Deploy with:
 
-```bash
-helm install {{ app.slug }} \
+<CommandBlock command="helm install {{ app.slug }} \
   oci://registry.replicated.com/{{ app.slug }}/{{ channel.slug }}/{{ app.slug }} \
   --version {{ release.version }} \
   --values values-aws-production.yaml \
-  --namespace {{ app.slug }}
-```
+  --namespace {{ app.slug }}" />
 
 ---
 
@@ -514,10 +500,8 @@ helm install {{ app.slug }} \
 - Verify security groups allow inbound PostgreSQL (5432) from EKS worker nodes
 - Test connectivity from a pod:
 
-```bash
-kubectl run -it --rm pg-test --image=postgres:16 --namespace {{ app.slug }} -- \
-  psql "postgresql://{{ app.slug }}:PASSWORD@YOUR_RDS_ENDPOINT:5432/{{ app.slug }}_plus_production"
-```
+<CommandBlock command="kubectl run -it --rm pg-test --image=postgres:16 --namespace {{ app.slug }} -- \
+  psql &quot;postgresql://{{ app.slug }}:PASSWORD@YOUR_RDS_ENDPOINT:5432/{{ app.slug }}_plus_production&quot;" />
 
 ### S3 Access Denied
 
@@ -527,12 +511,10 @@ kubectl run -it --rm pg-test --image=postgres:16 --namespace {{ app.slug }} -- \
 
 ### Secrets Manager Access Denied
 
-```bash
-# Check ExternalSecret status
+<CommandBlock command="# Check ExternalSecret status
 kubectl get externalsecret -n {{ app.slug }}
 
 # Check SecretStore status
-kubectl get secretstore -n {{ app.slug }}
-```
+kubectl get secretstore -n {{ app.slug }}" />
 
 Verify the External Secrets Operator logs show successful role assumption and that the IAM role has the required Secrets Manager permissions.

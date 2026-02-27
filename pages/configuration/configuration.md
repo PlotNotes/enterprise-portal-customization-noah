@@ -85,9 +85,7 @@ Supported version: **PostgreSQL 16.8+**
 
 If you used our [AWS Terraform module](/infrastructure/aws-infrastructure), the database is already provisioned. Use the output connection string:
 
-```bash
-terraform output -raw database_connection_string
-```
+<CommandBlock command="terraform output -raw database_connection_string" />
 {{/if}}
 
 {{#if entitlements.isGCPEnabled}}
@@ -268,12 +266,10 @@ tls:
 
 Upload your PEM-encoded certificate as a Kubernetes secret:
 
-```bash
-kubectl create secret tls {{ app.slug }}-tls \
+<CommandBlock command="kubectl create secret tls {{ app.slug }}-tls \
   --cert=path/to/tls.crt \
   --key=path/to/tls.key \
-  -n {{ app.slug }}
-```
+  -n {{ app.slug }}" />
 
 ### cert-manager
 
@@ -477,16 +473,14 @@ Migrations run automatically during installation and upgrades.
 
 ### Troubleshooting Migrations
 
-```bash
-# View migration logs (upgrades)
+<CommandBlock command="# View migration logs (upgrades)
 kubectl logs -l app.kubernetes.io/component=migration --tail=100
 
 # View setup logs (initial install)
 kubectl logs -l app.kubernetes.io/component=setup --tail=100
 
 # Check job status
-kubectl get jobs -l app.kubernetes.io/component=migration
-```
+kubectl get jobs -l app.kubernetes.io/component=migration" />
 
 ---
 

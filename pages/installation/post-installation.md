@@ -34,11 +34,9 @@ To enable Studio V2 features, ensure the following prerequisites are met:
 
 Then run the following commands:
 
-```bash
-kubectl exec -it deploy/{{ app.slug }}-web -- rake studio:agent:install
+<CommandBlock command="kubectl exec -it deploy/{{ app.slug }}-web -- rake studio:agent:install
 kubectl exec -it deploy/{{ app.slug }}-web -- rake studio:tools:sync_crewai_tools
-kubectl exec -it deploy/{{ app.slug }}-web -- rake studio:runner:install
-```
+kubectl exec -it deploy/{{ app.slug }}-web -- rake studio:runner:install" />
 
 </Accordion>
 

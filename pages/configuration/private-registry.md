@@ -19,11 +19,9 @@ Configure {{ app.name }} to pull images from your private Docker registry for ai
 
 Use the credentials from your customer portal. These are the same tokens used for Helm registry authentication.
 
-```bash
-docker login images.crewai.com \
+<CommandBlock command="docker login images.crewai.com \
   --username {{ customer.email }} \
-  --password {{ license.id }}
-```
+  --password {{ license.id }}" />
 
 ## Step 2: Pull Required Images
 
@@ -55,12 +53,10 @@ The following images are required for {{ app.name }}:
 
 Tag each image for your private registry:
 
-```bash
-export YOUR_PRIVATE_REGISTRY="your-registry.example.com"
+<CommandBlock command="export YOUR_PRIVATE_REGISTRY=&quot;your-registry.example.com&quot;
 
 docker tag images.crewai.com/library/replicated-sdk-image:1.12.1 \
-  $YOUR_PRIVATE_REGISTRY/crewai/replicated-sdk-image:1.12.1
-```
+  $YOUR_PRIVATE_REGISTRY/crewai/replicated-sdk-image:1.12.1" />
 
 Repeat for all required images.
 
@@ -68,9 +64,7 @@ Repeat for all required images.
 
 Push all tagged images to your private registry:
 
-```bash
-docker push $YOUR_PRIVATE_REGISTRY/crewai/replicated-sdk-image:1.12.1
-```
+<CommandBlock command="docker push $YOUR_PRIVATE_REGISTRY/crewai/replicated-sdk-image:1.12.1" />
 
 Repeat for all images.
 
@@ -134,49 +128,43 @@ envVars:
 
 Save the following as `mirror-images.sh` to automate the pull/tag/push workflow:
 
-```bash
-#!/bin/bash
+<CommandBlock command="#!/bin/bash
 set -euo pipefail
 
-SOURCE_REGISTRY="images.crewai.com"
-TARGET_REGISTRY="${YOUR_PRIVATE_REGISTRY}"
-TARGET_PREFIX="crewai"
+SOURCE_REGISTRY=&quot;images.crewai.com&quot;
+TARGET_REGISTRY=&quot;${YOUR_PRIVATE_REGISTRY}&quot;
+TARGET_PREFIX=&quot;crewai&quot;
 
 declare -A IMAGES=(
-  ["library/replicated-sdk-image:1.12.1"]="replicated-sdk-image:1.12.1"
-  ["library/crewai-enterprise-platform:0.15.6"]="crewai-enterprise-platform:0.15.6"
-  ["library/buildkit:v2026.0130.11"]="buildkit:v2026.0130.11"
-  ["library/buildkit-rootless:v2026.0130.11"]="buildkit-rootless:v2026.0130.11"
-  ["library/crewai-enterprise-preinstalled-v2:latest"]="crewai-enterprise-preinstalled-v2:latest"
-  ["library/python-base:latest"]="python-base:latest"
-  ["library/busybox:latest"]="busybox:latest"
-  ["library/redis:latest"]="redis:latest"
+  [&quot;library/replicated-sdk-image:1.12.1&quot;]=&quot;replicated-sdk-image:1.12.1&quot;
+  [&quot;library/crewai-enterprise-platform:0.15.6&quot;]=&quot;crewai-enterprise-platform:0.15.6&quot;
+  [&quot;library/buildkit:v2026.0130.11&quot;]=&quot;buildkit:v2026.0130.11&quot;
+  [&quot;library/buildkit-rootless:v2026.0130.11&quot;]=&quot;buildkit-rootless:v2026.0130.11&quot;
+  [&quot;library/crewai-enterprise-preinstalled-v2:latest&quot;]=&quot;crewai-enterprise-preinstalled-v2:latest&quot;
+  [&quot;library/python-base:latest&quot;]=&quot;python-base:latest&quot;
+  [&quot;library/busybox:latest&quot;]=&quot;busybox:latest&quot;
+  [&quot;library/redis:latest&quot;]=&quot;redis:latest&quot;
 )
 
-for SOURCE_IMAGE in "${!IMAGES[@]}"; do
-  TARGET_IMAGE="${IMAGES[$SOURCE_IMAGE]}"
-  echo "Mirroring ${SOURCE_IMAGE} -> ${TARGET_PREFIX}/${TARGET_IMAGE}"
-  docker pull "${SOURCE_REGISTRY}/${SOURCE_IMAGE}"
-  docker tag "${SOURCE_REGISTRY}/${SOURCE_IMAGE}" "${TARGET_REGISTRY}/${TARGET_PREFIX}/${TARGET_IMAGE}"
-  docker push "${TARGET_REGISTRY}/${TARGET_PREFIX}/${TARGET_IMAGE}"
+for SOURCE_IMAGE in &quot;${!IMAGES[@]}&quot;; do
+  TARGET_IMAGE=&quot;${IMAGES[$SOURCE_IMAGE]}&quot;
+  echo &quot;Mirroring ${SOURCE_IMAGE} -> ${TARGET_PREFIX}/${TARGET_IMAGE}&quot;
+  docker pull &quot;${SOURCE_REGISTRY}/${SOURCE_IMAGE}&quot;
+  docker tag &quot;${SOURCE_REGISTRY}/${SOURCE_IMAGE}&quot; &quot;${TARGET_REGISTRY}/${TARGET_PREFIX}/${TARGET_IMAGE}&quot;
+  docker push &quot;${TARGET_REGISTRY}/${TARGET_PREFIX}/${TARGET_IMAGE}&quot;
 done
 
-echo "All images mirrored successfully."
-```
+echo &quot;All images mirrored successfully.&quot;" />
 
-```bash
-chmod +x mirror-images.sh
-./mirror-images.sh
-```
+<CommandBlock command="chmod +x mirror-images.sh
+./mirror-images.sh" />
 
 ## Verification
 
 After deploying, verify all pods are pulling from your private registry:
 
-```bash
-kubectl get pods -l app.kubernetes.io/name={{ app.slug }} \
-  -o jsonpath='{range .items[*]}{.spec.containers[*].image}{"\n"}{end}'
-```
+<CommandBlock command="kubectl get pods -l app.kubernetes.io/name={{ app.slug }} \
+  -o jsonpath='{range .items[*]}{.spec.containers[*].image}{&quot;\n&quot;}{end}'" />
 
 ## Troubleshooting
 
@@ -185,6 +173,4 @@ If pods show `ImagePullBackOff` errors, check:
 - **Registry credentials** — Ensure the credentials in your Helm values are correct
 - **Image names and tags** — Verify the tagged images match the expected paths in your private registry
 
-```bash
-kubectl describe pod <pod-name> -n {{ app.slug }}
-```
+<CommandBlock command="kubectl describe pod <pod-name> -n {{ app.slug }}" />
