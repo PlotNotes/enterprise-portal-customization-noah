@@ -12,14 +12,7 @@ install_type: linux
 
 Install {{ app.name }} v2.0.0 on a Linux server. This version includes improved cluster provisioning and faster install times.
 
-## Requirements
-
-- Ubuntu 22.04+, RHEL 9+, or CentOS 9+ (64-bit)
-- 4 CPUs, 8 GB RAM, 40 GB disk minimum
-- Root or sudo access
-- Port 443 outbound (or air gap bundle)
-
-See the full [system requirements](/content/installation/requirements).
+<LinuxRequirements />
 
 ---
 
@@ -34,32 +27,21 @@ See the full [system requirements](/content/installation/requirements).
 
 ---
 
-## Install
-
-Download and run the installer on your target machine:
-
-```bash
-curl -f https://replicated.app/embedded/{{ app.slug }}/{{ channel.slug }} -H "Authorization: {{ license.id }}" -o {{ app.slug }}-install.sh
-sudo bash {{ app.slug }}-install.sh
-```
-
-The installer will:
-1. Provision an embedded Kubernetes cluster
-2. Deploy {{ app.name }} v2.0.0 and all dependencies
-3. Start the Admin Console on port 8800
+<LinuxConfiguration />
 
 ---
 
-## Verify Installation
+<LinuxInstallation />
 
-```bash
-kubectl get pods -A
-echo "Admin Console: https://$(hostname):8800"
-```
+<SupportLink />
+
+---
+
+<LinuxVerification />
+
+---
 
 {{#if entitlements.isHAEnabled}}
----
-
 ## Adding Worker Nodes
 
 ```bash
@@ -69,6 +51,20 @@ echo "Admin Console: https://$(hostname):8800"
 {{/if}}
 
 ---
+
+<InstanceName />
+
+---
+
+<PostInstall>
+
+After installation completes:
+
+1. **TLS Certificates** — Set up HTTPS for the admin console
+2. **Backup Schedule** — Configure automated backups
+3. **Identity Provider** — Connect your SSO provider
+
+</PostInstall>
 
 ## Next Steps
 
