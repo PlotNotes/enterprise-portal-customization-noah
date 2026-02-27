@@ -34,9 +34,9 @@ install_type: helm
 
 Two `kubectl` plugins are required: **preflight** (for cluster validation) and **support-bundle** (for diagnostics).
 
-<CommandBlock command="curl -fsSL https://krew.sh | bash">
-<CommandBlock command="kubectl krew install preflight">
-<CommandBlock command="kubectl krew install support-bundle">
+<CommandBlock command="curl -fsSL https://krew.sh | bash" />
+<CommandBlock command="kubectl krew install preflight" />
+<CommandBlock command="kubectl krew install support-bundle" />
 
 </InstallStep>
 
