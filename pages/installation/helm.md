@@ -12,12 +12,7 @@ install_type: helm
 
 {{ app.name }} v1.0.0 deploys as a Helm chart via OCI registry through Replicated.
 
-## Requirements
-
-- Kubernetes cluster v1.26 or later
-- Helm 3.x installed on your workstation
-- kubectl configured with cluster access
-- StorageClass available for persistent volumes
+<HelmRequirements />
 
 ---
 
@@ -31,29 +26,19 @@ install_type: helm
 > **Using Azure?** Provision your infrastructure first with our [Azure Terraform module](/content/infrastructure/azure-infrastructure).
 {{/if}}
 
-## Authenticate with the Registry
+---
 
-```bash
-helm registry login registry.replicated.com \
-  --username {{ customer.email }} \
-  --password {{ license.id }}
-```
+<HelmConfiguration />
 
 ---
 
-## Install
+<HelmInstallation />
 
-```bash
-helm install {{ app.slug }} \
-  oci://registry.replicated.com/{{ app.slug }}/{{ channel.slug }}/{{ app.slug }} \
-  --namespace {{ app.slug }} \
-  --create-namespace \
-  --values my-values.yaml
-```
+<SupportLink />
 
 ---
 
-## Verify
+### Verify the Installation
 
 ```bash
 kubectl -n {{ app.slug }} get pods
@@ -61,9 +46,20 @@ kubectl -n {{ app.slug }} get svc
 helm list -n {{ app.slug }}
 ```
 
-Wait for all pods to reach `Running` state.
+---
+
+<InstanceName />
 
 ---
+
+<PostInstall>
+
+After installation:
+
+1. Set up TLS certificates for your endpoints
+2. Save your `my-values.yaml` for future upgrades
+
+</PostInstall>
 
 ## Troubleshooting
 

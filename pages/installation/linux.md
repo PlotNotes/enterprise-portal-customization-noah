@@ -12,14 +12,7 @@ install_type: linux
 
 Install {{ app.name }} v1.0.0 on a Linux server. This method provisions an embedded Kubernetes cluster with everything pre-configured.
 
-## Requirements
-
-- Ubuntu 20.04+, RHEL 8+, or CentOS 8+ (64-bit)
-- 4 CPUs, 8 GB RAM, 40 GB disk minimum
-- Root or sudo access
-- Port 443 outbound (or air gap bundle)
-
-See the full [system requirements](/content/installation/requirements).
+<LinuxRequirements />
 
 ---
 
@@ -34,37 +27,22 @@ See the full [system requirements](/content/installation/requirements).
 
 ---
 
-## Install
-
-Download and run the installer on your target machine:
-
-```bash
-curl -f https://replicated.app/embedded/{{ app.slug }}/{{ channel.slug }} -H "Authorization: {{ license.id }}" -o {{ app.slug }}-install.sh
-sudo bash {{ app.slug }}-install.sh
-```
-
-The installer will:
-1. Provision an embedded Kubernetes cluster
-2. Deploy {{ app.name }} and all dependencies
-3. Start the Admin Console on port 8800
+<LinuxConfiguration />
 
 ---
 
-## Verify Installation
+<LinuxInstallation />
 
-Once the installer completes, verify everything is running:
+<SupportLink />
 
-```bash
-kubectl get pods -A
-echo "Admin Console: https://$(hostname):8800"
-```
+---
+
+<LinuxVerification />
+
+---
 
 {{#if entitlements.isHAEnabled}}
----
-
 ## Adding Worker Nodes
-
-To add additional nodes for high availability:
 
 ```bash
 # On the first node, generate a join token:
@@ -75,6 +53,19 @@ To add additional nodes for high availability:
 {{/if}}
 
 ---
+
+<InstanceName />
+
+---
+
+<PostInstall>
+
+After installation completes:
+
+1. Set up TLS certificates for the admin console
+2. Configure automated backups
+
+</PostInstall>
 
 ## Next Steps
 
