@@ -28,7 +28,7 @@ v3.0.0 features zero-downtime node joins. Add worker nodes at any time without d
 
 </ConditionalRender>
 
----
+--- 
 
 <LinuxInstallAssets stepNumber={1} />
 
