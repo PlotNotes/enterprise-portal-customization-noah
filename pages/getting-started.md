@@ -10,7 +10,7 @@ layout: doc
 You are viewing the **v3.0.0** documentation. This is the latest release with cutting-edge features.
 </Note>
 
-Hello, **{{ customer.name }}**! This portal contains everything you need to install, configure, and operate <ValueDisplay path="app.name" fallback="your application" /> in your environment.
+Hello, **{{ customer.name }}**! This portal contains everything you need to install, configure, and operate {{ app.name }} in your environment.
 
 You're on the **{{ channel.name }}** channel, running version **{{ release.version }}**.
 

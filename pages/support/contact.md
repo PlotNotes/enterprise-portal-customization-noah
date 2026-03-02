@@ -19,7 +19,7 @@ Please have the following information ready when contacting support:
 </Note>
 
 1. Your {{ app.name }} version: `{{ release.version }}`
-2. Your customer name: **<ValueDisplay path="customer.name" fallback="(check your license)" />**
+2. Your customer name: **{{ customer.name }}**
 3. Installation method (Helm or Linux)
 4. A support bundle (see below)
 

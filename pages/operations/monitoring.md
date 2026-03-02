@@ -7,7 +7,7 @@ weight: 100
 # Monitoring & Metrics
 
 <Note>
-<ValueDisplay path="app.name" fallback="The application" /> exposes Prometheus metrics on port **9090** by default.
+{{ app.name }} exposes Prometheus metrics on port **9090** by default.
 </Note>
 
 ## Prometheus
