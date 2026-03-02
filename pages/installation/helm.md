@@ -68,6 +68,8 @@ Wait for all pods to reach `Running` state.
 
 </InstallStep>
 
+<InstanceName />
+
 ---
 
 ## Post-Installation Configuration
