@@ -117,7 +117,7 @@ customCSS: |
     height: 300px;
     background: linear-gradient(to bottom, rgba(212, 88, 59, 0.15), transparent);
     pointer-events: none;
-    z-index: 10;
+    z-index: 0;
   }
 
   /* Grid overlay on content area */
@@ -135,7 +135,7 @@ customCSS: |
     mask-image: linear-gradient(to bottom, white 0%, transparent 60%);
     -webkit-mask-image: linear-gradient(to bottom, white 0%, transparent 60%);
     pointer-events: none;
-    z-index: 10;
+    z-index: 0;
   }
 
 # ─────────────────────────────────────────────────────────────────────────────
