@@ -56,7 +56,11 @@ Generate a join token and run it on each additional node for zero-downtime join 
 
 </ConditionalRender>
 
-<InstanceName />
+<InstallStep stepNumber={4} title="Name Your Instance">
+
+Give this installation a name for identification in the portal. This helps when managing multiple environments.
+
+</InstallStep>
 
 ---
 
