@@ -12,59 +12,63 @@ install_type: helm
 
 {{ app.name }} v2.0.0 deploys as a Helm chart via OCI registry. This version includes updated chart defaults and improved resource management.
 
-<HelmRequirements />
+<Prerequisites title="Requirements">
+
+- Kubernetes 1.27+ cluster with kubectl access
+- Helm 3.8+
+- StorageClass available for persistent volumes
+
+</Prerequisites>
+
+{{#if terraform_modules.aws-infrastructure}}
+
+<Tip>
+**Using AWS?** Provision your infrastructure first with our [AWS Terraform module](/content/infrastructure/aws-infrastructure).
+</Tip>
+
+{{/if}}
 
 ---
 
-{{#if terraform_modules.aws-infrastructure}}
-> **Using AWS?** Provision your infrastructure first with our [AWS Terraform module](/content/infrastructure/aws-infrastructure).
-{{/if}}
+<InstallStep stepNumber={1} title="Install Required Plugins">
 
-## Install Required Plugins
+Two `kubectl` plugins are required for validation and diagnostics:
 
-```bash
+<CommandBlock>
 curl -fsSL https://krew.sh | bash
 kubectl krew install preflight
 kubectl krew install support-bundle
-```
+</CommandBlock>
 
----
+</InstallStep>
 
-<HelmConfiguration />
+<HelmInstallAssets stepNumber={2} />
 
----
+<InstallStep stepNumber={3} title="Run Preflight Checks">
 
-## Preflight Validation
+Validate your cluster meets the requirements:
 
-```bash
-helm template {{ app.slug }} \
-  oci://registry.replicated.com/{{ app.slug }}/{{ channel.slug }}/{{ app.slug }} \
-  --values my-values.yaml | kubectl preflight -
-```
+<CommandBlock command="helm template {{ app.slug }} oci://registry.replicated.com/{{ app.slug }}/{{ channel.slug }}/{{ app.slug }} --values my-values.yaml | kubectl preflight -" />
 
----
+</InstallStep>
 
-<HelmInstallation />
+<InstallStep stepNumber={4} title="Verify the Installation">
 
-<SupportLink />
-
----
-
-### Verify the Installation
-
-```bash
+<CommandBlock>
 kubectl -n {{ app.slug }} get pods
 kubectl -n {{ app.slug }} get svc
 helm list -n {{ app.slug }}
-```
+</CommandBlock>
 
----
+Wait for all pods to reach `Running` state.
+
+</InstallStep>
 
 <InstanceName />
 
 ---
 
-<PostInstall>
+## Post-Installation
 
 After your v2.0.0 Helm deployment is running:
 
@@ -72,15 +76,15 @@ After your v2.0.0 Helm deployment is running:
 2. **Create Values Override** — Save your `my-values.yaml` for upgrades
 3. **Configure Backups** — Set up PV snapshots with Velero
 
-</PostInstall>
+<Accordion title="Troubleshooting">
 
-## Troubleshooting
-
-```bash
+<CommandBlock>
 kubectl -n {{ app.slug }} describe pod <pod-name>
 kubectl -n {{ app.slug }} logs <pod-name>
 kubectl support-bundle --load-cluster-specs
-```
+</CommandBlock>
+
+</Accordion>
 
 ## Next Steps
 

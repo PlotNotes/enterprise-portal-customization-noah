@@ -12,59 +12,62 @@ install_type: linux
 
 Install {{ app.name }} v2.0.0 on a Linux server. This version includes improved cluster provisioning and faster install times.
 
-<LinuxRequirements />
+<Prerequisites title="Requirements">
 
----
-
-## Before You Begin
-
-- Have root or sudo access ready
+- Ubuntu 20.04+, RHEL 8+, or CentOS 8+
+- 4 CPUs, 8GB RAM, 40GB disk minimum
+- Root or sudo access
 - For air gap environments, see [Air Gap Installation](/content/installation/airgap)
 
+</Prerequisites>
+
 {{#if entitlements.isHAEnabled}}
-> **High Availability:** v2.0.0 includes improved multi-node support. After completing the single-node installation below, you can add worker nodes for redundancy.
+
+<Tip title="High Availability">
+v2.0.0 includes improved multi-node support. After completing the single-node installation below, you can add worker nodes for redundancy.
+</Tip>
+
 {{/if}}
 
 ---
 
-<LinuxConfiguration />
+<LinuxInstallAssets stepNumber={1} />
 
----
+<InstallStep stepNumber={2} title="Verify the Installation">
 
-<LinuxInstallation />
+Check that all services are running:
 
-<SupportLink />
+<CommandBlock command="{{ app.slug }} status" />
 
----
+Verify the admin console is accessible:
 
-<LinuxVerification />
+<CommandBlock command="curl -sk https://localhost:8800/api/v1/healthz" />
 
----
+</InstallStep>
 
 {{#if entitlements.isHAEnabled}}
-## Adding Worker Nodes
 
-```bash
-{{ app.slug }} join-token
-# Run the output on each additional node
-```
+<InstallStep stepNumber={3} title="Add Worker Nodes" optional={true}>
+
+Generate a join token and run it on each additional node:
+
+<CommandBlock command="{{ app.slug }} join-token" />
+
+</InstallStep>
+
 {{/if}}
-
----
 
 <InstanceName />
 
 ---
 
-<PostInstall>
+## Post-Installation
 
 After installation completes:
 
 1. **TLS Certificates** — Set up HTTPS for the admin console
 2. **Backup Schedule** — Configure automated backups
 3. **Identity Provider** — Connect your SSO provider
-
-</PostInstall>
 
 ## Next Steps
 
