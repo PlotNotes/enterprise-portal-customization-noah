@@ -12,9 +12,11 @@ install_type: helm
 
 {{ app.name }} v1.0.0 deploys as a Helm chart via OCI registry through Replicated.
 
-<HelmRequirements />
+## Requirements
 
----
+- Kubernetes 1.27+ cluster with kubectl access
+- Helm 3.8+
+- StorageClass available for persistent volumes
 
 {{#if terraform_modules.aws-infrastructure}}
 > **Using AWS?** Provision your infrastructure first with our [AWS Terraform module](/content/infrastructure/aws-infrastructure).
@@ -28,17 +30,30 @@ install_type: helm
 
 ---
 
-<HelmConfiguration />
+## Step 1: Authenticate
+
+```bash
+helm registry login registry.replicated.com \
+  --username {{ customer.email }} \
+  --password <your-license-id>
+```
+
+You can find your license ID on the [License](/license) page.
 
 ---
 
-<HelmInstallation />
+## Step 2: Install the Chart
 
-<SupportLink />
+```bash
+helm install {{ app.slug }} \
+  oci://registry.replicated.com/{{ app.slug }}/{{ channel.slug }}/{{ app.slug }} \
+  --namespace {{ app.slug }} \
+  --create-namespace
+```
 
 ---
 
-### Verify the Installation
+## Step 3: Verify
 
 ```bash
 kubectl -n {{ app.slug }} get pods
@@ -46,20 +61,16 @@ kubectl -n {{ app.slug }} get svc
 helm list -n {{ app.slug }}
 ```
 
----
-
-<InstanceName />
+Wait for all pods to reach `Running` state.
 
 ---
 
-<PostInstall>
+## Post-Installation
 
 After installation:
 
 1. Set up TLS certificates for your endpoints
 2. Save your `my-values.yaml` for future upgrades
-
-</PostInstall>
 
 ## Troubleshooting
 
