@@ -16,7 +16,7 @@ You're on the **{{ channel.name }}** channel, running version **{{ release.versi
 
 ## Quick Start
 
-<ConditionalRender when="entitlements.isEmbeddedClusterDownloadEnabled">
+{{#if entitlements.isEmbeddedClusterDownloadEnabled}}
 
 ### Linux (Recommended)
 
@@ -24,9 +24,9 @@ If you don't have access to a K8s cluster, our Linux installer provisions a comp
 
 <LinuxInstallAssets stepNumber={1} />
 
-</ConditionalRender>
+{{/if}}
 
-<ConditionalRender when="entitlements.isHelmInstallEnabled">
+{{#if entitlements.isHelmInstallEnabled}}
 
 ### Helm
 
@@ -34,7 +34,7 @@ Deploy to your existing Kubernetes cluster using Helm.
 
 <HelmInstallAssets stepNumber={1} />
 
-</ConditionalRender>
+{{/if}}
 
 ## Before You Begin
 
@@ -51,29 +51,29 @@ Deploy to your existing Kubernetes cluster using Helm.
 
 Your {{ channel.name }} license includes:
 
-<ConditionalRender when="entitlements.isHelmInstallEnabled">
+{{#if entitlements.isHelmInstallEnabled}}
 
 - Helm-based installation
 
-</ConditionalRender>
+{{/if}}
 
-<ConditionalRender when="entitlements.isEmbeddedClusterDownloadEnabled">
+{{#if entitlements.isEmbeddedClusterDownloadEnabled}}
 
 - Linux embedded cluster installation
 
-</ConditionalRender>
+{{/if}}
 
-<ConditionalRender when="entitlements.isAirgapSupported">
+{{#if entitlements.isAirgapSupported}}
 
 - Air gap deployment support
 
-</ConditionalRender>
+{{/if}}
 
-<ConditionalRender when="entitlements.isHAEnabled">
+{{#if entitlements.isHAEnabled}}
 
 - High availability configuration
 
-</ConditionalRender>
+{{/if}}
 
 ## Need Help?
 

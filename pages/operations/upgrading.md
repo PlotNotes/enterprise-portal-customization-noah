@@ -24,7 +24,7 @@ Always review the release notes for breaking changes and back up your database b
 
 </Prerequisites>
 
-<ConditionalRender when="entitlements.isHelmInstallEnabled">
+{{#if entitlements.isHelmInstallEnabled}}
 
 ## Helm Upgrade
 
@@ -34,9 +34,9 @@ Always review the release notes for breaking changes and back up your database b
 
 </InstallStep>
 
-</ConditionalRender>
+{{/if}}
 
-<ConditionalRender when="entitlements.isEmbeddedClusterDownloadEnabled">
+{{#if entitlements.isEmbeddedClusterDownloadEnabled}}
 
 ## Linux Upgrade
 
@@ -51,7 +51,7 @@ chartsmith update apply
 
 </InstallStep>
 
-</ConditionalRender>
+{{/if}}
 
 ## Rollback
 
@@ -59,14 +59,14 @@ chartsmith update apply
 Only roll back if the upgrade caused issues. Rollbacks may not reverse database migrations.
 </Warning>
 
-<ConditionalRender when="entitlements.isHelmInstallEnabled">
+{{#if entitlements.isHelmInstallEnabled}}
 
 <CommandBlock command="helm rollback {{ app.slug }} --namespace chartsmith" />
 
-</ConditionalRender>
+{{/if}}
 
-<ConditionalRender when="entitlements.isEmbeddedClusterDownloadEnabled">
+{{#if entitlements.isEmbeddedClusterDownloadEnabled}}
 
 <CommandBlock command="chartsmith update rollback" />
 
-</ConditionalRender>
+{{/if}}

@@ -30,17 +30,17 @@ Visit the [License](/license) page in this portal to view your license details, 
 
 <Accordion title="Which installation method should I use?">
 
-<ConditionalRender when="entitlements.isEmbeddedClusterDownloadEnabled">
+{{#if entitlements.isEmbeddedClusterDownloadEnabled}}
 
 - **Linux**: Best for single-server deployments or when you don't have an existing Kubernetes cluster.
 
-</ConditionalRender>
+{{/if}}
 
-<ConditionalRender when="entitlements.isHelmInstallEnabled">
+{{#if entitlements.isHelmInstallEnabled}}
 
 - **Helm**: Best when you have an existing Kubernetes cluster and want full control.
 
-</ConditionalRender>
+{{/if}}
 
 </Accordion>
 

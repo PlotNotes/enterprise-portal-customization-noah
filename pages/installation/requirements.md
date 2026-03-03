@@ -22,7 +22,7 @@ Before installing {{ app.name }}, ensure your environment meets the following re
 | CPU | 4 cores | 8 cores |
 | Ephemeral Storage | 10 Gi | 20 Gi |
 
-<ConditionalRender when="entitlements.isHAEnabled">
+{{#if entitlements.isHAEnabled}}
 
 <Accordion title="High Availability Requirements" defaultOpen={false}>
 
@@ -36,7 +36,7 @@ Production deployments should use 3 or more nodes. Multiply the per-node require
 
 </Accordion>
 
-</ConditionalRender>
+{{/if}}
 
 ## Data Storage
 
@@ -74,7 +74,7 @@ Functional cluster DNS (CoreDNS or kube-dns) is required for pod service discove
 | 80 | TCP | Inbound | Ingress traffic (HTTP) |
 | 5432 | TCP | Internal | PostgreSQL database connectivity |
 
-<ConditionalRender when="entitlements.isHAEnabled">
+{{#if entitlements.isHAEnabled}}
 
 <Accordion title="HA Network Requirements">
 
@@ -86,7 +86,7 @@ Functional cluster DNS (CoreDNS or kube-dns) is required for pod service discove
 
 </Accordion>
 
-</ConditionalRender>
+{{/if}}
 
 ## Required Tools
 
