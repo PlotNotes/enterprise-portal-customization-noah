@@ -15,48 +15,41 @@ Install {{ app.name }} in environments without direct internet access.
 Air gap installations require pre-downloading all bundles from a machine with internet access. Plan your transfer method before beginning.
 </Warning>
 
-<InstallStep stepNumber={1} title="Download the Air Gap Bundle">
+<Prerequisites title="Before You Begin">
 
-From a machine with internet access, download the air gap bundle from this portal's [Release History](/installation/release-history) page.
+- Review the [System Requirements](/installation/requirements)
+- A machine with internet access for downloading bundles
+- An approved transfer method to your air gap environment (USB drive, bastion host, etc.)
 
-The bundle includes:
-- {{ app.name }} container images
-- Kubernetes manifests
-- Embedded cluster binaries (if using Linux install)
+</Prerequisites>
 
-</InstallStep>
+---
 
-<InstallStep stepNumber={2} title="Transfer to Air Gap Environment">
+{{#if entitlements.isEmbeddedClusterDownloadEnabled}}
+## Linux Air Gap Installation
 
-Copy the bundle to your air gap server using your organization's approved transfer method (USB drive, bastion host, etc.).
+Install {{ app.name }} on a Linux server in an air-gapped environment using Embedded Cluster.
 
-</InstallStep>
+<LinuxAirgapInstallAssets stepNumber={1} />
+{{/if}}
 
-<InstallStep stepNumber={3} title="Extract and Install">
+{{#if entitlements.isHelmAirgapEnabled}}
+## Helm Air Gap Installation
 
-<CommandBlock>
-tar xzf {{ app.slug }}-{{ release.version }}.airgap.tar.gz
-cd {{ app.slug }}-{{ release.version }}
-sudo ./install.sh --airgap
-</CommandBlock>
+Install {{ app.name }} on your existing Kubernetes cluster using Helm in an air-gapped environment.
 
-</InstallStep>
+<HelmAirgapInstallAssets stepNumber={1} />
+{{/if}}
 
-<InstallStep stepNumber={4} title="Wait for Image Loading">
-
-<Note>
-The installer automatically loads container images into the embedded registry. This may take **10-15 minutes** depending on hardware.
-</Note>
-
-</InstallStep>
+---
 
 ## Updating in Air Gap
 
-Download the new version's air gap bundle and run:
+Download the new version's air gap bundle from the [Release History](/installation/release-history) page and repeat the installation steps above with the new bundle.
 
-<CommandBlock command="sudo ./install.sh --airgap --upgrade" />
+<InstanceName />
 
 ## Next Steps
 
 - [Post-Installation steps](/installation/post-installation)
-- [Configuration Guide](/configuration/guide)
+- [Configuration Guide](/content/configuration/configuration)

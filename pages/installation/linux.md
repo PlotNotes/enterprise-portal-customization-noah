@@ -20,13 +20,13 @@ Install {{ app.name }} v3.0.0 on a Linux server. This is the latest release with
 
 </Prerequisites>
 
-<ConditionalRender when="entitlements.isHAEnabled">
+{{#if entitlements.isHAEnabled}}
 
 <Tip title="High Availability">
 v3.0.0 features zero-downtime node joins. Add worker nodes at any time without disrupting running workloads.
 </Tip>
 
-</ConditionalRender>
+{{/if}}
 
 --- 
 
@@ -44,7 +44,7 @@ Check the admin console is accessible on port 8800:
 
 </InstallStep>
 
-<ConditionalRender when="entitlements.isHAEnabled">
+{{#if entitlements.isHAEnabled}}
 
 <InstallStep stepNumber={3} title="Add Worker Nodes" optional={true}>
 
@@ -54,7 +54,7 @@ Generate a join token and run it on each additional node for zero-downtime join 
 
 </InstallStep>
 
-</ConditionalRender>
+{{/if}}
 
 <InstanceName />
 
