@@ -291,14 +291,18 @@ ingress:
 
 ## Authentication
 
-### Local Authentication
+<OptionSelector label="Auth Provider" defaultOption="Entra ID" storageKey="auth-provider">
+  <Option value="Local">
+
+No external identity provider required. Users are managed directly within {{ app.name }}.
 
 <CommandBlock label="yaml">
 env:
   AUTH_PROVIDER: "local"
 </CommandBlock>
 
-### Microsoft Entra ID
+  </Option>
+  <Option value="Entra ID">
 
 Register an application in Azure AD with the redirect URI: `https://your-domain/auth/entra_id/callback`
 
@@ -312,7 +316,8 @@ secrets:
   ENTRA_ID_CLIENT_SECRET: ""
 </CommandBlock>
 
-### Okta
+  </Option>
+  <Option value="Okta">
 
 Create an OIDC web application in Okta with the redirect URI: `https://your-domain/auth/okta/callback`
 
@@ -327,7 +332,8 @@ secrets:
   OKTA_AUDIENCE: ""
 </CommandBlock>
 
-### WorkOS
+  </Option>
+  <Option value="WorkOS">
 
 Create an application in the WorkOS Dashboard with the redirect URI configured for your domain.
 
@@ -340,7 +346,8 @@ secrets:
   WORKOS_AUTHKIT_DOMAIN: ""
 </CommandBlock>
 
-### Keycloak
+  </Option>
+  <Option value="Keycloak">
 
 Create an OpenID Connect client in the Keycloak Admin Console with client authentication enabled, standard flow enabled, and the redirect URI: `https://your-domain/auth/keycloak/callback`
 
@@ -358,9 +365,61 @@ secrets:
 
 Optional: For CLI authentication, create a separate public client with Device Authorization Grant flow and set `KEYCLOAK_DEVICE_AUTHORIZATION_CLIENT_ID`.
 
+  </Option>
+</OptionSelector>
+
 ---
 
 ## Resource Sizing
+
+<OptionSelector label="Deployment Size" defaultOption="Medium" storageKey="resource-sizing">
+  <Option value="Small">
+
+For development, testing, and evaluation environments with low traffic.
+
+<CommandBlock label="yaml">
+web:
+  replicas: 1
+  resources:
+    limits:
+      cpu: 2
+      memory: 4Gi
+    requests:
+      cpu: 500m
+      memory: 2Gi
+
+worker:
+  replicas: 1
+  resources:
+    limits:
+      cpu: 2
+      memory: 4Gi
+    requests:
+      cpu: 500m
+      memory: 2Gi
+
+buildkit:
+  replicas: 1
+  resources:
+    limits:
+      cpu: 2
+      memory: 4Gi
+    requests:
+      cpu: 250m
+      memory: 1Gi
+</CommandBlock>
+
+| Component | Replicas | CPU (request/limit) | Memory (request/limit) |
+|-----------|----------|---------------------|----------------------|
+| Web | 1 | 500m / 2 | 2Gi / 4Gi |
+| Worker | 1 | 500m / 2 | 2Gi / 4Gi |
+| BuildKit | 1 | 250m / 2 | 1Gi / 4Gi |
+| **Total** | **3** | **1.25 / 6 cores** | **5Gi / 12Gi** |
+
+  </Option>
+  <Option value="Medium">
+
+Recommended for most production workloads with moderate traffic.
 
 <CommandBlock label="yaml">
 web:
@@ -394,7 +453,59 @@ buildkit:
       memory: 2Gi
 </CommandBlock>
 
-> **Note:** Default resource requests are conservative. Increase them for production workloads.
+| Component | Replicas | CPU (request/limit) | Memory (request/limit) |
+|-----------|----------|---------------------|----------------------|
+| Web | 2 | 1000m / 6 | 6Gi / 12Gi |
+| Worker | 2 | 1000m / 6 | 6Gi / 12Gi |
+| BuildKit | 1 | 500m / 4 | 2Gi / 8Gi |
+| **Total** | **5** | **4.5 / 22 cores** | **20Gi / 44Gi** |
+
+  </Option>
+  <Option value="Large">
+
+For high-throughput production environments with large teams and heavy workloads.
+
+<CommandBlock label="yaml">
+web:
+  replicas: 3
+  resources:
+    limits:
+      cpu: 8
+      memory: 16Gi
+    requests:
+      cpu: 2000m
+      memory: 8Gi
+
+worker:
+  replicas: 3
+  resources:
+    limits:
+      cpu: 8
+      memory: 16Gi
+    requests:
+      cpu: 2000m
+      memory: 8Gi
+
+buildkit:
+  replicas: 2
+  resources:
+    limits:
+      cpu: 4
+      memory: 8Gi
+    requests:
+      cpu: 1000m
+      memory: 4Gi
+</CommandBlock>
+
+| Component | Replicas | CPU (request/limit) | Memory (request/limit) |
+|-----------|----------|---------------------|----------------------|
+| Web | 3 | 2000m / 8 | 8Gi / 16Gi |
+| Worker | 3 | 2000m / 8 | 8Gi / 16Gi |
+| BuildKit | 2 | 1000m / 4 | 4Gi / 8Gi |
+| **Total** | **8** | **14 / 32 cores** | **28Gi / 64Gi** |
+
+  </Option>
+</OptionSelector>
 
 {{#if entitlements.isHAEnabled}}
 ---

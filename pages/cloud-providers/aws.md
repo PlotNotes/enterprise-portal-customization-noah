@@ -98,9 +98,10 @@ aws s3api put-bucket-encryption \
 
 ### Authentication Methods
 
-**Pod Identity (Recommended for EKS 1.24+):**
+<OptionSelector label="S3 Auth Method" defaultOption="Pod Identity" storageKey="aws-s3-auth">
+  <Option value="Pod Identity">
 
-No static keys required. Credentials are provided automatically with rotation.
+Recommended for EKS 1.24+. No static keys required — credentials are provided automatically with rotation.
 
 1. Create an IAM policy for S3 access (`GetObject`, `PutObject`, `DeleteObject`, `ListBucket`)
 2. Create an IAM role with Pod Identity trust:
@@ -134,7 +135,48 @@ aws eks create-pod-identity-association \
   --role-arn arn:aws:iam::ACCOUNT:role/CrewAIPodIdentityRole
 </CommandBlock>
 
-**Static Access Keys (Development Only):**
+  </Option>
+  <Option value="IRSA">
+
+IAM Roles for Service Accounts (IRSA) uses an OIDC provider to map a Kubernetes service account to an IAM role.
+
+1. Create an OIDC provider for your EKS cluster:
+
+<CommandBlock>
+eksctl utils associate-iam-oidc-provider \
+  --cluster your-cluster \
+  --approve
+</CommandBlock>
+
+2. Create a service account with the IAM role:
+
+<CommandBlock>
+eksctl create iamserviceaccount \
+  --name {{ app.slug }}-sa \
+  --namespace {{ app.slug }} \
+  --cluster your-cluster \
+  --role-name CrewAIIRSARole \
+  --attach-policy-arn arn:aws:iam::ACCOUNT:policy/CrewAIS3Access \
+  --approve
+</CommandBlock>
+
+3. Configure the Helm values to use the service account:
+
+<CommandBlock label="yaml">
+serviceAccount: "{{ app.slug }}-sa"
+
+envVars:
+  STORAGE_SERVICE: "amazon"
+  AWS_REGION: "us-east-1"
+  AWS_BUCKET: "{{ app.slug }}-prod-storage"
+</CommandBlock>
+
+  </Option>
+  <Option value="Static Keys">
+
+<Warning>
+Static access keys are recommended for development only. Use Pod Identity or IRSA for production.
+</Warning>
 
 <CommandBlock label="yaml">
 envVars:
@@ -147,7 +189,8 @@ secrets:
   AWS_SECRET_ACCESS_KEY: "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"
 </CommandBlock>
 
-**IAM Roles for Service Accounts (IRSA):** Also supported as an alternative. See the AWS IRSA documentation for details.
+  </Option>
+</OptionSelector>
 
 ---
 
