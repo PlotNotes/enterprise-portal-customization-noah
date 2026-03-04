@@ -30,9 +30,21 @@ v3.0.0 features zero-downtime node joins. Add worker nodes at any time without d
 
 --- 
 
-<LinuxInstallAssets stepNumber={1} />
+<LinuxInstallStep step="download" stepNumber={1} />
 
-<InstallStep stepNumber={2} title="Verify the Installation">
+<InstallStep stepNumber={2} title="Verify Download">
+
+After downloading assets, verify the tarball with the following command:
+
+<CommandBlock command="Dummy command" />
+
+</InstallStep>
+
+<LinuxInstallStep step="extract" stepNumber={3} />
+
+<LinuxInstallStep step="install" stepNumber={4} />
+
+<InstallStep stepNumber={5} title="Verify the Installation">
 
 After installation completes, verify that all services are running:
 
@@ -46,7 +58,7 @@ Check the admin console is accessible on port 8800:
 
 {{#if entitlements.isHAEnabled}}
 
-<InstallStep stepNumber={3} title="Add Worker Nodes" optional={true}>
+<InstallStep stepNumber={5} title="Add Worker Nodes" optional={true}>
 
 Generate a join token and run it on each additional node for zero-downtime join in v3.0.0:
 
