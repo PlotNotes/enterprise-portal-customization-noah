@@ -54,8 +54,6 @@ Generate a support bundle for our team:
 
 <SupportBundleUpload />
 
-<SupportBundleUploadHistory />
-
 ## Preflight Checks
 
 Run preflight checks to validate your environment:
