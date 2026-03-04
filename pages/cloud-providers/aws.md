@@ -99,7 +99,7 @@ aws s3api put-bucket-encryption \
 ### Authentication Methods
 
 <OptionSelector label="S3 Auth Method" defaultOption="Pod Identity" storageKey="aws-s3-auth">
-  <Option value="Pod Identity">
+<Option value="Pod Identity">
 
 Recommended for EKS 1.24+. No static keys required — credentials are provided automatically with rotation.
 
@@ -135,8 +135,8 @@ aws eks create-pod-identity-association \
   --role-arn arn:aws:iam::ACCOUNT:role/CrewAIPodIdentityRole
 </CommandBlock>
 
-  </Option>
-  <Option value="IRSA">
+</Option>
+<Option value="IRSA">
 
 IAM Roles for Service Accounts (IRSA) uses an OIDC provider to map a Kubernetes service account to an IAM role.
 
@@ -171,8 +171,8 @@ envVars:
   AWS_BUCKET: "{{ app.slug }}-prod-storage"
 </CommandBlock>
 
-  </Option>
-  <Option value="Static Keys">
+</Option>
+<Option value="Static Keys">
 
 <Warning>
 Static access keys are recommended for development only. Use Pod Identity or IRSA for production.
@@ -189,7 +189,7 @@ secrets:
   AWS_SECRET_ACCESS_KEY: "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"
 </CommandBlock>
 
-  </Option>
+</Option>
 </OptionSelector>
 
 ---
