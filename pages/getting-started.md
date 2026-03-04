@@ -18,24 +18,6 @@ You're on the **{{ channel.name }}** channel, running version **{{ release.versi
 
 {{#if entitlements.isEmbeddedClusterDownloadEnabled}}
 
-### Linux (Recommended)
-
-If you don't have access to a K8s cluster, our Linux installer provisions a complete Kubernetes cluster with {{ app.name }} pre-configured.
-
-<LinuxInstallAssets stepNumber={1} />
-
-{{/if}}
-
-{{#if entitlements.isHelmInstallEnabled}}
-
-### Helm
-
-Deploy to your existing Kubernetes cluster using Helm.
-
-<HelmInstallAssets stepNumber={1} />
-
-{{/if}}
-
 ## Before You Begin
 
 <Prerequisites title="Checklist">
