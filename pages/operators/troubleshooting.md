@@ -285,7 +285,7 @@ kubectl support-bundle --load-cluster-specs
 
 The bundle includes pod logs, resource configurations, cluster state, event history, and secret names (values are excluded). Share the generated `.tar.gz` file with support.
 
-<SupportBundleUploadHistory />
+<SupportBundleUploadHistory limit={3}/>
 
 ### Support Resources
 
