@@ -4,7 +4,7 @@ title: Checking for Updates
 
 # Checking for Updates
 
-View your deployed instances and check for available updates.
+Select an instance from the sidebar to view available updates.
 
-<OnlineInstances />
-<AirgapInstances />
+<LinuxUpdateAssets />
+<HelmUpdateAssets />
