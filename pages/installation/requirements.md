@@ -1,116 +1,94 @@
 ---
-title: Requirements
-description: System requirements for {{ app.name }}
-weight: 100
+title: Embedded Cluster Installation Requirements
+visible_when:
+  entitlements:
+    - isEmbeddedClusterDownloadEnabled
 ---
 
-# System Requirements
+# Embedded Cluster Installation Requirements
 
-Before installing {{ app.name }}, ensure your environment meets the following requirements.
+Ensure your environment meets these requirements before installing with Embedded Cluster.
 
-## Kubernetes Infrastructure
+## System Requirements
 
-<Note>
-{{ app.name }} requires **Kubernetes 1.32.0 or later** with the `apps/v1`, `v1`, `batch/v1`, and `networking.k8s.io/v1` API groups enabled.
-</Note>
+- Linux operating system
+- x86-64 architecture
+- systemd
+- At least 2GB of memory and 2 CPU cores
+- Disk write latency: Maximum P99 write latency of 10ms (required for etcd performance)
+- Root access or `sudo` privileges
+- Data directory requirements:
+  - 40Gi or more of total space
+  - Less than 80% full
+  - Default location: `/var/lib/embedded-cluster`
+  - Can be changed with the `--data-dir` flag during installation
 
-### Cluster Resources
+## Port Requirements
 
-| Component | Minimum (per node) | Recommended |
-|-----------|-------------------|-------------|
-| Memory | 8 Gi | 16 Gi |
-| CPU | 4 cores | 8 cores |
-| Ephemeral Storage | 10 Gi | 20 Gi |
+The following ports must be open and available for Embedded Cluster installations.
 
-<ConditionalRender when="entitlements.isHAEnabled">
+### Ports Used by Local Processes
 
-<Accordion title="High Availability Requirements" defaultOpen={false}>
+These ports must be available for local processes (no firewall openings needed):
 
-Production deployments should use 3 or more nodes. Multiply the per-node requirements by your node count.
+- 2379/TCP
+- 7443/TCP
+- 9099/TCP
+- 10248/TCP
+- 10257/TCP
+- 10259/TCP
 
-| Component | Per Node | 3-Node Cluster |
-|-----------|----------|-----------------|
-| Memory | 8 Gi | 24 Gi |
-| CPU | 4 cores | 12 cores |
-| Ephemeral Storage | 10 Gi | 30 Gi |
+### Ports for Node Communication
 
-</Accordion>
+These ports are used for bidirectional communication between nodes in multi-node installations. Create firewall openings between nodes for these ports:
 
-</ConditionalRender>
+- 2380/TCP
+- 4789/UDP
+- 6443/TCP
+- 9091/TCP
+- 9443/TCP
+- 10249/TCP
+- 10250/TCP
+- 10256/TCP
 
-## Data Storage
+### Admin Console Port
 
-### PostgreSQL Database
+Port **30000/TCP** must be open and accessible for the Admin Console. This port must also be accessible by nodes joining the cluster.
 
-A **PostgreSQL 16.8+** database is required with `CREATE`, `DROP`, and `ALTER` privileges.
+If port 30000 is occupied, you can select a different port during installation using the `--admin-console-port` flag.
 
-Compatible providers include:
+### Local Artifact Mirror (LAM) Port
 
-{{#if entitlements.isAWSEnabled}}
-- AWS Aurora PostgreSQL
-{{/if}}
-{{#if entitlements.isAzureEnabled}}
-- Azure Database for PostgreSQL
-{{/if}}
-{{#if entitlements.isGCPEnabled}}
-- Google Cloud SQL for PostgreSQL
-{{/if}}
-- Self-managed PostgreSQL instances
+Port **50000/TCP** must be open for the Local Artifact Mirror.
 
-The database must be network-accessible from cluster pods. SSL/TLS connections are recommended.
+If port 50000 is occupied, you can select a different port during installation.
 
-### S3-Compatible Object Storage
+## Firewalld Configuration
 
-Full S3 API compatibility is required. You must pre-create your storage buckets and provide read/write access credentials.
+If Firewalld is enabled in your environment, Embedded Cluster will automatically configure it to allow necessary traffic. No additional configuration is required.
 
-## Network Requirements
+The following ports are automatically opened in the default zone:
 
-Functional cluster DNS (CoreDNS or kube-dns) is required for pod service discovery.
+- 6443/TCP
+- 10250/TCP
+- 9443/TCP
+- 2380/TCP
+- 4789/UDP
 
-| Port | Protocol | Direction | Purpose |
-|------|----------|-----------|---------|
-| 443 | TCP | Outbound | Object storage, registry access |
-| 443 | TCP | Inbound | Ingress traffic (HTTPS) |
-| 80 | TCP | Inbound | Ingress traffic (HTTP) |
-| 5432 | TCP | Internal | PostgreSQL database connectivity |
+## Additional System Directories
 
-<ConditionalRender when="entitlements.isHAEnabled">
+In addition to the primary data directory, Embedded Cluster creates files in these locations:
 
-<Accordion title="HA Network Requirements">
-
-| Port | Protocol | Direction | Purpose |
-|------|----------|-----------|---------|
-| 2379-2380 | TCP | Internal | etcd peer communication |
-| 9443 | TCP | Internal | Join server |
-| 10250 | TCP | Internal | Kubelet API |
-
-</Accordion>
-
-</ConditionalRender>
-
-## Required Tools
-
-| Tool | Version | Purpose |
-|------|---------|---------|
-| Helm | 3.10+ | Deploying {{ app.name }} to Kubernetes |
-| kubectl | Compatible with your cluster version | Cluster management |
-
-### Registry Access
-
-{{ app.name }} images are distributed through the Replicated registry. Authenticate with your service account token:
-
-<CommandBlock command="helm registry login registry.replicated.com --username {{ customer.email }} --password {{ license.id }}" />
-
-## TLS Certificates
-
-<Warning>
-Production deployments **require** valid TLS certificates in PEM-encoded format from a trusted or internal certificate authority.
-</Warning>
-
-Supported provisioning methods include:
-
-{{#if entitlements.isAWSEnabled}}
-- AWS Certificate Manager
-{{/if}}
-- cert-manager (automated provisioning within Kubernetes)
-- Manual upload as Kubernetes secrets
+- `/etc/cni`
+- `/etc/k0s`
+- `/opt/cni`
+- `/opt/containerd`
+- `/run/calico`
+- `/run/containerd`
+- `/run/k0s`
+- `/var/lib/calico`
+- `/var/lib/cni`
+- `/var/lib/containers`
+- `/var/lib/kubelet`
+- `/var/log/embedded-cluster`
+- `/usr/local/bin/k0s`
