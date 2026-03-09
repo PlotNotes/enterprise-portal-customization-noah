@@ -18,6 +18,13 @@ Review the following prerequisites before installing.
 - kubectl configured with cluster access
 - StorageClass available for persistent volumes
 
+## Configuration
+
+Customize the options below. The install commands will update automatically based on your selections.
+
+<NetworkAvailability installType="helm" />
+<VersionSelector installType="helm" />
+
 ## Install
 
 <HelmInstallAssets />
