@@ -42,6 +42,7 @@ kubectl get pods -A
 echo "Admin Console: https://$(hostname):8800"
 </CommandBlock>
 
+<AdminConsoleUrl />
 <InstanceName />
 
 ## Post-Install
