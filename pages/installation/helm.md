@@ -22,7 +22,9 @@ Review the following prerequisites before installing.
 
 Customize the options below. The install commands will update automatically based on your selections.
 
+<KubernetesDistribution />
 <NetworkAvailability installType="helm" />
+<RegistryAccess />
 <VersionSelector installType="helm" />
 
 ## Install
