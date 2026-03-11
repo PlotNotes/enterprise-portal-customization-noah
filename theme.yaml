@@ -1,5 +1,6 @@
 # theme.yaml — Enterprise Portal v2 Branding & Appearance
 # ======================================================
+#
 # Place this file at the root of your content repo (or at path_prefix + theme.yaml),
 # alongside toc.yaml. If a theme.yaml is present, it becomes the sole source of
 # branding — UI-configured values in the Vendor Portal are ignored entirely.
