@@ -137,11 +137,3 @@ customCSS: |
     pointer-events: none;
     z-index: 0;
   }
-
-# ─────────────────────────────────────────────────────────────────────────────
-# FONTS (stretch goal — not yet supported)
-# ─────────────────────────────────────────────────────────────────────────────
-# fonts:
-#   sans: "'IBM Plex Sans', system-ui, sans-serif"
-#   mono: "'IBM Plex Mono', 'SFMono-Regular', Consolas, monospace"
-#   googleFontsURL: "https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap"
