@@ -7,7 +7,7 @@ navigation:
         visible_when:
           entitlements:
             - isEmbeddedClusterDownloadEnabled
-       - title: Helm Reference
+      - title: Helm Reference
          helm_chart:
           name: "dnd-plotnotes"
       - title: Release History
