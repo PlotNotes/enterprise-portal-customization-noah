@@ -13,6 +13,9 @@ navigation:
     items:
       - title: Requirements
         page: pages/installation/requirements.md
+      - title: Helm Reference
+        helm_chart:
+          name: "dnd-plotnotes-0.1.0"
       - title: Linux Installation
         page: pages/installation/linux.md
         visible_when:
