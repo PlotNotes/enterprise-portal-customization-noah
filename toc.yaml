@@ -8,7 +8,7 @@ navigation:
           entitlements:
             - isEmbeddedClusterDownloadEnabled
       - title: Helm Reference
-         helm_chart:
+        helm_chart:
           name: "dnd-plotnotes"
       - title: Release History
         page: pages/installation/release-history.md
