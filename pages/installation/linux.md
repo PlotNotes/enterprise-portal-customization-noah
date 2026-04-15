@@ -26,11 +26,19 @@ Customize the options below. The install commands will update automatically base
 
 ## Install
 
-SSH into your target machine and run the following command as root or with sudo.
+<Warning>
+The install command must be run as root or with sudo. Running without elevated privileges will cause the installation to fail.
+</Warning>
+
+SSH into your target machine and run the following command.
 
 <LinuxInstallAssets />
 
 ## Verify Installation
+
+<Tip title="Admin Console Access">
+The admin console URL is printed at the end of the installation. Bookmark it — you'll use it to manage updates, check status, and configure the application.
+</Tip>
 
 Once the installer completes, it will print the URL for the admin console. Open it in your browser to continue with application setup.
 

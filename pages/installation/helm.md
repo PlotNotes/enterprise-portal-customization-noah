@@ -18,6 +18,10 @@ Review the following prerequisites before installing.
 - kubectl configured with cluster access
 - StorageClass available for persistent volumes
 
+<Tip title="Before You Begin">
+Run `kubectl get sc` to confirm a default StorageClass is available. If no default is set, the installation will fail when creating persistent volume claims.
+</Tip>
+
 ## Configuration
 
 Customize the options below. The install commands will update automatically based on your selections.
@@ -34,5 +38,9 @@ Customize the options below. The install commands will update automatically base
 <InstanceName />
 
 ## Post-Install
+
+<Note>
+After installation, verify that all pods are running with `kubectl get pods -n <namespace>` before proceeding to post-installation configuration.
+</Note>
 
 See the post-installation documentation for next steps including configuring TLS, setting up backups, and connecting to your identity provider.

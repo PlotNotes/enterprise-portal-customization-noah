@@ -22,6 +22,10 @@ Your installation includes access to the following features:
 
 ## Getting Started
 
+<Tip title="New to this portal?">
+Start with the Installation Guide for your deployment method. The configuration selectors on each installation page will generate customized commands for your environment.
+</Tip>
+
 Use the sidebar navigation on the left to explore available documentation sections. We recommend starting with:
 
 {{#if entitlements.isEmbeddedClusterDownloadEnabled}}

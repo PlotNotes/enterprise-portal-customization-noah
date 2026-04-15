@@ -7,28 +7,34 @@ title: Frequently Asked Questions
 ## General
 
 {{#if entitlements.isEmbeddedClusterDownloadEnabled}}
-### What are the system requirements?
+<Accordion title="What are the system requirements?">
 
 See [Requirements](../installation/requirements) for details.
+
+</Accordion>
 {{/if}}
 
-### How do I check for updates?
+<Accordion title="How do I check for updates?">
 
 See [Checking for Updates](../updates/checking).
+
+</Accordion>
 
 {{#if entitlements.isHelmInstallEnabled}}
 ## Installation
 
-### Which installation method should I use?
+<Accordion title="Which installation method should I use?">
 
 {{#if entitlements.isEmbeddedClusterDownloadEnabled}}
 Choose [Embedded Cluster (Linux)](../installation/linux) for installing on a Linux server, or [Helm](../installation/helm) for deploying to an existing Kubernetes cluster.
 {{/if}}
+
+</Accordion>
 {{/if}}
 
 ## Troubleshooting
 
-### How do I collect diagnostic information?
+<Accordion title="How do I collect diagnostic information?">
 
 Generate a support bundle for troubleshooting:
 
@@ -39,3 +45,5 @@ Generate a support bundle for troubleshooting:
 - [Helm installations](../operations/bundles/helm)
 {{/if}}
 - If you already have a support bundle, [upload it here](../operations/bundles/uploaded)
+
+</Accordion>

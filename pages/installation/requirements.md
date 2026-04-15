@@ -16,12 +16,20 @@ Ensure your environment meets these requirements before installing with Embedded
 - systemd
 - At least 2GB of memory and 2 CPU cores
 - Disk write latency: Maximum P99 write latency of 10ms (required for etcd performance)
+
+<Warning title="Disk Latency">
+Installations on systems that exceed 10ms P99 write latency may experience etcd instability, leading to cluster failures. Verify disk performance before proceeding.
+</Warning>
 - Root access or `sudo` privileges
 - Data directory requirements:
   - 40Gi or more of total space
   - Less than 80% full
   - Default location: `/var/lib/embedded-cluster`
   - Can be changed with the `--data-dir` flag during installation
+
+<Note title="Custom Data Directory">
+If your system has a dedicated data volume mounted at a path other than `/var/lib/embedded-cluster`, use the `--data-dir` flag during installation to point to it. This must be set at install time and cannot be changed later.
+</Note>
 
 ## Port Requirements
 
