@@ -31,16 +31,8 @@ navigation:
         visible_when:
           permissions:
             - canViewSecurity
-      - title: Linux Bundles
-        page: pages/operations/bundles/linux.md
-        visible_when:
-          entitlements:
-            - isEmbeddedClusterDownloadEnabled
-      - title: Helm Bundles
-        page: pages/operations/bundles/helm.md
-        visible_when:
-          entitlements:
-            - isHelmInstallEnabled
+      - title: Support Bundles
+        page: pages/operations/bundles/bundles.md
       - title: Upload Bundles
         page: pages/operations/bundles/uploaded.md
 
