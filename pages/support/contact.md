@@ -16,10 +16,18 @@ Including a support bundle with your request helps our team diagnose issues fast
 
 1. Check the [FAQ](../support/faq) for common questions
 2. Generate a support bundle for faster troubleshooting:
-{{#if entitlements.isEmbeddedClusterDownloadEnabled}}
-   - [Linux installations](../operations/bundles/linux)
-{{/if}}
-{{#if entitlements.isHelmInstallEnabled}}
-   - [Helm installations](../operations/bundles/helm)
-{{/if}}
-   - [Upload an existing bundle](../operations/bundles/uploaded)
+
+<Tabs>
+<Tab title="Linux">
+
+See [Linux Support Bundles](../operations/bundles/linux) to generate a bundle from your Embedded Cluster installation.
+
+</Tab>
+<Tab title="Helm">
+
+See [Helm Support Bundles](../operations/bundles/helm) to generate a bundle from your Kubernetes cluster.
+
+</Tab>
+</Tabs>
+
+3. [Upload an existing bundle](../operations/bundles/uploaded) if you already have one
