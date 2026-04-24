@@ -7,9 +7,6 @@ navigation:
         visible_when:
           entitlements:
             - isEmbeddedClusterDownloadEnabled
-      - title: Helm Reference
-        helm_chart:
-          name: "dnd-plotnotes"
       - title: Release History
         page: pages/installation/release-history.md
       - title: Linux
@@ -22,7 +19,6 @@ navigation:
         visible_when:
           entitlements:
             - isHelmInstallEnabled
-
   - title: Operations
     icon: wrench
     items:

@@ -8,13 +8,3 @@ visible_when:
 # Security
 
 View vulnerability scanning and security reports for your releases.
-
-<SecurityVersionSelector />
-
-## CVE Report
-
-<CVEReport />
-
-## SBOM
-
-<SBOMReport />
