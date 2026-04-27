@@ -88,6 +88,12 @@ navigation:
       - title: Upgrading
         page: pages/operations/upgrading.md
 
+  - title: Updates
+    icon: refresh-cw
+    items:
+      - title: Instances & Updates
+        page: pages/updates/instances.md
+
   - title: Reference
     icon: file-text
     items:
