@@ -35,6 +35,8 @@ navigation:
   - title: Updates
     icon: refresh-cw
     items:
+      - title: Instances & Updates
+        page: pages/updates/instances.md
       - title: Checking for Updates
         page: pages/updates/checking.md
 
