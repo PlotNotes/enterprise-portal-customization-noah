@@ -4,10 +4,10 @@ description: Get started with {{ app.name }} — your enterprise chart managemen
 layout: doc
 ---
 
-# Welcome to {{ app.name }} — v3.0.0
+# Welcome to {{ app.name }} — {{_version}}
 
 <Note title="Latest Release">
-You are viewing the **v3.0.0** documentation. This is the latest release with cutting-edge features.
+You are viewing the **{{_version}}** documentation. This is the latest release with cutting-edge features.
 </Note>
 
 Hello, **{{ customer.name }}**! This portal contains everything you need to install, configure, and operate {{ app.name }} in your environment.
