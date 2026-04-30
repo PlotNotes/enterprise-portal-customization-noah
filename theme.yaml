@@ -12,5 +12,5 @@ branding:
 
   # Support contact info — shown on the Contact Support page (via the
   # <ContactInfo /> component) and on support bundle pages.
-  # contact: "support@yourcompany.com"
-  # supportPortalLink: "https://support.yourcompany.com"
+  contact: "support@yourcompany.com"
+  supportPortalLink: "https://support.yourcompany.com"
