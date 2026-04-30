@@ -41,7 +41,7 @@ Customize the options below. The install commands will update automatically base
 
 <HelmInstallAssets />
 
-<InstanceName />
+<InstanceName method="helm" />
 
 ## Post-Install
 
