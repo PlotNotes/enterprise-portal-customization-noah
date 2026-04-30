@@ -16,7 +16,7 @@ See [Requirements](../installation/requirements) for details.
 
 <Accordion title="How do I check for updates?">
 
-See [Checking for Updates](../updates/checking).
+See [Instances & Updates](../updates/instances).
 
 </Accordion>
 

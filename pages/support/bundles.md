@@ -32,3 +32,5 @@ Support bundles contain cluster state, application logs, and configuration detai
 </Note>
 
 <SupportBundleUpload />
+
+<ContactInfo />

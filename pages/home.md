@@ -45,7 +45,7 @@ Use the sidebar navigation on the left to explore available documentation sectio
 - [Linux Installation](installation/linux)
 {{/if}}
 - [Release History](installation/release-history)
-- [Check for Updates](updates/checking)
+- [Instances & Updates](updates/instances)
 - [Support Bundles](support/bundles)
 - [FAQ](support/faq)
 
@@ -56,7 +56,7 @@ Use the sidebar navigation on the left to explore available documentation sectio
 - [Helm Installation](installation/helm)
 {{/if}}
 - [Release History](installation/release-history)
-- [Check for Updates](updates/checking)
+- [Instances & Updates](updates/instances)
 - [Support Bundles](support/bundles)
 - [FAQ](support/faq)
 
