@@ -17,6 +17,12 @@ See the [system requirements documentation](requirements) for the full list of p
 - 4 CPUs, 8GB RAM, 40GB disk minimum
 - Root or sudo access
 
+## Choose an installation
+
+<PendingInstallSelector method="linux" />
+
+<NewInstall method="linux" />
+
 ## Configuration
 
 Customize the options below. The install commands will update automatically based on your selections.
