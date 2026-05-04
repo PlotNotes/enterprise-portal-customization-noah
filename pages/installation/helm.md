@@ -41,6 +41,10 @@ Customize the options below. The install commands will update automatically base
 
 ## Install
 
+<Note>
+The commands below are personalized to your selected installation. If you switch installations or rename your instance, the commands will update automatically.
+</Note>
+
 <HelmInstallAssets />
 
 ## Post-Install

@@ -40,6 +40,10 @@ The install command must be run as root or with sudo. Running without elevated p
 
 SSH into your target machine and run the following command.
 
+<Note>
+The commands below are personalized to your selected installation. If you switch installations or rename your instance, the commands will update automatically.
+</Note>
+
 <LinuxInstallAssets />
 
 ## Verify Installation
