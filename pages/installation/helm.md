@@ -28,6 +28,8 @@ Run `kubectl get sc` to confirm a default StorageClass is available. If no defau
 
 <NewInstall method="helm" />
 
+<InstanceName method="helm" />
+
 ## Configuration
 
 Customize the options below. The install commands will update automatically based on your selections.
@@ -40,8 +42,6 @@ Customize the options below. The install commands will update automatically base
 ## Install
 
 <HelmInstallAssets />
-
-<InstanceName method="helm" />
 
 ## Post-Install
 

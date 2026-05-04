@@ -23,6 +23,8 @@ See the [system requirements documentation](requirements) for the full list of p
 
 <NewInstall method="linux" />
 
+<InstanceName method="linux" />
+
 ## Configuration
 
 Customize the options below. The install commands will update automatically based on your selections.
@@ -55,8 +57,6 @@ kubectl get pods -A
 # Access the admin console
 echo "Admin Console: https://$(hostname):8800"
 </CommandBlock>
-
-<InstanceName method="linux" />
 
 ## Post-Install
 
