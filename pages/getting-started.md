@@ -10,6 +10,8 @@ layout: doc
 
 ![Broken svg](../assets/svg-broken.svg)
 
+![Root PNG](../svg-test.png)
+
 <Note title="Latest Release">
 You are viewing the **{{_version}}** documentation. This is the latest release with cutting-edge features.
 </Note>
