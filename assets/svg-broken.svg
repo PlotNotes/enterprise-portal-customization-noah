@@ -4,7 +4,7 @@
       @import url('https://fonts.googleapis.com/css2?family=Inter:wght@700');
     </style>
   </defs>
-  <text x="10" y="45" font-family="Inter, sans-serif" font-size="32" fill="#1a1a1a">
+  <text x="10" y="45" font-family="Inter, sans-serif" font-size="32" fill="#ff0000">
     ACME Corporation
   </text>
 </svg>
