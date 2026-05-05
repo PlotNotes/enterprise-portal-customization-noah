@@ -1,10 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="300" height="60" viewBox="0 0 300 60">
-  <defs>
-    <style>
-      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@700');
-    </style>
-  </defs>
-  <text x="10" y="45" font-family="Inter, sans-serif" font-size="32" fill="#1a1a1a">
-    ACME Corporation
-  </text>
+  <!-- Each letter is a vector path, not a text element -->
+  <path d="M10 45 L30 10 L50 45 M20 35 L40 35" fill="#1a1a1a" />
+  <!-- ...more path data for the rest of "ACME Corporation" -->
 </svg>
