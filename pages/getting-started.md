@@ -6,6 +6,8 @@ layout: doc
 
 # Welcome to {{ app.name }} — {{_version}}
 
+![SVG Test](assets/svg-test.svg)
+
 <Note title="Latest Release">
 You are viewing the **{{_version}}** documentation. This is the latest release with cutting-edge features.
 </Note>
