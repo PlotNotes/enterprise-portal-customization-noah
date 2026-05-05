@@ -6,16 +6,9 @@ layout: doc
 
 # Welcome to {{ app.name }} — {{_version}}
 
-<svg xmlns="http://www.w3.org/2000/svg" width="300" height="60" viewBox="0 0 300 60">
-  <defs>
-    <style>
-      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@700');
-    </style>
-  </defs>
-  <text x="10" y="45" font-family="Inter, sans-serif" font-size="32" fill="#1a1a1a">
-    ACME Corporation
-  </text>
-</svg>
+![Working svg](../assets/svg-works.svg)
+
+![Broken svg](../assets/svg-broken.svg)
 
 <Note title="Latest Release">
 You are viewing the **{{_version}}** documentation. This is the latest release with cutting-edge features.
