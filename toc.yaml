@@ -10,7 +10,8 @@ navigation:
   - title: Conditional Render Test
     page: pages/conditional-render-test.md
     visible_when:
-      - allow_add_cats
+      entitlements:
+        - allow_add_cats
   - title: Installation
     icon: download
     items:
