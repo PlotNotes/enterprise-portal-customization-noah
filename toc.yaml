@@ -2,11 +2,6 @@ navigation:
   - title: Installation
     icon: rocket
     items:
-      - title: Requirements
-        page: pages/installation/requirements.md
-        visible_when:
-          entitlements:
-            - isEmbeddedClusterDownloadEnabled
       - title: Release History
         page: pages/installation/release-history.md
       - title: Linux
