@@ -9,33 +9,28 @@
 # This example demonstrates a dark, warm-toned theme inspired by modern dev portals.
 
 branding:
-  title: "Plotnotes"
-  overview: "Welcome to the Plotnotes Enterprise Portal."
-  contact: support@plotnotes.io
-  supportPortalLink: https://support.plotnotes.io
+  # Portal branding
+  # title: "Your Portal Name"
+  # primaryColor: "#4f46e5"
+  # logo: assets/logo.png
+  # favicon: assets/favicon.ico
 
-  # Core colors — warm coral accent
-  primaryColor: "#D4583B"
-  secondaryColor: "#E8654A"
+  # Support contact info — shown on the Contact Support page (via the
+  # <ContactInfo /> component) and on support bundle pages.
+  contact: "support@plotnotes.ai"
+  supportPortalLink: "https://support.plotnotes.ai"
 
-  # Link colors
-  linkColor: "#D4583B"
-  linkHoverColor: "#E8856A"
-
-  # Header background
-  background: minimal
-
-  # Dark header
-  headerColor: "#141414"
-  headerGradientEnd: "#1a1a1a"
-
-  # Dark sidebar
-  sidebarColor: "#141414"
-  sidebarGradientEnd: "#1a1a1a"
-
-  # Dark content area
-  contentBackgroundColor: "#1a1a1a"
-  contentBackgroundGradientEnd: "#1a1a1a"
+  # Login page footer. Customize or remove these to brand your login page.
+  # Warning: removing the login footer without a custom domain may cause
+  # your portal to be flagged by Google Safe Browsing.
+  loginFooterText: "Secured by Chartsmith"
+  loginFooterLinks:
+    - label: Privacy
+      url: https://plotnotes.ai/privacy
+    - label: Terms
+      url: https://plotnotes.ai/terms
+    - label: Contact
+      url: https://plotnotes.ai/contact
 
 customCSS: |
   /* Dark content area with light text */
