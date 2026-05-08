@@ -1,83 +1,67 @@
 ---
 title: Linux Installation
-description: Install {{ app.name }} on a Linux server with embedded Kubernetes
 visible_when:
   entitlements:
     - isEmbeddedClusterDownloadEnabled
-weight: 150
-install_type: linux
 ---
 
-# Linux Installation (v3.0.0)
+# Linux Installation
 
-Install {{ app.name }} v3.0.0 on a Linux server. This is the latest release with the fastest installer and new automatic cluster health checks.
+Install your application on a Linux server using Embedded Cluster. Read the docs or select your deployment preferences.
 
-<Prerequisites title="Before You Begin">
+## Requirements
 
-- Have root or sudo access ready
-- Review the [System Requirements](/installation/requirements)
-- For air gap environments, see [Air Gap Installation](/content/installation/airgap)
+See the [system requirements documentation](requirements) for the full list of prerequisites. At minimum:
 
-</Prerequisites>
+- Ubuntu 20.04+ / RHEL 8+ / CentOS 8+
+- 4 CPUs, 8GB RAM, 40GB disk minimum
+- Root or sudo access
 
-<ConditionalRender when="entitlements.isHAEnabled">
+## Choose an installation
 
-<Tip title="High Availability">
-v3.0.0 features zero-downtime node joins. Add worker nodes at any time without disrupting running workloads.
+<PendingInstallSelector method="linux" />
+
+<NewInstall method="linux" />
+
+<InstanceName method="linux" />
+
+## Configuration
+
+Customize the options below. The install commands will update automatically based on your selections.
+
+<NetworkAvailability installType="linux" />
+<VersionSelector installType="linux" />
+
+## Install
+
+<Warning>
+The install command must be run as root or with sudo. Running without elevated privileges will cause the installation to fail.
+</Warning>
+
+SSH into your target machine and run the following command.
+
+<Note>
+The commands below are personalized to your selected installation. If you switch installations or rename your instance, the commands will update automatically.
+</Note>
+
+<LinuxInstallAssets />
+
+## Verify Installation
+
+<Tip title="Admin Console Access">
+The admin console URL is printed at the end of the installation. Bookmark it — you'll use it to manage updates, check status, and configure the application.
 </Tip>
 
-</ConditionalRender>
+Once the installer completes, it will print the URL for the admin console. Open it in your browser to continue with application setup.
 
---- 
+<CommandBlock>
+# Check that all pods are running
+kubectl get pods -A
 
-<LinuxInstallAssets stepNumber={1} />
+# Access the admin console
+echo "Admin Console: https://$(hostname):8800"
+</CommandBlock>
 
-<InstallStep stepNumber={2} title="Verify the Installation">
+## Post-Install
 
-After installation completes, verify that all services are running:
-
-<CommandBlock command="{{ app.slug }} status" />
-
-Check the admin console is accessible on port 8800:
-
-<CommandBlock command="curl -sk https://localhost:8800/api/v1/healthz" />
-
-</InstallStep>
-
-<ConditionalRender when="entitlements.isHAEnabled">
-
-<InstallStep stepNumber={3} title="Add Worker Nodes" optional={true}>
-
-Generate a join token and run it on each additional node for zero-downtime join in v3.0.0:
-
-<CommandBlock command="{{ app.slug }} join-token" />
-
-</InstallStep>
-
-</ConditionalRender>
-
-<InstallStep stepNumber={4} title="Name Your Instance">
-
-Give this installation a name for identification in the portal. This helps when managing multiple environments.
-
-</InstallStep>
-
----
-
-## Post-Installation Configuration
-
-<Accordion title="Recommended Next Steps" defaultOpen={true}>
-
-After installation completes, configure the following for your v3.0.0 deployment:
-
-1. **TLS Certificates** — Set up HTTPS for the admin console and application endpoints
-2. **Backup Schedule** — Configure automated backups using the built-in snapshot system
-3. **Identity Provider** — Connect your SSO provider for user authentication
-4. **Monitoring** — v3.0.0 includes built-in Prometheus metrics on port 9090
-
-</Accordion>
-
-## Next Steps
-
-- [Post-Installation steps](/content/installation/post-installation)
-- [Configuration Guide](/content/configuration/configuration)
+See the post-installation documentation for next steps including configuring TLS, setting up backups, and connecting to your identity provider.

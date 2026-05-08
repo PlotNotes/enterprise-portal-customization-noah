@@ -1,42 +1,19 @@
 ---
 title: Contact Support
-description: Get help with {{ app.name }}
-weight: 200
 ---
 
 # Contact Support
 
-## Support Channels
+Get help from our support team.
 
-- **Email**: support@chartsmith.io
-- **Slack**: [ChartSmith Community](https://chartsmith.slack.com)
-- **GitHub**: [Issue Tracker](https://github.com/chartsmith/chartsmith/issues)
+<ContactInfo />
+
+<Tip title="Speed Up Your Support Request">
+Including a support bundle with your request helps our team diagnose issues faster, often reducing resolution time significantly.
+</Tip>
 
 ## Before Contacting Support
 
-<Note>
-Please have the following information ready when contacting support:
-</Note>
-
-1. Your {{ app.name }} version: `{{ release.version }}`
-2. Your customer name: **<ValueDisplay path="customer.name" fallback="(check your license)" />**
-3. Installation method (Helm or Linux)
-4. A support bundle (see below)
-
-## Upload a Support Bundle
-
-Generate a support bundle for faster resolution:
-
-<CommandBlock command="kubectl support-bundle --namespace chartsmith" />
-
-<SupportBundleUpload />
-
-## SLA
-
-| Channel | Response Time |
-|---------|--------------|
-| {{ channel.name }} | Based on your support agreement |
-
-<Tip>
-Contact your account manager for SLA details and to discuss priority support options.
-</Tip>
+1. Check the [FAQ](./faq) for common questions
+2. [Generate a support bundle](./bundles) for faster troubleshooting
+3. [Upload an existing bundle](./bundles#upload-an-existing-bundle) if you already have one

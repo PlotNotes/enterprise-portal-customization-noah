@@ -1,69 +1,41 @@
 ---
-title: FAQ
-description: Frequently asked questions about {{ app.name }}
-weight: 100
+title: Frequently Asked Questions
 ---
 
 # Frequently Asked Questions
 
 ## General
 
-<Accordion title="What Kubernetes versions are supported?">
+{{#if entitlements.isEmbeddedClusterDownloadEnabled}}
+<Accordion title="What are the system requirements?">
 
-{{ app.name }} supports Kubernetes 1.27 and later.
+See [Requirements](../installation/requirements) for details.
+
+</Accordion>
+{{/if}}
+
+<Accordion title="How do I check for updates?">
+
+See [Instances & Updates](../updates/instances).
 
 </Accordion>
 
-<Accordion title="Can I run on-premises?">
-
-Yes. {{ app.name }} is designed for on-premises, air-gapped, and cloud deployments.
-
-</Accordion>
-
-<Accordion title="How do I check my license?">
-
-Visit the [License](/license) page in this portal to view your license details, entitlements, and expiration date.
-
-</Accordion>
-
+{{#if entitlements.isHelmInstallEnabled}}
 ## Installation
 
 <Accordion title="Which installation method should I use?">
 
-<ConditionalRender when="entitlements.isEmbeddedClusterDownloadEnabled">
-
-- **Linux**: Best for single-server deployments or when you don't have an existing Kubernetes cluster.
-
-</ConditionalRender>
-
-<ConditionalRender when="entitlements.isHelmInstallEnabled">
-
-- **Helm**: Best when you have an existing Kubernetes cluster and want full control.
-
-</ConditionalRender>
+{{#if entitlements.isEmbeddedClusterDownloadEnabled}}
+Choose [Embedded Cluster (Linux)](../installation/linux) for installing on a Linux server, or [Helm](../installation/helm) for deploying to an existing Kubernetes cluster.
+{{/if}}
 
 </Accordion>
+{{/if}}
 
-<Accordion title="Can I migrate between installation methods?">
+## Troubleshooting
 
-Not directly. We recommend a fresh install with data migration via database backup/restore.
+<Accordion title="How do I collect diagnostic information?">
 
-<Warning>
-Make sure to back up your database before attempting any migration. See [Backup & Restore](/operations/backup).
-</Warning>
-
-</Accordion>
-
-## Licensing
-
-<Accordion title="What happens when my license expires?">
-
-{{ app.name }} continues to run but you won't be able to pull updates or access new releases.
-
-</Accordion>
-
-<Accordion title="How do I renew my license?">
-
-Contact your account manager or reach out via [Contact Support](/support/contact).
+See [Support Bundles](./bundles) to generate a new bundle, or [upload an existing one](./bundles#upload-an-existing-bundle).
 
 </Accordion>
