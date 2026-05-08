@@ -19,18 +19,15 @@ navigation:
         visible_when:
           entitlements:
             - isHelmInstallEnabled
-
   - title: Updates
     icon: refresh-cw
     page: pages/updates/instances.md
-
   - title: Security
     icon: shield
     page: pages/security.md
     visible_when:
       permissions:
         - canViewSecurity
-
   - title: Support
     icon: life-buoy
     items:
