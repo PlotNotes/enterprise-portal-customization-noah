@@ -45,9 +45,7 @@ Customize the options below. The install commands will update automatically base
 The commands below are personalized to your selected installation. If you switch installations or rename your instance, the commands will update automatically.
 </Note>
 
-<HelmInstallStep step="export_credentials" stepNumber={1} />
-
-<HelmInstallStep step="install_chart" stepNumber={2} charts={["purrfect-match"]} />
+<HelmInstallAssets stepNumber={1} charts={["purrfect-match"]} />
 
 ## Post-Install
 
