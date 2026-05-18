@@ -53,7 +53,7 @@ navigation:
       - title: Overview
         page: pages/infrastructure/overview.md
       - title: AWS
-        terraform_module: github.com/NoaheCampbell/chartsmith-terraform//modules/aws?ref=v1.0.0
+        terraform_module: aws-infrastructure
         visible_when:
           entitlements:
             - isAWSEnabled
