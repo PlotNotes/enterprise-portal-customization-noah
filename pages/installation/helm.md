@@ -45,21 +45,9 @@ Customize the options below. The install commands will update automatically base
 The commands below are personalized to your selected installation. If you switch installations or rename your instance, the commands will update automatically.
 </Note>
 
-<HelmInstallAssets stepNumber={1} />
-
-<Tip title="Filtering Charts">
-For releases with multiple Helm charts, you can filter which charts are shown using the `charts` prop on `HelmInstallAssets` or `HelmInstallStep`:
-
-```mdx
-<HelmInstallAssets stepNumber={1} charts={["main-app"]} />
-```
-
-Or compose individual steps for finer control:
-```mdx
 <HelmInstallStep step="export_credentials" stepNumber={1} />
-<HelmInstallStep step="install_chart" stepNumber={2} charts={["main-app"]} />
-```
-</Tip>
+
+<HelmInstallStep step="install_chart" stepNumber={2} charts={["purrfect-match"]} />
 
 ## Post-Install
 
