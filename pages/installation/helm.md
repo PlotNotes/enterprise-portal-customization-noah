@@ -47,6 +47,20 @@ The commands below are personalized to your selected installation. If you switch
 
 <HelmInstallAssets stepNumber={1} charts={["purrfect-match"]} />
 
+## Install (per-step with chart filter)
+
+<HelmInstallStep step="export_credentials" stepNumber={1} charts={["purrfect-match"]} />
+
+<HelmInstallStep step="install_chart" stepNumber={2} charts={["purrfect-match"]} />
+
+## Airgap Install
+
+<HelmAirgapInstallAssets stepNumber={1} charts={["purrfect-match"]} />
+
+## Update
+
+<HelmUpdateAssets stepNumber={1} charts={["purrfect-match"]} />
+
 ## Post-Install
 
 <Note>
