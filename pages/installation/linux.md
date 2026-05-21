@@ -30,6 +30,7 @@ See the [system requirements documentation](requirements) for the full list of p
 Customize the options below. The install commands will update automatically based on your selections.
 
 <NetworkAvailability installType="linux" />
+<RegistryAccess installType="linux" />
 <VersionSelector installType="linux" />
 
 ## Install
