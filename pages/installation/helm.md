@@ -38,6 +38,7 @@ Customize the options below. The install commands will update automatically base
 <NetworkAvailability installType="helm" />
 <RegistryAccess />
 <VersionSelector installType="helm" />
+<HelmReleaseImages />
 
 ## Install
 
