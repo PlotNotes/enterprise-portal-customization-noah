@@ -20,6 +20,10 @@ Your installation includes access to the following features:
 - **Air Gap Support:** Install in disconnected environments
 {{/if}}
 
+## License
+
+<LicenseDownload />
+
 ## Getting Started
 
 <Tip title="New to this portal?">
