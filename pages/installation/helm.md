@@ -40,21 +40,49 @@ Customize the options below. The install commands will update automatically base
 <VersionSelector installType="helm" />
 <HelmReleaseImages />
 
-## Install
+## Install - all charts
 
 <Note>
 The commands below are personalized to your selected installation. If you switch installations or rename your instance, the commands will update automatically.
 </Note>
 
+<HelmInstallAssets stepNumber={1} />
+
+## Install - include purrfect-match
+
 <HelmInstallAssets stepNumber={1} charts={["purrfect-match"]} />
+
+## Install - exclude purrfect-match
+
+<HelmInstallAssets stepNumber={1} exclude={["purrfect-match"]} />
+
+## Install - include and exclude purrfect-match
+
+<HelmInstallAssets stepNumber={1} charts={["purrfect-match"]} exclude={["purrfect-match"]} />
+
+## Airgap Install - all charts
+
+<HelmAirgapInstallAssets stepNumber={1} />
 
 ## Airgap Install
 
 <HelmAirgapInstallAssets stepNumber={1} charts={["purrfect-match"]} />
 
-## Update
+## Airgap Install - exclude purrfect-match
+
+<HelmAirgapInstallAssets stepNumber={1} exclude={["purrfect-match"]} />
+
+## Update - all charts
+
+<HelmUpdateAssets stepNumber={1} />
+
+## Update - include purrfect-match
 
 <HelmUpdateAssets stepNumber={1} charts={["purrfect-match"]} />
+
+## Update - exclude purrfect-match
+
+<HelmUpdateAssets stepNumber={1} exclude={["purrfect-match"]} />
 
 ## Post-Install
 

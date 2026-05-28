@@ -24,6 +24,14 @@
   </Tip>
 </UpgradePath>
 
-## Apply the upgrade
+## Apply the upgrade - all charts
+
+<HelmUpdateAssets stepNumber={1} />
+
+## Apply the upgrade - include purrfect-match
 
 <HelmUpdateAssets stepNumber={1} charts={["purrfect-match"]} />
+
+## Apply the upgrade - exclude purrfect-match
+
+<HelmUpdateAssets stepNumber={1} exclude={["purrfect-match"]} />
