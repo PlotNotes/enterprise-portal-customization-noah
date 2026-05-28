@@ -26,4 +26,4 @@
 
 ## Apply the upgrade
 
-<HelmUpdateAssets stepNumber={1} />
+<HelmUpdateAssets stepNumber={1} charts={["purrfect-match"]} />
