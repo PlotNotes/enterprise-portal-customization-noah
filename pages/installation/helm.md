@@ -50,15 +50,15 @@ The commands below are personalized to your selected installation. If you switch
 
 ## Install - include purrfect-match
 
-<HelmInstallAssets stepNumber={1} charts={["purrfect-match"]} />
+<HelmInstallAssets stepNumber={1} charts="purrfect-match" />
 
 ## Install - exclude purrfect-match
 
-<HelmInstallAssets stepNumber={1} exclude={["purrfect-match"]} />
+<HelmInstallAssets stepNumber={1} exclude="purrfect-match" />
 
 ## Install - include and exclude purrfect-match
 
-<HelmInstallAssets stepNumber={1} charts={["purrfect-match"]} exclude={["purrfect-match"]} />
+<HelmInstallAssets stepNumber={1} charts="purrfect-match" exclude="purrfect-match" />
 
 ## Airgap Install - all charts
 
@@ -66,11 +66,11 @@ The commands below are personalized to your selected installation. If you switch
 
 ## Airgap Install
 
-<HelmAirgapInstallAssets stepNumber={1} charts={["purrfect-match"]} />
+<HelmAirgapInstallAssets stepNumber={1} charts="purrfect-match" />
 
 ## Airgap Install - exclude purrfect-match
 
-<HelmAirgapInstallAssets stepNumber={1} exclude={["purrfect-match"]} />
+<HelmAirgapInstallAssets stepNumber={1} exclude="purrfect-match" />
 
 ## Update - all charts
 
@@ -78,11 +78,11 @@ The commands below are personalized to your selected installation. If you switch
 
 ## Update - include purrfect-match
 
-<HelmUpdateAssets stepNumber={1} charts={["purrfect-match"]} />
+<HelmUpdateAssets stepNumber={1} charts="purrfect-match" />
 
 ## Update - exclude purrfect-match
 
-<HelmUpdateAssets stepNumber={1} exclude={["purrfect-match"]} />
+<HelmUpdateAssets stepNumber={1} exclude="purrfect-match" />
 
 ## Post-Install
 

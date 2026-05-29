@@ -30,8 +30,8 @@
 
 ## Apply the upgrade - include purrfect-match
 
-<HelmUpdateAssets stepNumber={1} charts={["purrfect-match"]} />
+<HelmUpdateAssets stepNumber={1} charts="purrfect-match" />
 
 ## Apply the upgrade - exclude purrfect-match
 
-<HelmUpdateAssets stepNumber={1} exclude={["purrfect-match"]} />
+<HelmUpdateAssets stepNumber={1} exclude="purrfect-match" />
