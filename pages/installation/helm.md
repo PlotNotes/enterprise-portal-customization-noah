@@ -60,6 +60,18 @@ The commands below are personalized to your selected installation. If you switch
 
 <HelmInstallAssets stepNumber={1} charts="purrfect-match" exclude="purrfect-match" />
 
+## Install steps - include purrfect-match
+
+<HelmInstallStep step="install_preflight_plugin" stepNumber={1} charts="purrfect-match" />
+<HelmInstallStep step="run_preflight_checks" stepNumber={2} charts="purrfect-match" />
+<HelmInstallStep step="install_chart" stepNumber={3} charts="purrfect-match" />
+
+## Install steps - exclude purrfect-match
+
+<HelmInstallStep step="install_preflight_plugin" stepNumber={1} exclude="purrfect-match" />
+<HelmInstallStep step="run_preflight_checks" stepNumber={2} exclude="purrfect-match" />
+<HelmInstallStep step="install_chart" stepNumber={3} exclude="purrfect-match" />
+
 ## Airgap Install - all charts
 
 <HelmAirgapInstallAssets stepNumber={1} />
@@ -71,6 +83,20 @@ The commands below are personalized to your selected installation. If you switch
 ## Airgap Install - exclude purrfect-match
 
 <HelmAirgapInstallAssets stepNumber={1} exclude="purrfect-match" />
+
+## Airgap install steps - include purrfect-match
+
+<HelmAirgapInstallStep step="get_push_images" stepNumber={1} charts="purrfect-match" />
+<HelmAirgapInstallStep step="install_preflight_plugin" stepNumber={2} charts="purrfect-match" />
+<HelmAirgapInstallStep step="run_preflight_checks" stepNumber={3} charts="purrfect-match" />
+<HelmAirgapInstallStep step="install_chart" stepNumber={4} charts="purrfect-match" />
+
+## Airgap install steps - exclude purrfect-match
+
+<HelmAirgapInstallStep step="get_push_images" stepNumber={1} exclude="purrfect-match" />
+<HelmAirgapInstallStep step="install_preflight_plugin" stepNumber={2} exclude="purrfect-match" />
+<HelmAirgapInstallStep step="run_preflight_checks" stepNumber={3} exclude="purrfect-match" />
+<HelmAirgapInstallStep step="install_chart" stepNumber={4} exclude="purrfect-match" />
 
 ## Update - all charts
 
