@@ -10,8 +10,8 @@
 
 branding:
   title: "Plotnotes"
-  icon: svg-test.png
-  favicon: svg-test.png
+  icon: assets/svg-works.svg
+  favicon: assets/svg-works.svg
   overview: "Welcome to the Plotnotes Enterprise Portal."
   contact: support@plotnotes.io
   supportPortalLink: https://support.plotnotes.io
