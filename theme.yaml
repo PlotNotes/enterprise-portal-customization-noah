@@ -12,6 +12,8 @@ branding:
   title: "Plotnotes"
   logo: assets/svg-works.svg
   favicon: assets/svg-works.svg
+  background: image
+  backgroundImage: assets/svg-broken.svg
   overview: "Welcome to the Plotnotes Enterprise Portal."
   contact: support@plotnotes.io
   supportPortalLink: https://support.plotnotes.io
@@ -25,7 +27,6 @@ branding:
   linkHoverColor: "#E8856A"
 
   # Header background
-  background: minimal
 
   # Dark header
   headerColor: "#141414"

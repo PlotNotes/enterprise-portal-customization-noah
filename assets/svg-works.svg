@@ -1,3 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="300" height="60" viewBox="0 0 300 60">
-  <path d="M10 45 L30 10 L50 45 M20 35 L40 35" fill="#ff0000" />
+<svg xmlns="http://www.w3.org/2000/svg" width="300" height="60" viewBox="0 0 300 60" role="img" aria-label="Chartsmith SVG test logo">
+  <rect x="8" y="10" width="44" height="40" rx="6" fill="#2563eb" />
+  <circle cx="30" cy="30" r="13" fill="#ffffff" />
+  <path d="M26 30 L30 24 L34 30 L30 36 Z" fill="#2563eb" />
+  <text x="68" y="39" font-family="Arial, sans-serif" font-size="28" font-weight="700" fill="#ef4444">SVG OK</text>
 </svg>
