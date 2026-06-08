@@ -1,6 +1,6 @@
 ---
 id: 2026-06-08-installation-guidance-status-update
-published_at: 2026-06-08T20:00:00Z
+published_at: 2026-06-08T23:00:00Z
 title: Installation guidance status update
 impact: recommended
 summary: Aligns the template with the current Enterprise Portal install and update status experience so customers see clearer install paths, release matching, and troubleshooting context.
