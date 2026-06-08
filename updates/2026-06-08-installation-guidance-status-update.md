@@ -1,4 +1,5 @@
 ---
+id: 2026-06-08-installation-guidance-status-update
 published_at: 2026-06-08T20:00:00Z
 title: Installation guidance status update
 impact: recommended
