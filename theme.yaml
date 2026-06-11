@@ -17,7 +17,7 @@ branding:
   overview: "Welcome to the Plotnotes Enterprise Portal."
   contact: support@plotnotes.io
   supportPortalLink: https://support.plotnotes.io
-  defaultTheme: neither
+  defaultTheme: light
 
   # Core colors — warm coral accent
   primaryColor: "#D4583B"
