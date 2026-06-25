@@ -16,30 +16,33 @@ navigation:
       - title: Configuration
         page: pages/on-prem/configuration.md
         items:
+          - title: Authentication & SSO
+            page: pages/on-prem/configuration/authentication-sso.md
+          - title: SMTP & Email
+            page: pages/on-prem/configuration/smtp-email.md
           - title: Required Values
             page: pages/on-prem/configuration/required-values.md
             items:
-              - title: Authentication & SSO
-                page: pages/on-prem/configuration/authentication-sso.md
-              - title: SMTP & Email
-                page: pages/on-prem/configuration/smtp-email.md
               - title: Encryption & Root Key
                 page: pages/on-prem/configuration/encryption-root-key.md
               - title: TLS & Ingress
                 page: pages/on-prem/configuration/tls-ingress.md
               - title: Image Pull & Licensing
                 page: pages/on-prem/configuration/image-pull-licensing.md
-              - title: Observability
-                page: pages/on-prem/configuration/observability.md
+          - title: Observability
+            page: pages/on-prem/configuration/observability.md
       - title: Integrations
         page: pages/on-prem/integrations.md
         items:
           - title: AWS Integration
             page: pages/on-prem/integrations/aws.md
-          - title: Azure App Service Integration
-            page: pages/on-prem/integrations/azure-app-service.md
-          - title: Azure DevOps Integration
-            page: pages/on-prem/integrations/azure-devops.md
+          - title: Azure Integrations
+            page: pages/on-prem/integrations/azure.md
+            items:
+              - title: Azure App Service Integration
+                page: pages/on-prem/integrations/azure-app-service.md
+              - title: Azure DevOps Integration
+                page: pages/on-prem/integrations/azure-devops.md
   - title: Installation
     icon: rocket
     page: pages/installation/overview.md
