@@ -1,28 +1,37 @@
 navigation:
   - title: Installation
     icon: rocket
+    page: pages/installation/overview.md
     items:
       - title: Getting Started
+        page: pages/installation/getting-started.md
         items:
-          - title: Requirements
-            page: pages/installation/requirements.md
-            visible_when:
-              entitlements:
-                - isEmbeddedClusterDownloadEnabled
-          - title: Release History
-            page: pages/installation/release-history.md
+          - title: Environment
+            page: pages/installation/environment.md
+            items:
+              - title: Requirements
+                page: pages/installation/requirements.md
+                visible_when:
+                  entitlements:
+                    - isEmbeddedClusterDownloadEnabled
+              - title: Release History
+                page: pages/installation/release-history.md
       - title: Install Methods
+        page: pages/installation/install-methods.md
         items:
-          - title: Linux
-            page: pages/installation/linux.md
-            visible_when:
-              entitlements:
-                - isEmbeddedClusterDownloadEnabled
-          - title: Helm
-            page: pages/installation/helm.md
-            visible_when:
-              entitlements:
-                - isHelmInstallEnabled
+          - title: Cluster Installs
+            page: pages/installation/cluster-installs.md
+            items:
+              - title: Linux
+                page: pages/installation/linux.md
+                visible_when:
+                  entitlements:
+                    - isEmbeddedClusterDownloadEnabled
+              - title: Helm
+                page: pages/installation/helm.md
+                visible_when:
+                  entitlements:
+                    - isHelmInstallEnabled
   - title: Updates
     icon: refresh-cw
     page: pages/updates/instances.md
@@ -34,14 +43,20 @@ navigation:
         - canViewSecurity
   - title: Support
     icon: life-buoy
+    page: pages/support/overview.md
     items:
       - title: Troubleshooting
+        page: pages/support/troubleshooting.md
         items:
-          - title: Support Bundles
-            page: pages/support/bundles.md
-          - title: FAQ
-            page: pages/support/faq.md
+          - title: Diagnostics
+            page: pages/support/diagnostics.md
+            items:
+              - title: Support Bundles
+                page: pages/support/bundles.md
+              - title: FAQ
+                page: pages/support/faq.md
       - title: Contact
+        page: pages/support/contact-overview.md
         items:
           - title: Contact Support
             page: pages/support/contact.md
