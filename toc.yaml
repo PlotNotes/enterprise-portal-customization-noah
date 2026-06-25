@@ -7,7 +7,6 @@ navigation:
       - title: System Requirements
         page: pages/on-prem/system-requirements.md
       - title: Installation
-        page: pages/on-prem/installation.md
         items:
           - title: Cluster Planning
             page: pages/on-prem/installation/cluster-planning.md
@@ -21,7 +20,6 @@ navigation:
           - title: SMTP & Email
             page: pages/on-prem/configuration/smtp-email.md
           - title: Required Values
-            page: pages/on-prem/configuration/required-values.md
             items:
               - title: Encryption & Root Key
                 page: pages/on-prem/configuration/encryption-root-key.md
@@ -37,7 +35,6 @@ navigation:
           - title: AWS Integration
             page: pages/on-prem/integrations/aws.md
           - title: Azure Integrations
-            page: pages/on-prem/integrations/azure.md
             items:
               - title: Azure App Service Integration
                 page: pages/on-prem/integrations/azure-app-service.md
