@@ -2,23 +2,27 @@ navigation:
   - title: Installation
     icon: rocket
     items:
-      - title: Requirements
-        page: pages/installation/requirements.md
-        visible_when:
-          entitlements:
-            - isEmbeddedClusterDownloadEnabled
-      - title: Release History
-        page: pages/installation/release-history.md
-      - title: Linux
-        page: pages/installation/linux.md
-        visible_when:
-          entitlements:
-            - isEmbeddedClusterDownloadEnabled
-      - title: Helm
-        page: pages/installation/helm.md
-        visible_when:
-          entitlements:
-            - isHelmInstallEnabled
+      - title: Getting Started
+        items:
+          - title: Requirements
+            page: pages/installation/requirements.md
+            visible_when:
+              entitlements:
+                - isEmbeddedClusterDownloadEnabled
+          - title: Release History
+            page: pages/installation/release-history.md
+      - title: Install Methods
+        items:
+          - title: Linux
+            page: pages/installation/linux.md
+            visible_when:
+              entitlements:
+                - isEmbeddedClusterDownloadEnabled
+          - title: Helm
+            page: pages/installation/helm.md
+            visible_when:
+              entitlements:
+                - isHelmInstallEnabled
   - title: Updates
     icon: refresh-cw
     page: pages/updates/instances.md
@@ -31,12 +35,16 @@ navigation:
   - title: Support
     icon: life-buoy
     items:
-      - title: Support Bundles
-        page: pages/support/bundles.md
-      - title: FAQ
-        page: pages/support/faq.md
-      - title: Contact Support
-        page: pages/support/contact.md
+      - title: Troubleshooting
+        items:
+          - title: Support Bundles
+            page: pages/support/bundles.md
+          - title: FAQ
+            page: pages/support/faq.md
+      - title: Contact
+        items:
+          - title: Contact Support
+            page: pages/support/contact.md
 
 overrides:
   home: pages/home.md
