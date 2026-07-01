@@ -46,17 +46,21 @@ Customize the options below. The install commands will update automatically base
 The commands below are personalized to your selected installation. If you switch installations or rename your instance, the commands will update automatically.
 </Note>
 
-<HelmInstallAssets stepNumber={1} charts={["purrfect-match"]} />
+<HelmInstallStep step="export_credentials" stepNumber={10} charts="purrfect-match" />
+
+<HelmInstallStep step="create_values_file" stepNumber={20} charts="purrfect-match" />
+
+<HelmInstallStep step="install_chart" stepNumber={30} charts="purrfect-match" />
 
 ## Install (per-step with chart filter)
 
-<HelmInstallStep step="export_credentials" stepNumber={1} charts={["purrfect-match"]} />
+<HelmInstallStep step="install_chart" stepNumber={101} charts="purrfect-match" />
 
-<HelmInstallStep step="install_chart" stepNumber={2} charts={["purrfect-match"]} />
+<HelmInstallStep step="export_credentials" stepNumber={102} charts="purrfect-match" />
 
 ## Airgap Install
 
-<HelmAirgapInstallAssets stepNumber={1} charts={["purrfect-match"]} />
+<HelmAirgapInstallAssets stepNumber={50} charts="purrfect-match" />
 
 ## Update
 

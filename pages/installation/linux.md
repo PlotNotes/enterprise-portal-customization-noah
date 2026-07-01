@@ -44,7 +44,13 @@ SSH into your target machine and run the following command.
 The commands below are personalized to your selected installation. If you switch installations or rename your instance, the commands will update automatically.
 </Note>
 
-<LinuxInstallAssets />
+<LinuxInstallStep step="download" stepNumber={10} />
+
+<LinuxInstallStep step="extract" stepNumber={20} />
+
+<LinuxInstallStep step="install" stepNumber={30} />
+
+<LinuxAirgapInstallAssets stepNumber={40} />
 
 ## Verify Installation
 
