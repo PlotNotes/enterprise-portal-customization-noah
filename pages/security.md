@@ -1,7 +1,7 @@
 ---
 title: Security
 visible_when:
-  permissions:
+  entitlements:
     - canViewSecurity
 ---
 
