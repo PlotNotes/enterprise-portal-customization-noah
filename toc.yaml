@@ -16,6 +16,18 @@ navigation:
             - isEmbeddedClusterDownloadEnabled
       - title: Release History
         page: pages/installation/release-history.md
+      - title: KOTS Downloads
+        page: pages/installation/kots.md
+        visible_when:
+          entitlements:
+            - isKotsInstallEnabled
+            - isAirgapSupported
+      - title: kURL Downloads
+        page: pages/installation/kurl.md
+        visible_when:
+          entitlements:
+            - isKurlInstallEnabled
+            - isAirgapSupported
       - title: Linux
         page: pages/installation/linux.md
         visible_when:
